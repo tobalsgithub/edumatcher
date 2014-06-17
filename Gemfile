@@ -28,6 +28,14 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor', group: :production
 
+group :development, :test do
+	# Use rspec instead of Test::Unit
+	gem 'rspec-rails'
+	gem 'nifty-generators'
+	gem 'shoulda-matchers'
+	gem 'factory_girl_rails'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
