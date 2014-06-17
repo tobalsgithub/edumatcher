@@ -151,6 +151,11 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      bower_components: {
+        files: [{
+          src: ['./app/bower_components/*']
+        }]
+      },
       server: '.tmp'
     },
 
@@ -370,7 +375,15 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
-      }
+      },
+      bower_components: {
+        files: [{
+          expand: true,
+          cwd: './bower_components/',
+          dest: './app/bower_components/',
+          src: ['**']
+        }]
+      },
     },
 
     // Run some tasks in parallel to speed up the build process
@@ -407,6 +420,8 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'clean:bower_components',
+      'copy:bower_components',
       'wiredep',
       'concurrent:server',
       'configureProxies',
@@ -423,6 +438,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'clean:bower_components',
+    'copy:bower_components',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -431,6 +448,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'clean:bower_components',
+    'copy:bower_components',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -450,5 +469,10 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('bowerTest', [
+    'clean:bower_components',
+    'copy:bower_components',
   ]);
 };
