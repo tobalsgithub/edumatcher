@@ -60,7 +60,8 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.app %>/{,*/}*.css'
         ]
       }
     },
@@ -151,7 +152,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      bower_components: {
+      bowerComponents: {
         files: [{
           src: ['./app/bower_components/*']
         }]
@@ -181,8 +182,8 @@ module.exports = function (grunt) {
         ignorePath: new RegExp('^<%= yeoman.app %>/|../')
       },
       sass: {
-      src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-      ignorePath: /(\.\.\/){1,2}bower_components\//
+      src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass,css}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
 
@@ -376,7 +377,7 @@ module.exports = function (grunt) {
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       },
-      bower_components: {
+      bowerComponents: {
         files: [{
           expand: true,
           cwd: './bower_components/',
@@ -420,8 +421,8 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'clean:bower_components',
-      'copy:bower_components',
+      'clean:bowerComponents',
+      'copy:bowerComponents',
       'wiredep',
       'concurrent:server',
       'configureProxies',
@@ -438,8 +439,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'clean:bower_components',
-    'copy:bower_components',
+    'clean:bowerComponents',
+    'copy:bowerComponents',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -448,8 +449,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'clean:bower_components',
-    'copy:bower_components',
+    'clean:bowerComponents',
+    'copy:bowerComponents',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -472,7 +473,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('bowerTest', [
-    'clean:bower_components',
-    'copy:bower_components',
+    'clean:bowerComponents',
+    'copy:bowerComponents',
   ]);
 };

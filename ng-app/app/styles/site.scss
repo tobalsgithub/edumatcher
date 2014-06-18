@@ -1,0 +1,305 @@
+/*!
+ * Site specific CSS by James Lloyd.
+ *
+ */
+
+html.splash {
+  background: url("/images/sci-class-dark.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  background-color: transparent;
+}
+
+.title-header h1 {
+  font-size: 70px;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+}
+.login-modal {
+  margin-top: 150px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.login-register-toolbar{
+  float: right;
+}
+  .login-register-group > .login-register-btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #169e83;
+  }
+
+.login-register-text {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.login-field-icon-email{
+  margin-top: 4px;
+  font-size: 28px;
+}
+/* CONTENT */
+.example-steps{
+  margin-top: 8%;
+}
+.info-box {
+  border: 1px solid #efefef;
+  border-radius: 6px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 44%;
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 20px;
+}
+.info-box h3{
+
+}
+
+.info-box h4{
+  color: #222;
+  font-size: 1.2em;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+
+}
+.schools{
+  color: #13bfe1;
+}
+.industry{
+  color: #F99D1E;
+}
+
+
+/* FOOTER */
+.footer{
+  bottom: 0;
+   position:fixed;
+  z-index:150;
+  _position:absolute;
+  _top:expression(eval(document.documentElement.scrollTop+
+        (document.documentElement.clientHeight-this.offsetHeight)));
+  height:60px;
+  width: 100%;
+  background-color: #444;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #555;
+
+
+}
+
+  #footerNav{
+    margin: 0;
+    padding-top: 15px;
+    list-style-type: none;
+    text-align: center;
+  }
+
+    #footerNav li{
+      display: inline;
+      list-style-type: none;
+      padding-right: 20px;
+    }
+      #footerNav li{
+        color: #eee;
+        font-size: 0.8em;
+        font-family: "Lato", Helvetica, Arial, sans-serif;
+        font-weight: 300;
+      }
+
+      #footerNav li a{
+        text-decoration: none;
+        padding: .2em 1em;
+
+      }
+
+
+.clear{
+  clear: both;
+}
+.mm-header-bar{
+  border-bottom-color: #bbb;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.navbar{
+  height: 50px;
+}
+.brand-link{
+  font-size: 32px;
+}
+
+ul.navbar-right li{
+  padding-top: 22px;
+  margin-right: 22px;
+}
+.map-section{
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.search-info-section{
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background: #f3f3f3;
+  z-index: 1000;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #ccc;
+
+}
+
+/* FILTERS */
+.filter-section{
+  border-bottom-color: #cdcdcd;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.filter-item{
+  height: 52px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #dedede;
+}
+.filter-item:nth-of-type(even){
+  background-color: #fdfdfd;
+}
+.filter-item:nth-of-type(odd){
+  background-color: #fff;
+}
+.filter-label{
+  float: left;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 120px;
+}
+.filter-choice{
+  float: left;
+  margin-top: 8px;
+  margin-left: 10px;
+
+}
+.filter-btn{
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.filter-input{
+  float:left;
+  margin-right: 30px;
+}
+.filter-input > div{
+  float:left;
+}
+.filter-input-label{
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+/* LIST */
+.list-item{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #dedede;
+  height: 128px;
+}
+.list-thumb{
+  float: left;
+  height: 128px;
+  width: 128px;
+}
+.list-thumb > img{
+  height: 128px;
+  width: 128px;
+}
+.list-details{
+  margin-left: 16px;
+  width: 82%;
+  float: left;
+}
+.list-details-header > h5{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.list-details-subject{
+  display: inline-block;
+  width: 40%;
+}
+.list-item:nth-of-type(even){
+  background-color: #f3f3f3;
+}
+.list-item:nth-of-type(odd){
+  background-color: #ededed;
+}
+
+/* ==== PROFILE === */
+.name-row{
+  margin-top: 10px;
+}
+.profile-center-col{
+  background-color: #fefefe;
+}
+.profile-contact{
+  width: 100%;
+  margin-top: 10px;
+}
+.profile-contact-btn{
+  width: 216px;
+}
+.profile-info-label{
+  font-weight: 700;
+  display: inline-block;
+  width: 120px;
+}
+.profile-thumb-img{
+  height: 216px; width: 216px;
+}
+.profile-reviews-container{
+  background-color: #ededed;
+  border-radius: 8px;
+}
+.profile-reviews-header{
+  background-color: #34495e;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  height: 44px;
+  padding-top: 8px;
+}
+.profile-reviews-item {
+  margin-top: 8px;
+}
+.profile-reviews-item-name{
+  display: block;
+  color: #1abc9c;
+  font-size: 14px;
+  margin-left: 4px;
+}
+.profile-reviews-item-details{
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+  margin-left: 4px;
+}
+.profile-reviews-item-stars{
+  margin-left: 4px;
+}

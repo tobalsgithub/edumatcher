@@ -8,7 +8,7 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', ['$scope','$http', function ($scope, $http) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -20,4 +20,4 @@ angular.module('edumatcherApp')
 				console.log(data);
 			});
     };
-  });
+  }]);
