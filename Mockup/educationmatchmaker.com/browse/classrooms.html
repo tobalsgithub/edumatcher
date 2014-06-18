@@ -1,0 +1,363 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <title>Education Matchmaker</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet" type="text/css" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/flat-ui.css" rel="stylesheet" />
+    <link href="../css/site.css" rel="stylesheet" />
+  <script type="text/javascript" src="../js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap-multiselect.css" type="text/css"/>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(39.9500,-75.1700);
+    var mapOptions = {
+      zoom: 12,
+      center: myLatlng
+    }
+    var icons = {
+      unselected: {
+        icon: '../images/blueflag.png'
+      },
+      selected: {
+        icon: '../images/greenflag.png'
+      }
+    };
+    
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'School'
+    });
+    map.panBy(400,0);
+
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+
+  </head>
+  <body>
+    <!-- Header Nav Bar -->
+    <nav class="navbar navbar-default navbar-fixed-top mm-header-bar" role="navigation" style="border-radius:0px;">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="../index.html" style="font-size:24px;">Education Matchmaker</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right mm-header-right">
+          <li>
+            <span class="fui-mail"></span>
+          </li>
+          <li><div>Hello, <a href="../profile/experts.html">James</a></div></li>
+        </ul><!-- /.navbar-right -->
+      </div><!-- /.navbar-collapse -->
+    </nav> <!-- /Header Nav Bar -->
+
+    <div id="map-canvas" class="map-section">
+    </div> <!-- /.map-section -->
+
+      <div class="search-info-section">
+        <div class="filter-section">
+          <div class="filter-item">
+            <div class="filter-label">
+              Subject
+            </div>
+            <div class="filter-multiselect filter-choice">
+              <div class="filter-dropdown dropdown">
+                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Mathematics
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      General Science
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Physics
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Technology
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Geology
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Chemistry
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Arithmatic
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Algebra
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Pre-calculus
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Statistics
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Government
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Economics
+                    </label>
+                  </li>                  
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Political Science
+                    </label>
+                  </li>                       
+                  <li>
+                    <label class="checkbox" for="checkbox1">
+                      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+                      Physical Education
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="filter-item">
+            <div class="filter-label">
+              Grade Level
+            </div>
+            <div class="filter-multiselect filter-choice">
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                  <li>
+                    <label class="checkbox" for="checkbox2">
+                      <input type="checkbox" value="" id="checkbox2" data-toggle="checkbox">
+                      Elementary
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox2">
+                      <input type="checkbox" value="" id="checkbox2" data-toggle="checkbox">
+                      Middle School
+                    </label>
+                  </li>
+                  <li>
+                    <label class="checkbox" for="checkbox2">
+                      <input type="checkbox" value="" id="checkbox2" data-toggle="checkbox">
+                      High School
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="filter-item">
+            <div class="filter-label">
+              Location
+            </div>
+            <div class="filter-text filter-choice">
+              <div class="filter-input">
+                <div class="filter-input-label">
+                  Near
+                </div>
+                <input type="text" class="form-control input-sm" placeholder="City or ZIP" style="width:180px;"/>
+              </div>
+              <div class="filter-input">
+                <div class="filter-input-label">
+                  Within
+                </div>
+                <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                  <li>
+                      <a href="#">10 miles</a>
+                  </li>
+                  <li>
+                      <a href="#">25 miles</a>
+                  </li>
+                  <li>
+                    <a href="#">100 miles</a>
+                  </li>
+                  <li>
+                    <a href="#">Anywhere</a>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="filter-item filter-sortby">
+            <div class="filter-label">
+              Sort by
+            </div>
+            <div class="filter-multiselect filter-choice">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">Location</a>
+                  </li>
+                  <li>
+                    <a href="#">Match %</a>
+                  </li>
+                  <li>
+                    <a href="#">Soonest Available</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /.filter-section -->
+
+
+        <div class="list-section">
+          <div class="list-item">
+            <div class="list-thumb">
+              <img src="../images/classroom1.png" />
+            </div>
+            <div class="list-details">
+              <div class="list-details-header">
+                <h5><a href="../profile/classrooms.html">Judy Smith's 11th Grade Chemistry Class</a></h5>
+              </div>
+              <div class="list-details-info">
+                <small>
+                  <span class="list-details-subject">Subject: Chemistry</span>
+                  <span class="list-details-topics">Topics: Electronics, Biochemistry, Chemistry </span><br>
+                  <span class="list-details-availability">Availability: Wednesdays 9:00am-2:00pm through Jan 22, 2014</span>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-thumb">
+              <img src="../images/classroom2.png" />
+            </div>
+            <div class="list-details">
+              <div class="list-details-header">
+                <h5><a href="#">John Simpson's 8th Grade Math Class</a></h5>
+              </div>
+              <div class="list-details-info">
+                <small>
+                  <span class="list-details-subject">Subject: Mathematics</span>
+                  <span class="list-details-topics">Topics: Mathematics, Algebra, Trigonometry </span><br>
+                  <span class="list-details-availability">Availability: Tuesdays 8:00am-1:00pm</span>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-thumb">
+              <img src="../images/classroom3.png" />
+            </div>
+            <div class="list-details">
+              <div class="list-details-header">
+                <h5>Jill Jones' 10th Grade Physics Class</h5>
+              </div>
+              <div class="list-details-info">
+                <small>
+                  <span class="list-details-subject">Subject: Physics</span>
+                  <span class="list-details-topics">Topics: Physics, Electronics, Acoustics</span><br>
+                  <span class="list-details-availability">Availability: Monday-Wednesday 8:00am-12:00pm</span>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-thumb">
+              <img src="../images/classroom4.png" />
+            </div>
+            <div class="list-details">
+              <div class="list-details-header">
+                <h5>Ruth Perez's High School Biology Class</h5>
+              </div>
+              <div class="list-details-info">
+                <small>
+                  <span class="list-details-subject">Subject: Biology</span>
+                  <span class="list-details-topics">Topics: Biology, Biochemistry</span><br>
+                  <span class="list-details-availability">Availability: Fridays 8:00am-3:00pm</span>
+                </small>
+              </div>
+            </div>
+          </div>
+
+
+        </div> <!-- /.list-section -->
+
+      </div> <!-- /.search-info-section -->
+
+
+
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="../js/jquery.ui.touch-punch.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-select.js"></script>
+    <script src="../js/bootstrap-switch.js"></script>
+    <script src="../js/flatui-checkbox.js"></script>
+    <script src="../js/flatui-radio.js"></script>
+    <script src="../js/jquery.tagsinput.js"></script>
+    <script src="../js/jquery.placeholder.js"></script>
+    <script src="../js/jquery.stacktable.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+
+    </script>
+
+  </body>
+
+
+</html>
