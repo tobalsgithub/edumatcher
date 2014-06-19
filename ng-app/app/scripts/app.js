@@ -15,17 +15,24 @@ angular
     'ngResource',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'Devise'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
-     $stateProvider
+    $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/',
             templateUrl: 'views/index.html'
+        })
+
+        .state('login', {
+          url: '/login',
+          templateUrl: 'views/login/login.html',
+          controller: 'LoginCtrl'
         })
 
         .state('main', {
@@ -40,16 +47,4 @@ angular
             templateUrl: 'views/about.html'
         });
 
-    // $routeProvider
-    //   .when('/', {
-    //     templateUrl: 'views/main.html',
-    //     controller: 'MainCtrl'
-    //   })
-    //   .when('/about', {
-    //     templateUrl: 'views/about.html',
-    //     controller: 'AboutCtrl'
-    //   })
-    //   .otherwise({
-    //     redirectTo: '/'
-    //   });
-  });
+  }]);

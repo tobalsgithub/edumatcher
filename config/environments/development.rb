@@ -1,3 +1,6 @@
+require 'rest_client'
+require 'json'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -34,4 +37,21 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Get settings from mailtrap
+  response = RestClient.get "https://mailtrap.io/api/v1/inboxes?api_token=6fde6dd14c7f64523155f6dfbce368e5", {:content_type => :json, :accept => :json}
+
+  first_inbox = JSON.parse(response)[1] # get first inbox
+
+  # Configuring mailer for devise
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => first_inbox['username'],
+    :password => first_inbox['password'],
+    :address => first_inbox['domain'],
+    :domain => first_inbox['domain'],
+    :port => first_inbox['smtp_ports'][1],
+    :authentication => :plain
+  }
 end
