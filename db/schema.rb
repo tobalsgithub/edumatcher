@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619033513) do
+ActiveRecord::Schema.define(version: 20140624231321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20140619033513) do
 
   add_index "classrooms_schools", ["classroom_id"], name: "index_classrooms_schools_on_classroom_id", using: :btree
   add_index "classrooms_schools", ["school_id"], name: "index_classrooms_schools_on_school_id", using: :btree
+
+  create_table "classrooms_subjects", force: true do |t|
+    t.integer "classroom_id"
+    t.integer "subject_id"
+  end
+
+  add_index "classrooms_subjects", ["classroom_id"], name: "index_classrooms_subjects_on_classroom_id", using: :btree
+  add_index "classrooms_subjects", ["subject_id"], name: "index_classrooms_subjects_on_subject_id", using: :btree
 
   create_table "educators", force: true do |t|
     t.text     "notes"
@@ -80,6 +88,14 @@ ActiveRecord::Schema.define(version: 20140619033513) do
 
   add_index "experts", ["user_id"], name: "index_experts_on_user_id", using: :btree
 
+  create_table "experts_subjects", force: true do |t|
+    t.integer "expert_id"
+    t.integer "subject_id"
+  end
+
+  add_index "experts_subjects", ["expert_id"], name: "index_experts_subjects_on_expert_id", using: :btree
+  add_index "experts_subjects", ["subject_id"], name: "index_experts_subjects_on_subject_id", using: :btree
+
   create_table "school_districts", force: true do |t|
     t.string   "website"
     t.string   "location"
@@ -108,6 +124,12 @@ ActiveRecord::Schema.define(version: 20140619033513) do
 
   add_index "schools", ["SchoolDistrict_id"], name: "index_schools_on_SchoolDistrict_id", using: :btree
   add_index "schools", ["school_district_id"], name: "index_schools_on_school_district_id", using: :btree
+
+  create_table "subjects", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
