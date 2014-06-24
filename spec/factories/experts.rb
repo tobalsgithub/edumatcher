@@ -2,6 +2,8 @@
 
 FactoryGirl.define do
   factory :expert do
-    notes "MyText"
+    notes "I love teaching stuff"
+    User { FactoryGirl.create(:user) }
+    after(:create) {|expert| expert.subjects = [FactoryGirl.create(:subject), FactoryGirl.create(:subject)]}
   end
 end

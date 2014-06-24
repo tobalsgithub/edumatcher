@@ -2,6 +2,8 @@
 
 FactoryGirl.define do
   factory :subject do
-    name "MyString"
+    sequence(:name) { |n| "Awesome subject #{n}"}
+    after(:create) { |subject| subject.experts = [FactoryGirl.create(:expert)] }
+    after(:create) { |subject| subject.classrooms = [FactoryGirl.create(:classroom)] }
   end
 end
