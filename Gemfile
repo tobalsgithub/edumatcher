@@ -39,6 +39,7 @@ group :development, :test do
 	gem 'shoulda-matchers'
 	gem 'factory_girl_rails'
 	gem 'rest-client'
+	gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password
