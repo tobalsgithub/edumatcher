@@ -9,6 +9,7 @@ class ExpertsController < ApplicationController
   end
 
   def show
+    @expert = Expert.find(params[:id])
     respond_with(expert_to_json)
   end
 

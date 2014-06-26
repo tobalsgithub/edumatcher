@@ -58,7 +58,7 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'GET show' do
     before(:each) do
-      get :index, format: :json
+      get :index, id: expert.to_param, format: :json
     end
 
     it 'should return the expert in json format' do

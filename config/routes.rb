@@ -10,6 +10,13 @@ Rails.application.routes.draw do
 
   get 'welcome/proxy_test' => 'welcome#proxy_test'
 
+  # routes for users
+  post 'users/set_expert' => 'users#set_expert'
+  post 'users/set_educator' => 'users#set_educator'
+
+
+  # routes for experts
+
   resources :experts do
     # get 'subjects' => 'experts#subjects'
     # put 'add_subject' => 'experts#add_subject'
