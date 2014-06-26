@@ -17,7 +17,7 @@ RSpec.describe UsersController, :type => :controller do
 
     it 'creates a new expert model' do
       post :set_expert, format: :json
-      expect(user.expert.class).to eq(Expert)
+      expect(user.expert.id).to be > 0
     end
 
     it 'returns an error if the user is already an expert' do
@@ -29,13 +29,18 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  xdescribe 'setting up a new educator' do
+  describe 'setting up a new educator' do
     it 'creates a new educator model' do
-
+      post :set_educator, format: :json
+      expect(user.educator.id).to be > 0
     end
 
     it 'returns an error if the user is already an educator' do
-
+      educator = create(:educator)
+      user.educator= educator
+      user.save
+      post :set_educator, format: :json
+      expect(response.code).to eq("422")
     end
   end
 

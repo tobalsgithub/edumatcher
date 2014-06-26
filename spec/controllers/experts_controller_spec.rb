@@ -34,7 +34,6 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'access for non experts' do
     before(:each) do
-      educator = create(:educator, user: user)
       user.expert = nil
       user.save
       get :index, format: :json
@@ -105,7 +104,6 @@ RSpec.describe ExpertsController, :type => :controller do
   end
 
   describe 'PUT update' do
-    let(:expert) { create(:expert) }
     before(:each) do
       expert.notes = "New notes"
       put :update, id: expert.to_param, expert: expert, format: :json

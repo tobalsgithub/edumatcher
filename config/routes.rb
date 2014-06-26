@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   post 'experts/set_subjects' => 'experts#set_subjects'
 
 
+  # routes for educators
+  resources :educators
+  get 'educators/:id/subjects' => 'educators#subjects'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
