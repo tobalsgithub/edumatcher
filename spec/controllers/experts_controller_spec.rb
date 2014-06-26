@@ -46,18 +46,27 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'GET index' do
     before(:each) do
-      expert = create(:expert, user: user)
-      expert.notes = 'I love notes'
-      expert.save
       get :index, format: :json
     end
 
     it 'should return the expert in json format' do
-      expect(json['notes']).to eq('I love notes')
       expect(json['subjects'].size).to be(0)
     end
 
     it { should respond_with 200 }
+  end
+
+  describe 'GET show' do
+    before(:each) do
+      get :index, format: :json
+    end
+
+    it 'should return the expert in json format' do
+      expect(json).to have_key('subjects')
+    end
+
+    it { should respond_with 200 }
+
   end
 
   describe 'GET subjects' do
@@ -93,6 +102,21 @@ RSpec.describe ExpertsController, :type => :controller do
       get :subjects, id: different_expert.id, format: :json
       expect(json.size).to be(2)
     end
+  end
+
+  describe 'PUT update' do
+    let(:expert) { create(:expert) }
+    before(:each) do
+      expert.notes = "New notes"
+      put :update, id: expert.to_param, expert: expert, format: :json
+    end
+
+    it 'updates the expert' do
+      expert.reload
+      expect(expert.notes).to eq('New notes')
+    end
+
+    it { should respond_with 204 }
   end
 
   describe 'POST add_subject' do

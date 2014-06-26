@@ -8,6 +8,18 @@ class ExpertsController < ApplicationController
     respond_with(expert_to_json)
   end
 
+  def show
+    respond_with(expert_to_json)
+  end
+
+  def update
+    if @expert.update(expert_params)
+      respond_with(expert_to_json)
+    else
+      format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+    end
+  end
+
   def subjects
     respond_with(Expert.find(params[:id]).subjects)
   end
@@ -63,9 +75,8 @@ class ExpertsController < ApplicationController
   end
 
   def expert_params
-    params.permit(:notes, :subject_list, :subject_id)
-    # json_params = ActionController::Parameters.new( JSON.parse(request.body.read ) )
-    # json_params.permit(:notes, :subject_array, :subject_id)
+    json_params = ActionController::Parameters.new( JSON.parse(params.to_json) )
+    json_params[:expert].permit(:notes)
   end
 
   def expert_to_json
