@@ -10,6 +10,18 @@ Rails.application.routes.draw do
 
   get 'welcome/proxy_test' => 'welcome#proxy_test'
 
+  resources :experts do
+    # get 'subjects' => 'experts#subjects'
+    # put 'add_subject' => 'experts#add_subject'
+    # put 'remove_subject' => 'experts#remove_subject'
+    # post 'set_subjects' => 'experts#set_subjects'
+  end
+  get 'experts/:id/subjects' => 'experts#subjects'
+  post 'experts/add_subject' => 'experts#add_subject'
+  post 'experts/remove_subject' => 'experts#remove_subject'
+  post 'experts/set_subjects' => 'experts#set_subjects'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
