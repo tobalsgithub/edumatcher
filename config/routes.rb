@@ -27,11 +27,20 @@ Rails.application.routes.draw do
   post 'experts/add_subject' => 'experts#add_subject'
   post 'experts/remove_subject' => 'experts#remove_subject'
   post 'experts/set_subjects' => 'experts#set_subjects'
+  get 'experts/search' => 'experts#search'
 
 
   # routes for educators
   resources :educators
   get 'educators/:id/subjects' => 'educators#subjects'
+
+  # routes for classrooms
+  resources :classrooms
+  get 'classrooms/:id/subjects' => 'classrooms#subjects'
+  put 'classrooms/:id/add_subject' => 'classrooms#add_subject'
+  put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject'
+  post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects'
+  get 'classrooms/search' => 'classrooms#search'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

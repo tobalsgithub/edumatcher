@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EducatorsController, :type => :controller do
 
-  let(:valid_attributes) { create(:classroom).attributes }
+  let(:valid_attributes) { create(:educator).attributes }
 
   let(:invalid_attributes) { {
     'name' => ''

@@ -120,11 +120,17 @@ RSpec.describe ExpertsController, :type => :controller do
   describe 'POST add_subject' do
     let(:subject) { create(:subject) }
 
-    it 'can add a subject to an expert' do
-      params = { subject_id: subject.to_param }
+    before(:each) do
       post :add_subject, subject_id: subject.to_param, format: :json
+    end
+
+    it 'can add a subject to an expert' do
       expect(expert.subjects.size).to be(1)
       expect(expert.subjects.first.name).to eq(subject.name)
+    end
+
+    it 'returns the expert as json' do
+      expect(json).to have_key('subjects')
     end
   end
 
@@ -155,6 +161,61 @@ RSpec.describe ExpertsController, :type => :controller do
 
     it 'can set the list of subjects for an expert' do
       expect(expert.subjects.size).to be 3
+    end
+  end
+
+  describe 'GET search' do
+
+    before(:all) do
+      @sub_array = []
+      @exp_array = []
+      5.times do
+        subject = create(:subject)
+        @sub_array.push(subject)
+        4.times do
+          expert = create(:expert)
+          expert.subjects << subject
+          expert.save
+          @exp_array.push(expert)
+        end
+      end
+    end
+
+    describe 'matching on subject' do
+
+      it 'finds experts with a matching subject' do
+        subject = create(:subject)
+        expert = create(:expert)
+        expert.subjects << subject
+        expert.save
+        get :search, subject_list: [subject.to_param], format: :json
+        expect(json.size).to be(1)
+        expect(json[0]["notes"]).to eq(expert.notes)
+      end
+
+      it 'finds experts with matching subjects' do
+        get :search, subject_list: [@sub_array.first.to_param, @sub_array.second.to_param], format: :json
+        expect(json.size).to be(8)
+      end
+
+      it 'limits the number returned to 10 by default' do
+        get :search, subject_list: [@sub_array.first.to_param, @sub_array.second.to_param, @sub_array.third.to_param, @sub_array.fourth.to_param], format: :json
+        expect(json.size).to be(10)
+      end
+
+      it 'can find an arbitrary number of results' do
+        get :search, limit: 18, subject_list: [@sub_array.first.to_param, @sub_array.second.to_param, @sub_array.third.to_param, @sub_array.fourth.to_param, @sub_array.fifth.to_param], format: :json
+        expect(json.size).to be(18)
+      end
+
+      it 'can return an arbitrary number of results starting from not the first page' do
+        get :search, limit: 5, page: 2, subject_list: [@sub_array.first.to_param, @sub_array.second.to_param], format: :json
+        expect(json.size).to be(3)
+      end
+    end
+
+    xdescribe 'limiting the results by location' do
+
     end
   end
 end

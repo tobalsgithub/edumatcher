@@ -14,10 +14,12 @@ class EducatorsController < ApplicationController
   end
 
   def update
-    if @educator.update(educator_params)
-      respond_with(educator_to_json)
-    else
-      format.json { render :json => { "errors" => @educator.errors }, :status => :unprocessable_entity }
+    respond_to do |format|
+      if @educator.update(educator_params)
+        format.json { render :json => educator_to_json, :status => 204 }
+      else
+        format.json { render :json => { "errors" => @educator.errors }, :status => :unprocessable_entity }
+      end
     end
   end
 

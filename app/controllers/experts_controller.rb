@@ -5,19 +5,31 @@ class ExpertsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with(expert_to_json)
+    respond_with(@expert)
   end
 
   def show
     @expert = Expert.find(params[:id])
-    respond_with(expert_to_json)
+    respond_with(@expert)
   end
 
   def update
-    if @expert.update(expert_params)
-      respond_with(expert_to_json)
-    else
-      format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+    respond_to do |format|
+      if @expert.update(expert_params)
+        format.json { render :json => @expert, :status => 204 }
+      else
+        format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def search
+    limit = params[:limit] || 10
+    page = params[:page] || 1
+    offset = (page - 1) * limit
+    experts = Expert.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+    respond_to do |format|
+      format.json { render :json => experts }
     end
   end
 
@@ -31,7 +43,7 @@ class ExpertsController < ApplicationController
     respond_to do |format|
       if @expert.save && @expert.valid?
         @expert.reload
-        format.json { render :json => expert_to_json }
+        format.json { render :json => @expert }
       else
         format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
       end
@@ -44,7 +56,7 @@ class ExpertsController < ApplicationController
     respond_to do |format|
       if @expert.save && @expert.valid?
         @expert.reload
-        format.json { render :json => expert_to_json }
+        format.json { render :json => @expert }
       else
         format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
       end
@@ -58,7 +70,7 @@ class ExpertsController < ApplicationController
     end
     respond_to do |format|
       if @expert.save && @expert.valid?
-        format.json { render :json => expert_to_json }
+        format.json { render :json => @expert }
       else
         format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
       end
@@ -78,9 +90,5 @@ class ExpertsController < ApplicationController
   def expert_params
     json_params = ActionController::Parameters.new( JSON.parse(params.to_json) )
     json_params[:expert].permit(:notes)
-  end
-
-  def expert_to_json
-    @expert.to_json(:include => :subjects)
   end
 end
