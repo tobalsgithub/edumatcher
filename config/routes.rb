@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   # routes for schools
   resources :schools
 
+  # routes for school_districts
+  resources :school_districts
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
