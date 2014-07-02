@@ -159,6 +159,11 @@ RSpec.describe ClassroomsController, :type => :controller do
       expect(json).to have_key('school_id')
     end
 
+    it 'should include the school' do
+      expect(json).to have_key('school')
+      expect(json['school']).to have_key('name')
+    end
+
     it { should respond_with :ok }
   end
 

@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects'
   get 'classrooms/search' => 'classrooms#search'
 
+  # routes for schools
+  resources :schools
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

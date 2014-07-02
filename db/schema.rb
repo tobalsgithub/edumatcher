@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624231321) do
+ActiveRecord::Schema.define(version: 20140702210232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140624231321) do
   create_table "classrooms", force: true do |t|
     t.string   "website"
     t.string   "location"
-    t.integer  "School_id"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,7 +26,6 @@ ActiveRecord::Schema.define(version: 20140624231321) do
     t.integer  "school_id"
   end
 
-  add_index "classrooms", ["School_id"], name: "index_classrooms_on_School_id", using: :btree
   add_index "classrooms", ["school_id"], name: "index_classrooms_on_school_id", using: :btree
 
   create_table "classrooms_educators", force: true do |t|
@@ -65,11 +63,11 @@ ActiveRecord::Schema.define(version: 20140624231321) do
 
   create_table "educators_school_districts", force: true do |t|
     t.integer "educator_id"
-    t.integer "SchoolDistrict_id"
+    t.integer "school_district_id"
   end
 
-  add_index "educators_school_districts", ["SchoolDistrict_id"], name: "index_educators_school_districts_on_SchoolDistrict_id", using: :btree
   add_index "educators_school_districts", ["educator_id"], name: "index_educators_school_districts_on_educator_id", using: :btree
+  add_index "educators_school_districts", ["school_district_id"], name: "index_educators_school_districts_on_school_district_id", using: :btree
 
   create_table "educators_schools", force: true do |t|
     t.integer "educator_id"
@@ -97,32 +95,23 @@ ActiveRecord::Schema.define(version: 20140624231321) do
   add_index "experts_subjects", ["subject_id"], name: "index_experts_subjects_on_subject_id", using: :btree
 
   create_table "school_districts", force: true do |t|
+    t.string   "name"
     t.string   "website"
     t.string   "location"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
-
-  create_table "school_districts_schools", force: true do |t|
-    t.integer "SchoolDistrict_id"
-    t.integer "school_id"
-  end
-
-  add_index "school_districts_schools", ["SchoolDistrict_id"], name: "index_school_districts_schools_on_SchoolDistrict_id", using: :btree
-  add_index "school_districts_schools", ["school_id"], name: "index_school_districts_schools_on_school_id", using: :btree
 
   create_table "schools", force: true do |t|
     t.string   "website"
     t.string   "location"
-    t.integer  "SchoolDistrict_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "school_district_id"
     t.string   "name"
+    t.integer  "school_district_id"
   end
 
-  add_index "schools", ["SchoolDistrict_id"], name: "index_schools_on_SchoolDistrict_id", using: :btree
   add_index "schools", ["school_district_id"], name: "index_schools_on_school_district_id", using: :btree
 
   create_table "subjects", force: true do |t|
