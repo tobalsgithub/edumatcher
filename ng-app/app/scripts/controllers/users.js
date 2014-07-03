@@ -8,7 +8,7 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('LoginCtrl', function ($scope, $http, Auth) {
+  .controller('UsersCtrl', function ($scope, $http, Auth) {
 
     $scope.credentials = {email: null, password: null};
 

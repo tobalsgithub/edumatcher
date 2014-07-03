@@ -31,8 +31,8 @@ angular
 
         .state('login', {
           url: '/login',
-          templateUrl: 'views/login/login.html',
-          controller: 'LoginCtrl'
+          templateUrl: 'views/users/login.html',
+          controller: 'UsersCtrl'
         })
 
         .state('main', {

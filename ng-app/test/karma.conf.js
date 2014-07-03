@@ -12,7 +12,7 @@ module.exports = function(config) {
     basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['mocha','chai'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -21,16 +21,27 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-devise/lib/devise.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
+    reporters: ['spec'],
+    // Uncomment these lines to test feature #14
+    //specReporter : {
+    //    suppressPassed: true,
+    //    suppressFailed: true,
+    //    suppressSkipped: true
+    //},
+
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: [
+      'app/scripts/vendor/flatui*.js'
+    ],
 
     // web server port
     port: 8080,
@@ -50,7 +61,10 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      //'karma-jasmine',
+      'karma-mocha',
+      'karma-chai',
+      'karma-spec-reporter'
     ],
 
     // Continuous Integration mode

@@ -27,7 +27,16 @@
     "jshint-stylish": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1",
-    "grunt-connect-proxy": "~0.1.10"
+    "grunt-connect-proxy": "~0.1.10",
+    "grunt-karma": "~0.8.3",
+    "karma-spec-reporter": "0.0.13",
+    "mocha": "~1.20.1",
+    "chai": "~1.9.1",
+    "karma-mocha": "~0.1.4",
+    "karma-chai": "~0.1.0",
+    "requirejs": "~2.1.14",
+    "karma-requirejs": "~0.2.2",
+    "karma-phantomjs-launcher": "~0.1.4"
   },
   "engines": {
     "node": ">=0.10.0"
