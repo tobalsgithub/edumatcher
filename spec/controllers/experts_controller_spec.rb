@@ -70,7 +70,7 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'GET subjects' do
     it 'returns no subjects when there are no subjects' do
-      get :subjects, id: expert.id, format: :json
+      get :subjects, id: expert.to_param, format: :json
       expect(json.size).to be(0)
     end
 
@@ -80,7 +80,7 @@ RSpec.describe ExpertsController, :type => :controller do
       expert.subjects << sub1
       expert.subjects << sub2
       expert.save
-      get :subjects, id: expert.id, format: :json
+      get :subjects, id: expert.to_param, format: :json
       expect(json.size).to be(2)
     end
 
@@ -98,7 +98,7 @@ RSpec.describe ExpertsController, :type => :controller do
       different_expert.subjects << sub1
       different_expert.subjects << sub2
       different_expert.save
-      get :subjects, id: different_expert.id, format: :json
+      get :subjects, id: different_expert.to_param, format: :json
       expect(json.size).to be(2)
     end
   end
@@ -121,7 +121,7 @@ RSpec.describe ExpertsController, :type => :controller do
     let(:subject) { create(:subject) }
 
     before(:each) do
-      post :add_subject, subject_id: subject.to_param, format: :json
+      post :add_subject, id: expert.to_param, subject_id: subject.to_param, format: :json
     end
 
     it 'can add a subject to an expert' do
@@ -144,7 +144,7 @@ RSpec.describe ExpertsController, :type => :controller do
 
     it 'can remove an existing subject from an expert' do
       expect(expert.subjects.size).to be 1
-      post :remove_subject, subject_id: subject.to_param, format: :json
+      post :remove_subject, id: expert.to_param, subject_id: subject.to_param, format: :json
       expect(expert.subjects.size).to be(0)
     end
   end
@@ -156,7 +156,7 @@ RSpec.describe ExpertsController, :type => :controller do
       sub2 = create(:subject)
       sub3 = create(:subject)
       array = [sub1.id, sub2.id, sub3.id]
-      post :set_subjects, subject_list: array, format: :json
+      post :set_subjects, id: expert.to_param, subject_list: array, format: :json
     end
 
     it 'can set the list of subjects for an expert' do

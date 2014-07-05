@@ -16,7 +16,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'Devise'
+    'Devise',
+    'google-maps',
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -33,6 +34,12 @@ angular
           url: '/login',
           templateUrl: 'views/users/login.html',
           controller: 'UsersCtrl'
+        })
+
+        .state('classrooms', {
+          url: '/classrooms',
+          templateUrl: 'views/classrooms/classrooms.html',
+          controller: 'ClassroomsCtrl'
         })
 
         .state('main', {

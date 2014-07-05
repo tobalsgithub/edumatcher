@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/scripts/**/*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
       },
       gruntfile: {
@@ -58,10 +58,10 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.app %>/{,*/}*.css'
+          '<%= yeoman.app %>/**/*.html',
+          '.tmp/styles/**/*.css',
+          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.app %>/**/*.css'
         ]
       }
     },
@@ -182,7 +182,7 @@ module.exports = function (grunt) {
         ignorePath: new RegExp('^<%= yeoman.app %>/|../')
       },
       sass: {
-      src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass,css}'],
+        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass,css}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },

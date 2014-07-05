@@ -16,7 +16,7 @@ RSpec.describe UsersController, :type => :controller do
   describe 'setting up a new expert' do
 
     it 'creates a new expert model' do
-      post :set_expert, format: :json
+      post :set_expert, id: user.to_param, format: :json
       expect(user.expert.id).to be > 0
     end
 
@@ -24,14 +24,14 @@ RSpec.describe UsersController, :type => :controller do
       expert = create(:expert)
       user.expert = expert
       user.save
-      post :set_expert, format: :json
+      post :set_expert, id: user.to_param, format: :json
       expect(response.code).to eq("422")
     end
   end
 
   describe 'setting up a new educator' do
     it 'creates a new educator model' do
-      post :set_educator, format: :json
+      post :set_educator, id: user.to_param, format: :json
       expect(user.educator.id).to be > 0
     end
 
@@ -39,7 +39,7 @@ RSpec.describe UsersController, :type => :controller do
       educator = create(:educator)
       user.educator= educator
       user.save
-      post :set_educator, format: :json
+      post :set_educator, id: user.to_param, format: :json
       expect(response.code).to eq("422")
     end
   end

@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get 'welcome/proxy_test' => 'welcome#proxy_test'
 
   # routes for users
-  post 'users/set_expert' => 'users#set_expert'
-  post 'users/set_educator' => 'users#set_educator'
+  post 'users/:id/set_expert' => 'users#set_expert'
+  post 'users/:id/set_educator' => 'users#set_educator'
 
 
   # routes for experts
@@ -24,9 +24,9 @@ Rails.application.routes.draw do
     # post 'set_subjects' => 'experts#set_subjects'
   end
   get 'experts/:id/subjects' => 'experts#subjects'
-  post 'experts/add_subject' => 'experts#add_subject'
-  post 'experts/remove_subject' => 'experts#remove_subject'
-  post 'experts/set_subjects' => 'experts#set_subjects'
+  put 'experts/:id/add_subject' => 'experts#add_subject'
+  put 'experts/:id/remove_subject' => 'experts#remove_subject'
+  post 'experts/:id/set_subjects' => 'experts#set_subjects'
   get 'experts/search' => 'experts#search'
 
 

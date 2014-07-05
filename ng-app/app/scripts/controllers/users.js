@@ -15,10 +15,10 @@ angular.module('edumatcherApp')
     // Authentication stuff
 
     $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
-      console.log(xhr.data.error);
+      //console.log(xhr.data.error);
         // Ask user for login credentials
 
-        /*Auth.login($scope.credentials).then(function() {
+        Auth.login($scope.credentials).then(function() {
             // Successfully logged in.
             // Redo the original request.
             return $http(xhr.config);
@@ -30,7 +30,7 @@ angular.module('edumatcherApp')
             // There was an error.
             // Reject the original request's promise.
             deferred.reject(error);
-        });*/
+        });
       });
 
 
@@ -47,6 +47,7 @@ angular.module('edumatcherApp')
     };
 
     $scope.logout = function() {
-      $http({method: 'DELETE', url: '../users/sign_out.json', data: {}});
+      //$http({method: 'DELETE', url: '../users/sign_out.json', data: {}});
+      Auth.logout();
     };
   });
