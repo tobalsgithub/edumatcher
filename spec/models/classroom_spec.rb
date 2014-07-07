@@ -7,5 +7,6 @@ RSpec.describe Classroom, :type => :model do
     it { should have_and_belong_to_many(:educators) }
     it { should have_and_belong_to_many(:subjects) }
     it { should validate_presence_of(:school) }
+    it { should belong_to(:grade_level) }
   end
 end

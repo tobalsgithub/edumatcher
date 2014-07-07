@@ -61,29 +61,20 @@ angular.module('edumatcherApp')
   //
   // }
 
-    $scope.find = function(){
-      var data = {
-        subject_list: $scope.subject_list,
-        limit: $scope.limit,
-        page: $scope.page
-      };
-
-      $http.post('/classrooms/search', data).success(function(data){
-        $scope.classrooms = data;
-      });
-    };
-
     $scope.grade_level_list = [];
 
     $scope.grade_levels = [{
       name: 'Elementary',
-      id: 1
+      id: 1,
+      grades: [1,2,3,4,5]
     },{
       name: 'Middle School',
-      id: 2
+      id: 2,
+      grades: [6,7,8]
     },{
       name: 'High School',
-      id: 3
+      id: 3,
+      grades: [9,10,11,12]
     }];
 
     $scope.within_distances = [{

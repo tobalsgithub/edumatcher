@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   # routes for subjects
   resources :subjects, :defaults => {:format => "json"}
 
+  #routes for grade_levels
+  get 'grade_levels' => 'grade_levels#index'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

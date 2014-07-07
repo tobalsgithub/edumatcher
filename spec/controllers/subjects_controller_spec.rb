@@ -23,6 +23,7 @@ RSpec.describe SubjectsController, :type => :controller do
 
   describe 'GET index' do
     before(:each) do
+      create(:subject)
       get :index, format: :json
     end
 
@@ -30,7 +31,7 @@ RSpec.describe SubjectsController, :type => :controller do
       expect(json[0]).to have_key('id')
     end
 
-    xit { should respond_with 200 }
+    xit { should respond_with :success }
   end
 
   describe 'POST create' do
