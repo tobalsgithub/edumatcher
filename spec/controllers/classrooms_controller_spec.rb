@@ -237,13 +237,17 @@ RSpec.describe ClassroomsController, :type => :controller do
 
     before(:all) do
       @sub_array = []
+      @grade_level_array = []
       @class_array = []
       5.times do
         subject = create(:subject)
         @sub_array.push(subject)
+        grade_level = create(:grade_level)
+        @grade_level_array.push(grade_level)
         4.times do
           classroom = create(:classroom)
           classroom.subjects << subject
+          classroom.grade_level = grade_level
           classroom.save
           @class_array.push(classroom)
         end
@@ -295,6 +299,55 @@ RSpec.describe ClassroomsController, :type => :controller do
 
       it 'can return an arbitrary number of results starting from not the first page' do
         get :search, limit: 5, page: 2, subject_list: [@sub_array.first.to_param, @sub_array.second.to_param], format: :json
+        expect(json.size).to be(3)
+      end
+    end
+
+    describe 'matching on grade level' do
+      it 'returns all classrooms if no grade_level_list is given' do
+        get :search, format: :json
+        expect(json.size).to be(10)
+      end
+
+      it 'finds classrooms with a matching grade_level' do
+        grade_level = create(:grade_level)
+        classroom = create(:classroom)
+        classroom.grade_level = grade_level
+        classroom.save
+        get :search, grade_level_list: [grade_level.to_param], format: :json
+        expect(json.size).to be(1)
+        expect(json[0]["name"]).to eq(classroom.name)
+      end
+
+      it 'finds classrooms if the grade_level_list has more than just matching grade_level' do
+        grade_level = create(:grade_level)
+        grade_level_2 = create(:grade_level)
+        classroom = create(:classroom)
+        classroom.grade_level = grade_level
+        classroom.subjects << create(:subject)
+        classroom.save
+        get :search, grade_level_list: [grade_level.to_param, grade_level_2.to_param], format: :json
+        expect(json.size).to be(1)
+        expect(json[0]["name"]).to eq(classroom.name)
+      end
+
+      it 'finds classrooms with matching grade_level' do
+        get :search, grade_level_list: [@grade_level_array.first.to_param, @grade_level_array.second.to_param], format: :json
+        expect(json.size).to be(8)
+      end
+
+      it 'limits the number returned to 10 by default' do
+        get :search, grade_level_list: [@grade_level_array.first.to_param, @grade_level_array.second.to_param, @grade_level_array.third.to_param, @grade_level_array.fourth.to_param], format: :json
+        expect(json.size).to be(10)
+      end
+
+      it 'can find an arbitrary number of results' do
+        get :search, limit: 18, grade_level_list: [@grade_level_array.first.to_param, @grade_level_array.second.to_param, @grade_level_array.third.to_param, @grade_level_array.fourth.to_param, @grade_level_array.fifth.to_param], format: :json
+        expect(json.size).to be(18)
+      end
+
+      it 'can return an arbitrary number of results starting from not the first page' do
+        get :search, limit: 5, page: 2, grade_level_list: [@grade_level_array.first.to_param, @grade_level_array.second.to_param], format: :json
         expect(json.size).to be(3)
       end
     end

@@ -8,23 +8,44 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('ClassroomsCtrl', function ($scope, $http, Classrooms, Subjects) {
+  .controller('ClassroomsCtrl', function ($scope, $http, Classrooms, Subjects, GradeLevels) {
 
     $scope.subjects = [];
     $scope.classrooms = [];
     $scope.subject_list = [];
+    $scope.grade_levels = [];
+    $scope.grade_level_list = [];
+    $scope.page = 1;
+    $scope.limit = 10;
 
     function init() {
       $scope.classrooms = Classrooms.search();
       $scope.subjects = Subjects.query();
+      $scope.grade_levels = GradeLevels.query();
     }
 
     init();
 
+    function search_params(){
+      return {
+        'subject_list[]': $scope.subject_list || [],
+        'grade_level_list[]': $scope.grade_level_list || [],
+        'page': $scope.page || 1,
+        'limit': $scope.limit || 10
+      };
+    }
 
     $scope.$watch('subject_list', function(newValue, oldValue){
       if(newValue !== oldValue) {
-        $scope.classrooms = Classrooms.search({'subject_list[]': $scope.subject_list });
+        //$scope.classrooms = Classrooms.search({'subject_list[]': $scope.subject_list });
+        $scope.classrooms = Classrooms.search(search_params());
+
+      }
+    });
+
+    $scope.$watch('grade_level_list', function(newValue, oldValue){
+      if(newValue !== oldValue) {
+        $scope.classrooms = Classrooms.search(search_params());
       }
     });
 
@@ -60,22 +81,6 @@ angular.module('edumatcherApp')
   //   map.panBy(400,0);
   //
   // }
-
-    $scope.grade_level_list = [];
-
-    $scope.grade_levels = [{
-      name: 'Elementary',
-      id: 1,
-      grades: [1,2,3,4,5]
-    },{
-      name: 'Middle School',
-      id: 2,
-      grades: [6,7,8]
-    },{
-      name: 'High School',
-      id: 3,
-      grades: [9,10,11,12]
-    }];
 
     $scope.within_distances = [{
       id: 1,

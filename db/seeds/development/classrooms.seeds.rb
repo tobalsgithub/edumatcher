@@ -36,7 +36,7 @@ classroom.school = middle_school
 classroom.subjects.delete_all
 classroom.subjects << math
 classroom.grade = 8
-classroom.grade_level = middle_school
+classroom.grade_level = middle
 classroom.save!
 
 classroom = Classroom.where(name: 'Jill Jones\' 10th Grade Physics Class').first_or_initialize

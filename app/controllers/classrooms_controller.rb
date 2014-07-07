@@ -29,14 +29,26 @@ class ClassroomsController < ApplicationController
   end
 
   def search
-    limit = params[:limit] || 10
-    page = params[:page] || 1
+    limit = params[:limit].to_i || 10
+    page = params[:page].to_i || 1
     offset = (page - 1) * limit
-    if params[:subject_list] == nil || params[:subject_list].size == 0
-      classrooms = Classroom.all.limit(limit).offset(offset)
+    subject_list = []
+    grade_level_list = []
+
+    if params[:grade_level_list] == nil || params[:grade_level_list].size == 0
+      grade_level_list = GradeLevel.pluck(:id)
+      grade_level_list.push(nil)
     else
-      classrooms = Classroom.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+      grade_level_list = params[:grade_level_list]
     end
+
+    if params[:subject_list] == nil || params[:subject_list].size == 0
+      classrooms = Classroom.where('classrooms.grade_level_id' => grade_level_list).limit(limit).offset(offset)
+
+    else
+      classrooms = Classroom.joins(:subjects).where('subjects.id' => params[:subject_list], 'classrooms.grade_level_id' => grade_level_list).limit(limit).offset(offset)
+    end
+
     respond_to do |format|
       format.json { render :json => classrooms }
     end
