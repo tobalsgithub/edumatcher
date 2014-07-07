@@ -9,11 +9,13 @@ angular.module('edumatcherApp').factory('Classrooms', ['$resource', function($re
   {
     search: {
 			method: 'GET',
-			url: '/classrooms/search'
+			url: '/classrooms/search',
+      isArray: true
 		},
 		subjects: {
 			method: 'GET',
-			url: '/classrooms/:id/subjects'
+			url: '/classrooms/:id/subjects',
+      isArray: true
 		},
 		add_subject: {
 			method: 'PUT',

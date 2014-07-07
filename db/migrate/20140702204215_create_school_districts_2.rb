@@ -1,4 +1,4 @@
-class CreateSchoolDistricts < ActiveRecord::Migration
+class CreateSchoolDistricts2 < ActiveRecord::Migration
   def change
     create_table :school_districts do |t|
       t.string :name

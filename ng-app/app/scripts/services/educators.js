@@ -9,7 +9,8 @@ angular.module('edumatcherApp').factory('Educators', ['$resource', function($res
   {
     subjects: {
       method: 'GET',
-      url: '/educators/:id/subjects'
+      url: '/educators/:id/subjects',
+      isArray: true
     }
   });
 }]);

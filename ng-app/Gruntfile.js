@@ -367,7 +367,7 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.',
-          src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
+          src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
         }]
       },
@@ -385,6 +385,14 @@ module.exports = function (grunt) {
           src: ['**']
         }]
       },
+      bootstrapIcons: {
+        files: [{
+          expand: true,
+          cwd: './bower_components/bootstrap-sass-official/assets/fonts/bootstrap/',
+          dest: './app/fonts/',
+          src: ['**']
+        }]
+      }
     },
 
     // Run some tasks in parallel to speed up the build process
@@ -423,6 +431,7 @@ module.exports = function (grunt) {
       'clean:server',
       'clean:bowerComponents',
       'copy:bowerComponents',
+      'copy:bootstrapIcons',
       'wiredep',
       'concurrent:server',
       'configureProxies',
@@ -441,6 +450,7 @@ module.exports = function (grunt) {
     'clean:server',
     'clean:bowerComponents',
     'copy:bowerComponents',
+    'copy:bootstrapIcons',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -452,6 +462,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'clean:bowerComponents',
     'copy:bowerComponents',
+    'copy:bootstrapIcons',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -472,10 +483,5 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
-  ]);
-
-  grunt.registerTask('bowerTest', [
-    'clean:bowerComponents',
-    'copy:bowerComponents',
   ]);
 };

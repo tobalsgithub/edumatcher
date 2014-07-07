@@ -32,7 +32,11 @@ class ClassroomsController < ApplicationController
     limit = params[:limit] || 10
     page = params[:page] || 1
     offset = (page - 1) * limit
-    classrooms = Classroom.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+    if params[:subject_list] == nil || params[:subject_list].size == 0
+      classrooms = Classroom.all.limit(limit).offset(offset)
+    else
+      classrooms = Classroom.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+    end
     respond_to do |format|
       format.json { render :json => classrooms }
     end

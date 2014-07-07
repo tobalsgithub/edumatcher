@@ -18,6 +18,7 @@ angular
     'ui.router',
     'Devise',
     'google-maps',
+    'mgcrea.ngStrap'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');

@@ -11,42 +11,38 @@ Rails.application.routes.draw do
   get 'welcome/proxy_test' => 'welcome#proxy_test'
 
   # routes for users
-  post 'users/:id/set_expert' => 'users#set_expert'
-  post 'users/:id/set_educator' => 'users#set_educator'
+  post 'users/:id/set_expert' => 'users#set_expert', :defaults => {:format => "json"}
+  post 'users/:id/set_educator' => 'users#set_educator', :defaults => {:format => "json"}
 
 
   # routes for experts
-
-  resources :experts do
-    # get 'subjects' => 'experts#subjects'
-    # put 'add_subject' => 'experts#add_subject'
-    # put 'remove_subject' => 'experts#remove_subject'
-    # post 'set_subjects' => 'experts#set_subjects'
-  end
-  get 'experts/:id/subjects' => 'experts#subjects'
-  put 'experts/:id/add_subject' => 'experts#add_subject'
-  put 'experts/:id/remove_subject' => 'experts#remove_subject'
-  post 'experts/:id/set_subjects' => 'experts#set_subjects'
-  get 'experts/search' => 'experts#search'
-
+  get 'experts/search' => 'experts#search', :defaults => {:format => "json"}
+  resources :experts, :defaults => {:format => "json"}
+  get 'experts/:id/subjects' => 'experts#subjects', :defaults => {:format => "json"}
+  put 'experts/:id/add_subject' => 'experts#add_subject', :defaults => {:format => "json"}
+  put 'experts/:id/remove_subject' => 'experts#remove_subject', :defaults => {:format => "json"}
+  post 'experts/:id/set_subjects' => 'experts#set_subjects', :defaults => {:format => "json"}
 
   # routes for educators
-  resources :educators
-  get 'educators/:id/subjects' => 'educators#subjects'
+  resources :educators, :defaults => {:format => "json"}
+  get 'educators/:id/subjects' => 'educators#subjects', :defaults => {:format => "json"}
 
   # routes for classrooms
-  resources :classrooms
-  get 'classrooms/:id/subjects' => 'classrooms#subjects'
-  put 'classrooms/:id/add_subject' => 'classrooms#add_subject'
-  put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject'
-  post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects'
-  get 'classrooms/search' => 'classrooms#search'
+  get 'classrooms/search' => 'classrooms#search', :defaults => {:format => "json"}
+  resources :classrooms, :defaults => {:format => "json"}
+  get 'classrooms/:id/subjects' => 'classrooms#subjects', :defaults => {:format => "json"}
+  put 'classrooms/:id/add_subject' => 'classrooms#add_subject', :defaults => {:format => "json"}
+  put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject', :defaults => {:format => "json"}
+  post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects', :defaults => {:format => "json"}
 
   # routes for schools
-  resources :schools
+  resources :schools, :defaults => {:format => "json"}
 
   # routes for school_districts
-  resources :school_districts
+  resources :school_districts, :defaults => {:format => "json"}
+
+  # routes for subjects
+  resources :subjects, :defaults => {:format => "json"}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

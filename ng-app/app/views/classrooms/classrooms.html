@@ -17,47 +17,35 @@
       <google-map center="map.center" zoom="map.zoom"></google-map>
     </div> <!-- /.map-section -->
 
-      <div class="search-info-section">
-        <div class="filter-section">
-          <div class="filter-item">
-            <div class="filter-label">
-              Subject
-            </div>
-            <div class="filter-multiselect filter-choice">
 
-              <div class="filter-dropdown dropdown">
-                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
-                <span class="dropdown-arrow"></span>
-                <ul class="dropdown-menu">
-                  <li ng-repeat="subject in subjects">
-                    <label class="checkbox" for="checkbox1">
-                      <input type="checkbox" value="{{subject.id}}" id="checkbox1" data-toggle="checkbox" />
-                      {{subject.name}}
-                    </label>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    <div class="search-info-section">
+      <div class="filter-section">
+        <div class="filter-item">
+          <div class="filter-label">
+            Subject
           </div>
-          <div class="filter-item">
-            <div class="filter-label">
-              Grade Level
-            </div>
-            <div class="filter-multiselect filter-choice">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
-                <span class="dropdown-arrow"></span>
-                <ul class="dropdown-menu">
-                  <li ng-repeat="grade in grade_levels">
-                    <label class="checkbox" for="checkbox2">
-                      <input type="checkbox" value="{{grade.id}}" id="checkbox2" data-toggle="checkbox" />
-                      {{grade.name}}
-                    </label>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <div class="filter-text filter-choice">
+            <button type="button" class="btn btn-primary" ng-model="subject_list" data-multiple="1"
+              data-placeholder="All subjects" ng-options="subject.id as subject.name for subject in subjects" bs-select>
+              Action <span class="caret"></span>
+            </button>
           </div>
+      </div>
+
+      <div class="filter-item">
+        <div class="filter-label">
+          Grade Level
+        </div>
+        <div class="filter-text filter-choice">
+          <div class="filter-input">
+            <button type="button" class="btn btn-primary" ng-model="grade_level_list" data-multiple="1"
+              data-placeholder="None selected" ng-options="grade.id as grade.name for grade in grade_levels" bs-select>
+              Action <span class="caret"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
           <div class="filter-item">
             <div class="filter-label">
               Location
@@ -73,18 +61,10 @@
                 <div class="filter-input-label">
                   Within
                 </div>
-                <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle filter-btn" data-toggle="dropdown">None selected<span class="caret"></span></button>
-                <span class="dropdown-arrow"></span>
-                <ul class="dropdown-menu">
-                  <li ng-repeat="distance in within_distances">
-                    <label class="checkbox" for="checkbox3">
-                      <input type="checkbox" value="{{distance.distance}}" id="checkbox3" data-toggle="checkbox" />
-                      {{distance.distance}} miles
-                    </label>
-                  </li>
-                </ul>
-              </div>
+                <button type="button" class="btn btn-primary" ng-model="distance"
+                  data-placeholder="None selected" ng-options="distance.id as distance.name for distance in within_distances" bs-select>
+                  Action <span class="caret"></span>
+                </button>
               </div>
             </div>
           </div>
@@ -112,8 +92,29 @@
           </div>
         </div> <!-- /.filter-section -->
 
-
         <div class="list-section">
+          <div class="list-item" ng-repeat="classroom in classrooms">
+            <div class="list-thumb">
+              <img src="../images/classroom1.png" />
+            </div>
+            <div class="list-details">
+              <div class="list-details-header">
+                <h5><a href="classrooms/{{classroom.id}}">{{classroom.name}}</a></h5>
+              </div>
+              <div class="list-details-info">
+                <small>
+                  <span class="list-details-subject">Subjects:
+                    <span ng-repeat="subject in classroom.subjects">{{subject.name}}</span>
+                  </span>
+                  <span class="list-details-topics">Topics: ...</span><br />
+                  <span class="list-details-availability">Availability: ...</span>
+                </small>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- <div class="list-section">
           <div class="list-item">
             <div class="list-thumb">
               <img src="../images/classroom1.png" />
@@ -184,7 +185,7 @@
                 </small>
               </div>
             </div>
-          </div>
+          </div> -->
 
 
         </div> <!-- /.list-section -->

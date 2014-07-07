@@ -8,14 +8,25 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('ClassroomsCtrl', function ($scope, $http, Classrooms) {
+  .controller('ClassroomsCtrl', function ($scope, $http, Classrooms, Subjects) {
+
+    $scope.subjects = [];
+    $scope.classrooms = [];
+    $scope.subject_list = [];
 
     function init() {
-      var classrooms = Classrooms.get({id: 1});
-      console.log(classrooms);
+      $scope.classrooms = Classrooms.search();
+      $scope.subjects = Subjects.query();
     }
 
     init();
+
+
+    $scope.$watch('subject_list', function(newValue, oldValue){
+      if(newValue !== oldValue) {
+        $scope.classrooms = Classrooms.search({'subject_list[]': $scope.subject_list });
+      }
+    });
 
     $scope.map = {
       center: {
@@ -62,6 +73,8 @@ angular.module('edumatcherApp')
       });
     };
 
+    $scope.grade_level_list = [];
+
     $scope.grade_levels = [{
       name: 'Elementary',
       id: 1
@@ -74,51 +87,21 @@ angular.module('edumatcherApp')
     }];
 
     $scope.within_distances = [{
-      distance: 25
+      id: 1,
+      distance: 25,
+      name: '25 miles'
     },{
-      distance: 50
+      id: 2,
+      distance: 50,
+      name: '50 miles'
     },{
-      distance: 100
+      id: 3,
+      distance: 100,
+      name: '100 miles'
     },{
-      distance: 'Anywhere'
-    }];
-
-    $scope.subjects = [{
-      name: 'Mathematics',
-      id: 1
-    },{
-      name: 'General Science',
-      id: 2
-    },{
-      name: 'Physics',
-      id: 3
-    },{
-      name: 'History',
-      id: 4
-    },{
-      name: 'Technology',
-      id: 5
-    },{
-      name: 'Geology',
-      id: 6
-    },{
-      name: 'Chemistry',
-      id: 7
-    },{
-      name: 'Government',
-      id: 8
-    },{
-      name: 'Economics',
-      id: 9
-    },{
-      name: 'Political Science',
-      id: 10
-    },{
-      name: 'Physical Education',
-      id: 11
-    },{
-      name: 'Social Studies',
-      id: 12
+      id: 999,
+      distance: '9999999',
+      name: 'Anywhere'
     }];
 
   });

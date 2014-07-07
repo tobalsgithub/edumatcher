@@ -252,12 +252,28 @@ RSpec.describe ClassroomsController, :type => :controller do
 
     describe 'matching on subject' do
 
+      it 'returns all classrooms if no subject_list is given' do
+        get :search, format: :json
+        expect(json.size).to be(10)
+      end
+
       it 'finds classrooms with a matching subject' do
         subject = create(:subject)
         classroom = create(:classroom)
         classroom.subjects << subject
         classroom.save
         get :search, subject_list: [subject.to_param], format: :json
+        expect(json.size).to be(1)
+        expect(json[0]["name"]).to eq(classroom.name)
+      end
+
+      it 'finds classrooms if the subject_list has more than just matching subjects' do
+        subject = create(:subject)
+        sub2 = create(:subject)
+        classroom = create(:classroom)
+        classroom.subjects << subject
+        classroom.save
+        get :search, subject_list: [subject.to_param, sub2.to_param], format: :json
         expect(json.size).to be(1)
         expect(json[0]["name"]).to eq(classroom.name)
       end
