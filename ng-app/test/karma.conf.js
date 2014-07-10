@@ -12,7 +12,7 @@ module.exports = function(config) {
     basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha','chai'],
+    frameworks: ['jasmine','chai','sinon-chai'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -25,8 +25,10 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-devise/lib/devise.js',
+      //'bower_components/angular-google-maps/dist/angular-google-maps.js',
+      'bower_components/angular-strap/dist/angular-strap.js',
       'app/scripts/**/*.js',
-      //'test/mock/**/*.js',
+      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -61,10 +63,11 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      //'karma-jasmine',
+      'karma-jasmine',
       'karma-mocha',
       'karma-chai',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-sinon-chai',
     ],
 
     // Continuous Integration mode

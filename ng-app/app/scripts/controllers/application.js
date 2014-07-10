@@ -2,21 +2,25 @@
 
 /**
  * @ngdoc function
- * @name edumatcherApp.controller:LoginCtrl
+ * @name edumatcherApp.controller:AppCtrl
  * @description
- * # LoginCtrl
+ * # AppCtrl
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('UsersCtrl', function ($scope, $http, Auth) {
+  .controller('AppCtrl', function ($scope, Auth, $http, $location) {
 
     $scope.credentials = {email: null, password: null};
+    $scope.user = {};
 
     // Authentication stuff
 
     $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
       //console.log(xhr.data.error);
       // Ask user for login credentials
+
+      $scope.prompt_login();
+
       Auth.login($scope.credentials).then(function() {
         // Successfully logged in.
         // Redo the original request.
@@ -32,24 +36,29 @@ angular.module('edumatcherApp')
         // Reject the original request's promise.
         console.log('error');
         deferred.reject(error);
+        $scope.login_failed_message = error;
       });
     });
 
 
     $scope.login = function() {
       Auth.login($scope.credentials).then(function(user) {
-          console.log(user); // => {id: 1, ect: '...'}
+          $scope.user = user;
+          $location.path('/home');
         }, function(error) {
           // Authentication failed...
-          console.log('err' + error);
+          $scope.login_failed_message = error;
         });
-    //   console.log($scope.login_user);
-    //   $http.post('/users/sign_in.json', {user: {email: $scope.login_user.email, password: $scope.login_user.password}});
-    // };
+
     };
 
     $scope.logout = function() {
-      //$http({method: 'DELETE', url: '../users/sign_out.json', data: {}});
       Auth.logout();
+      $location.path('/');
     };
+
+    $scope.prompt_login = function(){
+      return true;
+    };
+
   });

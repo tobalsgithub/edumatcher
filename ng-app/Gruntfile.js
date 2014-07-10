@@ -448,14 +448,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'clean:bowerComponents',
-    'copy:bowerComponents',
-    'copy:bootstrapIcons',
-    'concurrent:test',
+    //'clean:bowerComponents',
+    //'copy:bowerComponents',
+    //'copy:bootstrapIcons',
+    //'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma',
-    'clean:bowerComponents',
+    //'clean:bowerComponents',
   ]);
 
   grunt.registerTask('build', [

@@ -8,7 +8,7 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('ClassroomsCtrl', function ($scope, $http, Classrooms, Subjects, GradeLevels) {
+  .controller('ClassroomsCtrl', function ($scope, Classrooms, Subjects, GradeLevels) {
 
     $scope.subjects = [];
     $scope.classrooms = [];
@@ -17,37 +17,6 @@ angular.module('edumatcherApp')
     $scope.grade_level_list = [];
     $scope.page = 1;
     $scope.limit = 10;
-
-    function init() {
-      $scope.classrooms = Classrooms.search();
-      $scope.subjects = Subjects.query();
-      $scope.grade_levels = GradeLevels.query();
-    }
-
-    init();
-
-    function search_params(){
-      return {
-        'subject_list[]': $scope.subject_list || [],
-        'grade_level_list[]': $scope.grade_level_list || [],
-        'page': $scope.page || 1,
-        'limit': $scope.limit || 10
-      };
-    }
-
-    $scope.$watch('subject_list', function(newValue, oldValue){
-      if(newValue !== oldValue) {
-        //$scope.classrooms = Classrooms.search({'subject_list[]': $scope.subject_list });
-        $scope.classrooms = Classrooms.search(search_params());
-
-      }
-    });
-
-    $scope.$watch('grade_level_list', function(newValue, oldValue){
-      if(newValue !== oldValue) {
-        $scope.classrooms = Classrooms.search(search_params());
-      }
-    });
 
     $scope.map = {
       center: {
@@ -99,5 +68,32 @@ angular.module('edumatcherApp')
       distance: '9999999',
       name: 'Anywhere'
     }];
+
+    $scope.update_classrooms = function(newValue, oldValue){
+      if(newValue !== oldValue) {
+        $scope.classrooms = Classrooms.search($scope.search_params());
+      }
+    };
+
+    $scope.search_params = function(){
+      return {
+        'subject_list[]': $scope.subject_list || [],
+        'grade_level_list[]': $scope.grade_level_list || [],
+        'page': $scope.page || 1,
+        'limit': $scope.limit || 10
+      };
+    };
+
+    $scope.$watch('subject_list', $scope.update_classrooms);
+
+    $scope.$watch('grade_level_list', $scope.update_classrooms);
+
+    function init(){
+      $scope.classrooms = Classrooms.search($scope.search_params());
+      $scope.subjects = Subjects.query();
+      $scope.grade_levels = GradeLevels.query();
+    }
+
+    init();
 
   });
