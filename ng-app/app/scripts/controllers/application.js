@@ -13,6 +13,21 @@ angular.module('edumatcherApp')
     $scope.credentials = {email: null, password: null};
     $scope.user = {};
 
+    // login form stuff
+
+      // hide error messages until 'submit' event
+    $scope.submitted = false;
+
+    // hide success message
+    $scope.showMessage = false;
+
+    // method called from shakeThat directive
+    $scope.submit = function() {
+      // show success message
+      $scope.showMessage = true;
+    };
+
+
     // Authentication stuff
 
     $scope.$on('devise:unauthorized', function(event, xhr, deferred) {

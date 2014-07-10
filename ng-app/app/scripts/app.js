@@ -33,7 +33,7 @@ angular
 
       .state('login', {
         url: '/login',
-        templateUrl: 'views/users/login.html',
+        templateUrl: 'views/users/login_form.html',
         controller: 'UsersCtrl'
       })
 
