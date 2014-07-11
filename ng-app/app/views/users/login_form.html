@@ -1,4 +1,4 @@
-<form name="form" autocomplete="off" novalidate shake-that submitted="submitted" submit="submit()">
+<form name="form" autocomplete="off" novalidate shake-that submitted="submitted" submit="login()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
@@ -14,7 +14,7 @@
           id="email"
           name="email"
           placeholder="Email"
-          ng-model="email"
+          ng-model="credentials.email"
           ng-model-options="{updateOn: 'blur'}"
           required>
       </div>
@@ -26,10 +26,14 @@
           id="password"
           name="password"
           placeholder="Password"
-          ng-model="password"
+          ng-model="credentials.password"
           required>
       </div>
       <button type="submit" class="btn btn-primary btn-block">Login</button>
     </div>
   </div>
 </form>
+
+<div class="alert alert-success message" ng-show="showMessage">Well done!</div>
+
+<div class="alert alert-warning message" ng-show="showErrorMessage">{{login_failed_message}}</div>

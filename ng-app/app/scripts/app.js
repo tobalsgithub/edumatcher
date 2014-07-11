@@ -18,7 +18,8 @@ angular
     'ui.router',
     'Devise',
     //'google-maps',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'stateFiles'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -34,7 +35,9 @@ angular
       .state('login', {
         url: '/login',
         templateUrl: 'views/users/login_form.html',
-        controller: 'UsersCtrl'
+        controller: 'UsersCtrl',
+        css: 'styles/shake_that.css',
+        js: 'scripts/flatui-checkbox.js1'
       })
 
       .state('classrooms', {

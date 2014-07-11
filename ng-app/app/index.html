@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html ng-app="edumatcherApp" class="no-js">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -18,11 +18,10 @@
     <!-- <link rel="stylesheet" href="styles/flat-ui.css"> -->
     <link rel="stylesheet" href="styles/site.css">
     <link rel="stylesheet" href="styles/ionicons.min.css">
-    <link rel="stylesheet" href="styles/shake_that.css">
 
     <!-- endbuild -->
   </head>
-  <body ng-app="edumatcherApp" ng-controller="AppCtrl">
+  <body ng-controller="AppCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -82,6 +81,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="bower_components/angular-state-files/state-files.js"></script>
     <!-- endbower -->
     <!--<script src="scripts/vendor/flatui-checkbox.js"></script>
     <script src="scripts/vendor/flatui-radio.js"></script>-->
@@ -104,5 +104,18 @@
         <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+        <script>
+          // a function that will allow us to inject a css file on a per view basis
+          function includeCSSfile(href) {
+            var head_node = document.getElementsByTagName('head')[0];
+            var link_tag = document.createElement('link');
+            link_tag.setAttribute('rel', 'stylesheet');
+            link_tag.setAttribute('type', 'text/css');
+            link_tag.setAttribute('href', href);
+            head_node.appendChild(link_tag);
+          }
+        </script>
 </body>
 </html>

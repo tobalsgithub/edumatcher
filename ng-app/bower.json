@@ -16,7 +16,8 @@
     "angular-devise": "~0.3.0",
     "angular-google-maps": "~1.1.6",
     "bootstrap-sass-official": "~3.2.0",
-    "angular-strap": "~2.0.3"
+    "angular-strap": "~2.0.3",
+    "angular-state-files": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.3",
