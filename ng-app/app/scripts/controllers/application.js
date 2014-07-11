@@ -8,10 +8,13 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('AppCtrl', function ($scope, Auth, $http, $location) {
+  .controller('AppCtrl', function ($scope, Auth, $http, $location, $state, $animate, $window) {
 
     $scope.credentials = {email: null, password: null};
     $scope.user = {};
+    $scope.attempted_url = '';
+    $scope.login_failed_message = '';
+    $scope.state = $state;
 
     // login form stuff
 
@@ -30,47 +33,57 @@ angular.module('edumatcherApp')
       $scope.showMessage = true;
     };
 
+    $scope.$on('devise:unauthorized', function(event, xhr){
+      $scope.unauthorized(event, xhr);
+    });
 
-    // Authentication stuff
+    $scope.unauthorized = function(event, xhr){
+      var element;
 
-    // $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
-    //   //console.log(xhr.data.error);
-    //   // Ask user for login credentials
-    //
-    //   $scope.prompt_login();
-    //
-    //   Auth.login($scope.credentials).then(function() {
-    //     // Successfully logged in.
-    //     // Redo the original request.
-    //     console.log('login');
-    //     return $http(xhr.config);
-    //   }).then(function(response) {
-    //     // Successfully recovered from unauthorized error.
-    //     // Resolve the original request's promise.
-    //     console.log('success');
-    //     deferred.resolve(response);
-    //   }, function(error) {
-    //     // There was an error.
-    //     // Reject the original request's promise.
-    //     console.log('error');
-    //     deferred.reject(error);
-    //     $scope.login_failed_message = error;
-    //   });
-    // });
+      if($state.current.name === 'login'){
 
+        element = $('#loginForm');
+
+        $scope.login_failed_message = xhr.data.error;
+
+        $scope.showErrorMessage = true;
+
+        // shake that form
+        $animate.addClass(element, 'shake', function() {
+          $animate.removeClass(element, 'shake');
+        });
+
+      } else {
+
+        $scope.attempted_url = $window.location.href;
+
+        $scope.prompt_login();
+      }
+    };
 
     $scope.login = function() {
-
-      console.log($scope.credentials);
-
+      var url;
       Auth.login($scope.credentials).then(function(user) {
+
           $scope.user = user;
-          $location.path('/home');
-          console.log('success');
+
+          if($scope.attempted_url !== ''){
+
+            url = $scope.attempted_url;
+
+            $scope.attempted_url = '';
+
+            $scope.setLocation(url);
+
+          } else {
+
+            $scope.setState('home');
+
+          }
+
         }, function(error) {
           // Authentication failed...
           $scope.showErrorMessage = true;
-          console.log(error);
           $scope.login_failed_message = error;
         });
 
@@ -78,11 +91,19 @@ angular.module('edumatcherApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $location.path('/');
+      $scope.setState('home');
     };
 
     $scope.prompt_login = function(){
-      return true;
+      $scope.setState('login');
+    };
+
+    $scope.setState = function (path) {
+      $state.transitionTo(path);
+    };
+
+    $scope.setLocation = function(url){
+      $window.location.href = url;
     };
 
   });

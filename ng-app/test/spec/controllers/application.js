@@ -2,11 +2,13 @@
 
 describe('Controller: AppCtrl', function () {
 
-  var $scope, $location, $controller, $rootScope, $q, ctrl, Auth, deferred;
+  var $scope, $location, $controller, $http, $rootScope, $q, $window, ctrl, Auth, deferred;
 
   function createController() {
     return $controller('AppCtrl', {
       $scope: $scope,
+      $window: $window,
+      $http: $http,
       Auth: Auth
     });
   }
@@ -16,16 +18,20 @@ describe('Controller: AppCtrl', function () {
 
   beforeEach(module('MockFactories'));
 
-  beforeEach(inject(function(_$location_, _$controller_, _$rootScope_, _$q_, _Auth_ ){
+  beforeEach(inject(function(_$location_, _$controller_, _$rootScope_, _$q_, _$window_, _$http_, _Auth_, $httpBackend ){
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
     $controller = _$controller_;
     $location = _$location_;
+    $window = _$window_;
     $q = _$q_;
+    $http = _$http_;
     Auth = _Auth_;
     deferred = $q.defer();
 
     ctrl = createController();
+
+    $httpBackend.whenGET('views/index.html').respond({});
 
   }));
 
@@ -48,7 +54,9 @@ describe('Controller: AppCtrl', function () {
         deferred = $q.defer();
 
         spyOn(Auth, 'login').andReturn(deferred.promise);
-        spyOn($location,'path').andCallThrough();
+        spyOn($scope,'setState').andCallThrough();
+        spyOn($scope,'setLocation').andReturn(true);
+
 
         $scope.login();
 
@@ -66,8 +74,23 @@ describe('Controller: AppCtrl', function () {
         expect($scope.user).toEqual(data);
       });
 
-      it('should redirect to /home on success', function(){
-        expect($location.path).toHaveBeenCalledWith('/home');
+      it('it should redirect to $scope.attempted_url if set', function(){
+        var url = 'http://localhost:9000/#!/classrooms';
+
+        $scope.attempted_url = url;
+
+        $scope.login();
+
+        deferred.resolve(data);
+
+        $scope.$root.$digest();
+
+        expect($scope.setLocation).toHaveBeenCalledWith(url);
+
+      });
+
+      it('should redirect to home on success', function(){
+        expect($scope.setState).toHaveBeenCalledWith('home');
       });
 
     });
@@ -96,7 +119,9 @@ describe('Controller: AppCtrl', function () {
   describe('function: logout', function(){
 
     beforeEach(function(){
-      spyOn(Auth,'logout').andReturn('');
+      spyOn(Auth,'logout').andReturn({});
+
+      spyOn($scope, 'setState').andCallThrough();
 
       $scope.logout();
 
@@ -109,9 +134,9 @@ describe('Controller: AppCtrl', function () {
 
     });
 
-    it('should redirect to /', function(){
+    it('should set the state to home', function(){
 
-      expect($location.path()).toBe('/');
+      expect($scope.setState).toHaveBeenCalledWith('home');
     });
 
   });
@@ -119,53 +144,53 @@ describe('Controller: AppCtrl', function () {
   describe('$on devise:unauthorized', function(){
 
     beforeEach(function(){
-
-    });
-
-    it('should call $scope.prompt_login', function(){
-      spyOn($scope, 'prompt_login');
-
+      spyOn($scope, 'unauthorized').andCallThrough();
       $rootScope.$broadcast('devise:unauthorized');
-
-      expect($scope.prompt_login).toHaveBeenCalled();
     });
 
-    it('should call Auth.login', function(){
+    it('should call $scope.unauthorized', function(){
+      expect($scope.unauthorized).toHaveBeenCalled();
+    });
+  });
 
-      spyOn(Auth,'login').andReturn(deferred.promise);
+  describe('Function: $scope.unauthorized', function(){
 
-      $rootScope.$broadcast('devise:unauthorized');
+    describe('when on the login form', function(){
+      var xhr = {
+        data: {
+          error: 'heyo'
+        }
+      };
+      beforeEach(function(){
+        $scope.state.current.name = 'login';
+        $scope.unauthorized(null, xhr);
+      });
 
-      expect(Auth.login).toHaveBeenCalled();
+      it('should set $scope.login_failed_message and $scope.showErrorMessage', function(){
+        expect($scope.login_failed_message).not.toEqual('');
+        expect($scope.showErrorMessage).toBe(true);
+      });
 
     });
 
-    // I'm generally unsure how to test this part.
-    xdescribe('successful login', function(){
+    describe('when in the main application', function(){
 
-      it('should redo the original request', function(){
-
+      beforeEach(function(){
+        spyOn($scope, 'prompt_login');
+        $scope.setState('classrooms');
+        $scope.unauthorized();
       });
 
-      it('should resolve the original request\'s promise', function(){
-
+      it('should record the attempted_url in $scope.attempted_url', function(){
+        expect($scope.attempted_url).not.toEqual('');
       });
 
-    });
-
-    describe('failed login', function(){
-
-      it('should reject the original request\'s promise', function(){
-
-      });
-
-      it('should set $scope.login_failed_message on error', function(){
-        expect($scope.login_failed_message).not.toBe(undefined);
+      it('should call $scope.prompt_login', function(){
+        expect($scope.prompt_login).toHaveBeenCalled();
       });
 
     });
 
   });
-
 
 });

@@ -16,6 +16,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-animate/angular-animate.js',
@@ -27,7 +28,9 @@ module.exports = function(config) {
       'bower_components/angular-devise/lib/devise.js',
       //'bower_components/angular-google-maps/dist/angular-google-maps.js',
       'bower_components/angular-strap/dist/angular-strap.js',
+      'bower_components/angular-state-files/state-files.js',
       'app/scripts/**/*.js',
+      'app/**/*.html',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
@@ -69,6 +72,10 @@ module.exports = function(config) {
       'karma-spec-reporter',
       'karma-sinon-chai',
     ],
+
+    preprocessors: {
+      'app/**/*.html': 'html2js'
+    },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
