@@ -1,20 +1,20 @@
-<form name="form" id="loginForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="login()">
+<form name="form" id="createClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="create()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
-        Login
+        Create a new Classroom
       </h3>
     </div>
     <div class="panel-body">
-      <div class="form-group" ng-class="{'has-error': form.email.$invalid && submitted}">
-        <label for="email" class="control-label">Email</label>
+      <div class="form-group" ng-class="{'has-error': form.name.$invalid && submitted}">
+        <label for="name" class="control-label">Classroom Name:</label>
         <input
-          type="email"
+          type="text"
           class="form-control"
-          id="email"
-          name="email"
-          placeholder="Email"
-          ng-model="credentials.email"
+          id="name"
+          name="name"
+          placeholder="Classroom Name"
+          ng-model="classroom.name"
           ng-model-options="{updateOn: 'blur'}"
           required>
       </div>

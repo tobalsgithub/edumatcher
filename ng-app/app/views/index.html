@@ -1,71 +1,10 @@
-<!-- Modals -->
-  <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" ng-controller="UsersCtrl">
-    <div class="login-modal">
-      <div class="modal-content">
-        <div class="login-form">
-        <div class="form-group">
-          <input type="text" class="form-control login-field" value="" placeholder="Enter your email" id="login-name" ng-model="login_user.email"/>
-          <label class="login-field-icon login-field-icon-email ion-at" for="login-email"></label>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass" ng-model="login_user.password"/>
-          <label class="login-field-icon fui-lock" for="login-pass"></label>
-        </div>
-        <a class="btn btn-primary btn-lg btn-block" href="browse/classrooms.html" data-dismiss="modal" ng-click="login">Login</a>
-        <a class="login-link" href="browse/classrooms.html">Lost your password?</a>
-      </div>
-    </div>
-    </div>
-  </div>
-
-  <div id="signupModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="login-modal">
-      <div class="modal-content">
-        <div class="login-form">
-          <div class="form-group">
-            <input type="text" class="form-control login-field" value="" placeholder="Enter your name" id="signup-name" />
-            <label class="login-field-icon fui-user" for="signup-name"></label>
-          </div>
-          <div class="form-group">
-          <div class="form-group">
-            <input type="text" class="form-control login-field" value="" placeholder="Enter your email" id="signup-name" ng-model="register_user.email"/>
-            <label class="login-field-icon login-field-icon-email ion-at" for="signup-email"></label>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control login-field" value="" placeholder="Password" id="signup-pass" ng-model="register_user.password"/>
-            <label class="login-field-icon fui-lock" for="signup-pass"></label>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control login-field" value="" placeholder="Confirm Password" id="signup-pass-confirm" ng-model="register_user.email"/>
-            <label class="login-field-icon fui-lock" for="signup-pass"></label>
-          </div>
-          <div class="form-group">
-              <label class="radio">
-                <input type="radio" name="group1" value="1" data-toggle="radio">
-                I am an <strong>Educator</strong>
-              </label>
-
-              <label class="radio">
-                <input type="radio" name="group1" value="2" data-toggle="radio" checked>
-                I am an <strong>Industry Expert</strong>
-              </label>
-
-            </div>
-            <a class="btn btn-primary btn-lg btn-block" href="#" data-dismiss="modal">Sign Up!</a>
-          </div>
-          <p class="login-link">Already a member? &nbsp;<a href="#">Log in</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <!-- Main page container -->
 <div class="container">
 
     <div class="login-register-toolbar btn-toolbar">
       <div class="login-register-group btn-group">
-        <button class="login-register-btn btn btn-primary" ng-click="setPath('login')"><span class="login-register-text">Log In</span></button>
-        <button class="login-register-btn btn btn-primary" data-toggle="modal" data-target="#signupModal"><span class="login-register-text">Sign Up</span></button>
+        <a ng-href="#/login"><button class="btn btn-primary"><span class="login-register-text">Log In</span></button></a>
+        <a ng-href="#/register"><button class="btn btn-primary"><span class="login-register-text">Sign Up</span></button></a>
       </div>
     </div>
     <div class="clear"></div>
@@ -90,7 +29,3 @@
     </div>
   </div>
 </div> <!-- /container -->
-
-<script type="text/javascript">
-  $('html').addClass('splash');
-</script>

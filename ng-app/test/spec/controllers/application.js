@@ -35,111 +35,7 @@ describe('Controller: AppCtrl', function () {
 
   }));
 
-  describe('function: login', function(){
 
-    describe('success', function(){
-
-      var data = {
-        name: 'username',
-        email: 'email@place.com',
-        id: 5
-      };
-
-      beforeEach(function(){
-        $scope.credentials = {
-          email: 'hey@gmail.com',
-          password: 'password'
-        };
-
-        deferred = $q.defer();
-
-        spyOn(Auth, 'login').andReturn(deferred.promise);
-        spyOn($scope,'setState').andCallThrough();
-        spyOn($scope,'setLocation').andReturn(true);
-
-
-        $scope.login();
-
-        deferred.resolve(data);
-
-        $scope.$root.$digest();
-
-      });
-
-      it('should call Auth.login', function(){
-        expect(Auth.login).toHaveBeenCalledWith($scope.credentials);
-      });
-
-      it('should set $scope.user on success', function(){
-        expect($scope.user).toEqual(data);
-      });
-
-      it('it should redirect to $scope.attempted_url if set', function(){
-        var url = 'http://localhost:9000/#!/classrooms';
-
-        $scope.attempted_url = url;
-
-        $scope.login();
-
-        deferred.resolve(data);
-
-        $scope.$root.$digest();
-
-        expect($scope.setLocation).toHaveBeenCalledWith(url);
-
-      });
-
-      it('should redirect to home on success', function(){
-        expect($scope.setState).toHaveBeenCalledWith('home');
-      });
-
-    });
-
-    describe('failure', function(){
-
-      beforeEach(function(){
-
-        spyOn(Auth, 'login').andReturn(deferred.promise);
-
-        $scope.login();
-
-        deferred.reject('error');
-
-        $scope.$root.$digest();
-      });
-
-      it('should set $scope.login_failed_message on error', function(){
-        expect($scope.login_failed_message).not.toBe(undefined);
-      });
-
-    });
-
-  });
-
-  describe('function: logout', function(){
-
-    beforeEach(function(){
-      spyOn(Auth,'logout').andReturn({});
-
-      spyOn($scope, 'setState').andCallThrough();
-
-      $scope.logout();
-
-      $scope.$root.$digest();
-    });
-
-    it('should call Auth.logout()', function(){
-
-      expect(Auth.logout).toHaveBeenCalled();
-
-    });
-
-    it('should set the state to home', function(){
-
-      expect($scope.setState).toHaveBeenCalledWith('home');
-    });
-
-  });
 
   describe('$on devise:unauthorized', function(){
 
@@ -177,7 +73,7 @@ describe('Controller: AppCtrl', function () {
 
       beforeEach(function(){
         spyOn($scope, 'prompt_login');
-        $scope.setState('classrooms');
+        $scope.state.transitionTo('classrooms');
         $scope.unauthorized();
       });
 

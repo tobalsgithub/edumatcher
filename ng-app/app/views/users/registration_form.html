@@ -1,0 +1,84 @@
+<form name="form" id="registrationForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="register()">
+  <div class="panel panel-default box-shadow">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Register
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group" ng-class="{'has-error': form.name.$invalid && submitted}">
+        <label for="name" class="control-label">Name</label>
+        <input type="text"
+          id="name"
+          class="form-control"
+          ng-model="new_user.fullname"
+          placeholder="Enter your name"
+          name="name"
+          required
+          ng-model-options="{updateOn: 'blur'}">
+      </div>
+      <div class="form-group" ng-class="{'has-error': form.email.$invalid && submitted}">
+        <label for="email" class="control-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          ng-model="new_user.email"
+          ng-model-options="{updateOn: 'blur'}"
+          required>
+      </div>
+      <div class="form-group" ng-class="{'has-error': form.password.$invalid && submitted}">
+        <label for="password" class="control-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Choose a password"
+          ng-model="new_user.password"
+          required>
+      </div>
+      <div class="form-group" ng-class="{'has-error': form.password_confirmation.$invalid && submitted}">
+        <label for="password_confirmation" class="control-label">Confirm your password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password_confirmation"
+          name="password_confirmation"
+          placeholder="Confirm your password"
+          ng-model="new_user.password_confirmation"
+          required
+          match="new_user.password">
+      </div>
+      <div class="form-group" ng-class="{'has-error': form.user_type.$invalid && submitted}">
+        <label class="radio control-label">
+          <input
+            type="radio"
+            name="user_type"
+            ng-model="selected_user_type"
+            value="{{user_types.expert.id}}"
+            required
+            />
+          {{user_types.expert.prompt}}
+        </label>
+        <label class="radio control-label">
+          <input
+            type="radio"
+            name="user_type"
+            ng-model="selected_user_type"
+            value="{{user_types.educator.id}}"
+            required
+            />
+          {{user_types.educator.prompt}}
+        </label>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </div>
+  </div>
+</form>
+
+<div class="alert alert-warning message" ng-repeat="message in registration_error_messages" ng-show="showErrorMessage">{{message}}</div>

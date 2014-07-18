@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
     def verified_request?
       super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
     end
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) << :fullname
+    end
 end

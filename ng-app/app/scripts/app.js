@@ -21,6 +21,7 @@ angular
     'mgcrea.ngStrap',
     'stateFiles'
   ])
+
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
@@ -29,15 +30,29 @@ angular
       // HOME STATES AND NESTED VIEWS ========================================
       .state('home', {
         url: '/',
-        templateUrl: 'views/index.html'
+        templateUrl: 'views/index.html',
+        css: 'styles/home.css'
       })
 
       .state('login', {
         url: '/login',
         templateUrl: 'views/users/login_form.html',
         controller: 'UsersCtrl',
-        css: 'styles/shake_that.css',
+        css: ['styles/shake_that.css','styles/login.css'],
         js: 'scripts/flatui-checkbox.js1'
+      })
+
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/users/registration_form.html',
+        controller: 'UsersCtrl',
+        css: ['styles/shake_that.css','styles/register.css'],
+      })
+
+      .state('registration_confirmation', {
+        url: '/registration_confirmation',
+        templateUrl: 'views/users/registration_confirmation.html',
+        controller: 'UsersCtrl'
       })
 
       .state('classrooms', {
@@ -53,6 +68,12 @@ angular
           }
         }
 
+      })
+
+      .state('classrooms_create',{
+        url: '/classrooms/create',
+        templateUrl: 'views/classrooms/create.html'
+        controller: 'ClassroomsCtrl'
       })
 
       .state('main', {

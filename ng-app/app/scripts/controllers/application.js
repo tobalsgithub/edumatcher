@@ -37,6 +37,14 @@ angular.module('edumatcherApp')
       $scope.unauthorized(event, xhr);
     });
 
+    $scope.$on('devise:login', function(event, currentUser) {
+      $scope.user = currentUser;
+    });
+
+    $scope.$on('devise:logout', function(event, oldCurrentUser) {
+      $scope.user = {};
+    });
+
     $scope.unauthorized = function(event, xhr){
       var element;
 
@@ -44,7 +52,7 @@ angular.module('edumatcherApp')
 
         element = $('#loginForm');
 
-        $scope.login_failed_message = xhr.data.error;
+        $scope.login_error_message = xhr.data.error;
 
         $scope.showErrorMessage = true;
 
@@ -61,49 +69,8 @@ angular.module('edumatcherApp')
       }
     };
 
-    $scope.login = function() {
-      var url;
-      Auth.login($scope.credentials).then(function(user) {
-
-          $scope.user = user;
-
-          if($scope.attempted_url !== ''){
-
-            url = $scope.attempted_url;
-
-            $scope.attempted_url = '';
-
-            $scope.setLocation(url);
-
-          } else {
-
-            $scope.setState('home');
-
-          }
-
-        }, function(error) {
-          // Authentication failed...
-          $scope.showErrorMessage = true;
-          $scope.login_failed_message = error;
-        });
-
-    };
-
-    $scope.logout = function() {
-      Auth.logout();
-      $scope.setState('home');
-    };
-
     $scope.prompt_login = function(){
-      $scope.setState('login');
-    };
-
-    $scope.setState = function (path) {
-      $state.transitionTo(path);
-    };
-
-    $scope.setLocation = function(url){
-      $window.location.href = url;
+      $state.transitionTo('login');
     };
 
   });
