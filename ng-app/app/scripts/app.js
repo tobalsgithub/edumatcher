@@ -72,8 +72,9 @@ angular
 
       .state('classrooms_create',{
         url: '/classrooms/create',
-        templateUrl: 'views/classrooms/create.html'
-        controller: 'ClassroomsCtrl'
+        templateUrl: 'views/classrooms/create.html',
+        controller: 'ClassroomsCtrl',
+        css: ['styles/shake_that.css']
       })
 
       .state('main', {
