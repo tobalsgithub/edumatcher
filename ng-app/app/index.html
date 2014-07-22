@@ -35,7 +35,7 @@
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
+     <!--<script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -43,7 +43,7 @@
 
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
-    </script>
+    </script>-->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -51,7 +51,7 @@
     <![endif]-->
 
     <!-- build:js scripts/vendor.js -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>-->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -65,7 +65,7 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-devise/lib/devise.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <!--<script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>-->
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
@@ -94,6 +94,9 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/users.js"></script>
         <script src="scripts/controllers/classrooms.js"></script>
+        <script src="scripts/controllers/admin/classrooms.js"></script>
+        <script src="scripts/controllers/admin/schools.js"></script>
+        <script src="scripts/controllers/admin/school_districts.js"></script>
         <script src="scripts/services/classrooms.js"></script>
         <script src="scripts/services/subjects.js"></script>
         <script src="scripts/services/grade_levels.js"></script>
@@ -106,19 +109,6 @@
 
         <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-        <script>
-          // a function that will allow us to inject a css file on a per view basis
-          function includeCSSfile(href) {
-            var head_node = document.getElementsByTagName('head')[0];
-            var link_tag = document.createElement('link');
-            link_tag.setAttribute('rel', 'stylesheet');
-            link_tag.setAttribute('type', 'text/css');
-            link_tag.setAttribute('href', href);
-            head_node.appendChild(link_tag);
-          }
-        </script>
+        <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 </body>
 </html>

@@ -67,13 +67,26 @@ angular
             controller: 'UsersCtrl'
           }
         }
-
       })
 
-      .state('classrooms_create',{
-        url: '/classrooms/create',
+      .state('admin_school_districts_create', {
+        url: '/admin/school_districts/create',
+        templateUrl: 'views/school_districts/create.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        css: ['styles/shake_that.css']
+      })
+
+      .state('admin_schools_create', {
+        url: '/admin/schools/create',
+        templateUrl: 'views/schools/create.html',
+        controller: 'AdminSchoolsCtrl',
+        css: ['styles/shake_that.css']
+      })
+
+      .state('admin_classrooms_create',{
+        url: '/admin/classrooms/create',
         templateUrl: 'views/classrooms/create.html',
-        controller: 'ClassroomsCtrl',
+        controller: 'AdminClassroomsCtrl',
         css: ['styles/shake_that.css']
       })
 
