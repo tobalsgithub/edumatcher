@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_action :authenticate_user!
   respond_to :json
-  before_action :set_school, only: [:show, :update, :destroy]
+  before_action :set_school, only: [:show, :update, :destroy, :classrooms]
 
   def create
     @school = School.new(school_params)
@@ -26,6 +26,11 @@ class SchoolsController < ApplicationController
 
   def show
     respond_with @school
+  end
+
+  def classrooms
+    classrooms = @school.classrooms
+    respond_with classrooms
   end
 
   private

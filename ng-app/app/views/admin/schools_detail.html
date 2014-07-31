@@ -1,0 +1,22 @@
+<div class="col-md-2"></div>
+<div class="col-md-8">
+  <div class="panel panel-default box-shadow">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{session.school.name}}</h3>
+    </div>
+    <div class="panel-body">
+      <label for="website" class="control-label">Website:</label>
+        {{session.school.website}}
+        <br />
+      <label for="location" class="control-label">Location:</label>
+        {{session.school.location}}
+        <br />
+      <label for="notes" class="control-label">Notes:</label>
+        {{session.school.notes}}
+        <br />
+
+      <a ui-sref="admin_schools_classrooms_list({school_id: {{session.school.id}}})"><button class="btn btn-primary btn-block">View Classrooms</button></a>
+
+    </div>
+  </div>
+<div class="col-md-2"></div>

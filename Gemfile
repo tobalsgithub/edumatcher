@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem "devise"
 # Seedbank for organizing seed data
 gem "seedbank"
+# CSRF Protection for Rails
+gem "angular_rails_csrf"
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 

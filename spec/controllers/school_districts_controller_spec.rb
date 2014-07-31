@@ -24,6 +24,19 @@ RSpec.describe SchoolDistrictsController, :type => :controller do
     sign_in user
   end
 
+  describe 'GET index' do
+    before(:each) do
+      create(:school_district)
+      get :index, format: :json
+    end
+
+    it 'should return the list of school districts' do
+      expect(json[0]).to have_key('id')
+    end
+
+    xit { should respond_with :success }
+  end
+
   describe 'POST create' do
 
     let(:school_district) { build(:school_district) }
@@ -120,5 +133,20 @@ RSpec.describe SchoolDistrictsController, :type => :controller do
     end
 
     it { should respond_with :ok }
+  end
+
+  describe 'GET schools' do
+
+    before(:each) do
+      school_district.schools.delete_all
+      school_district.schools << create(:school)
+      get :schools, id: school_district.to_param, format: :json
+    end
+
+    it 'should return the list of schools for the specified school district' do
+      expect(json.size).to equal(1)
+    end
+
+    it {should respond_with :ok }
   end
 end

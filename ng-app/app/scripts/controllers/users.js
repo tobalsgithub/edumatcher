@@ -66,22 +66,7 @@ angular.module('edumatcherApp')
       var url;
 
       Auth.login($scope.credentials).then(function(user) {
-        $scope.user = user;
-
-        if($scope.attempted_url !== ''){
-
-          url = $scope.attempted_url;
-
-          $scope.attempted_url = '';
-
-          $scope.setLocation(url);
-
-        } else {
-
-          $state.transitionTo('home');
-
-        }
-
+        // nothing at the moment. All handled by new-session event in application.js
       }, function(response) {
         // Authentication failed...
         $scope.showErrorMessages = true;

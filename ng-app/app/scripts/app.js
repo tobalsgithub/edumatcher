@@ -19,11 +19,15 @@ angular
     'Devise',
     //'google-maps',
     'mgcrea.ngStrap',
-    'stateFiles'
+    'stateFiles',
+    'webStorageModule'
   ])
 
-  .config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
+
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+
 
     $stateProvider
 
@@ -31,7 +35,8 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'views/index.html',
-        css: 'styles/home.css'
+        css: 'styles/home.css',
+        module: 'public'
       })
 
       .state('login', {
@@ -39,7 +44,8 @@ angular
         templateUrl: 'views/users/login_form.html',
         controller: 'UsersCtrl',
         css: ['styles/shake_that.css','styles/login.css'],
-        js: 'scripts/flatui-checkbox.js1'
+        js: 'scripts/flatui-checkbox.js1',
+        module: 'public'
       })
 
       .state('register', {
@@ -47,12 +53,14 @@ angular
         templateUrl: 'views/users/registration_form.html',
         controller: 'UsersCtrl',
         css: ['styles/shake_that.css','styles/register.css'],
+        module: 'public'
       })
 
       .state('registration_confirmation', {
         url: '/registration_confirmation',
         templateUrl: 'views/users/registration_confirmation.html',
-        controller: 'UsersCtrl'
+        controller: 'UsersCtrl',
+        module: 'private'
       })
 
       .state('classrooms', {
@@ -66,28 +74,73 @@ angular
             templateUrl: 'views/users/user_snippet.html',
             controller: 'UsersCtrl'
           }
-        }
+        },
+        module: 'private'
+      })
+
+      .state('admin_school_districts', {
+        url: '/admin/school_districts',
+        templateUrl: 'views/admin/school_districts_list.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        module: 'admin'
+      })
+
+      .state('admin_school_districts_detail', {
+        url: '/admin/school_districts/:school_district_id',
+        templateUrl: 'views/admin/school_districts_detail.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        module: 'admin'
+      })
+
+      .state('admin_school_districts_schools_list', {
+        url: '/admin/school_districts/:school_district_id/schools',
+        templateUrl: 'views/admin/schools_list.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        module: 'admin'
       })
 
       .state('admin_school_districts_create', {
         url: '/admin/school_districts/create',
-        templateUrl: 'views/school_districts/create.html',
+        templateUrl: 'views/admin/school_districts_create.html',
         controller: 'AdminSchoolDistrictsCtrl',
-        css: ['styles/shake_that.css']
+        css: ['styles/shake_that.css'],
+        module: 'admin'
+      })
+
+      .state('admin_school_detail', {
+        url: '/admin/schools/:school_id',
+        templateUrl: 'views/admin/schools_detail.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        module: 'admin'
+      })
+
+      .state('admin_schools_classrooms_list', {
+        url: '/admin/schools/:school_id/classrooms',
+        templateUrl: 'views/admin/classrooms_list.html',
+        controller: 'AdminSchoolDistrictsCtrl',
+        module: 'admin'
       })
 
       .state('admin_schools_create', {
         url: '/admin/schools/create',
-        templateUrl: 'views/schools/create.html',
+        views: {
+          '': { templateUrl: 'views/admin/schools_create.html' },
+          'session_info': { templateUrl: 'views/admin/session_info.html'}
+        },
         controller: 'AdminSchoolsCtrl',
-        css: ['styles/shake_that.css']
+        css: ['styles/shake_that.css'],
+        module: 'admin'
       })
 
       .state('admin_classrooms_create',{
         url: '/admin/classrooms/create',
-        templateUrl: 'views/classrooms/create.html',
+        views: {
+          '': { templateUrl: 'views/admin/classrooms_create.html' },
+          'session_info@admin_classrooms_create': { templateUrl: 'views/admin/session_info.html'}
+        },
         controller: 'AdminClassroomsCtrl',
-        css: ['styles/shake_that.css']
+        css: ['styles/shake_that.css'],
+        module: 'admin'
       })
 
       .state('main', {

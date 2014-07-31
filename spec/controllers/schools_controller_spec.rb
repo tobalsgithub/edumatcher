@@ -167,4 +167,19 @@ RSpec.describe SchoolsController, :type => :controller do
 
     it { should respond_with :ok }
   end
+
+  describe 'GET classrooms' do
+
+    before(:each) do
+      school.classrooms.delete_all
+      school.classrooms << create(:classroom)
+      get :classrooms, id: school.to_param, format: :json
+    end
+
+    it 'should return the list of classrooms for the specified school' do
+      expect(json.size).to equal(1)
+    end
+
+    it {should respond_with :ok }
+  end
 end

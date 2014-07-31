@@ -37,9 +37,11 @@ Rails.application.routes.draw do
 
   # routes for schools
   resources :schools, :defaults => {:format => "json"}
+  get 'schools/:id/classrooms' => 'schools#classrooms', :defaults => {:format => "json"}
 
   # routes for school_districts
   resources :school_districts, :defaults => {:format => "json"}
+  get 'school_districts/:id/schools' => 'school_districts#schools', :defaults => {:format => "json"}
 
   # routes for subjects
   resources :subjects, :defaults => {:format => "json"}

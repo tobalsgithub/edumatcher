@@ -49,7 +49,7 @@ describe('Controller: UsersCtrl', function () {
       beforeEach(function(){
 
         spyOn(Auth, 'register').andReturn(deferred.promise);
-        spyOn($state,'transitionTo').andReturn({});
+        spyOn($state,'go').andReturn({});
 
         $scope.register();
 
@@ -64,7 +64,7 @@ describe('Controller: UsersCtrl', function () {
       it('should redirect to registration_confirmation', function(){
         deferred.resolve(data);
         $scope.$root.$digest();
-        expect($state.transitionTo).toHaveBeenCalledWith('registration_confirmation');
+        expect($state.go).toHaveBeenCalledWith('registration_confirmation');
       });
 
       it('should set the user type to expert if selected_user_type is expert', function(){
@@ -131,7 +131,7 @@ describe('Controller: UsersCtrl', function () {
       beforeEach(function(){
 
         spyOn(Auth, 'login').andReturn(deferred.promise);
-        spyOn($state,'transitionTo').andCallThrough();
+        spyOn($state,'go').andCallThrough();
         spyOn($scope,'setLocation').andReturn(true);
 
 
@@ -145,29 +145,6 @@ describe('Controller: UsersCtrl', function () {
 
       it('should call Auth.login', function(){
         expect(Auth.login).toHaveBeenCalledWith($scope.credentials);
-      });
-
-      it('should set $scope.user on success', function(){
-        expect($scope.user).toEqual(data);
-      });
-
-      it('it should redirect to $scope.attempted_url if set', function(){
-        var url = 'http://localhost:9000/#!/classrooms';
-
-        $scope.attempted_url = url;
-
-        $scope.login();
-
-        deferred.resolve(data);
-
-        $scope.$root.$digest();
-
-        expect($scope.setLocation).toHaveBeenCalledWith(url);
-
-      });
-
-      it('should redirect to home on success otherwise', function(){
-        expect($state.transitionTo).toHaveBeenCalledWith('home');
       });
 
     });
@@ -202,7 +179,7 @@ describe('Controller: UsersCtrl', function () {
     beforeEach(function(){
       spyOn(Auth,'logout').andReturn({});
 
-      spyOn($state, 'transitionTo').andCallThrough();
+      spyOn($state, 'go').andCallThrough();
 
       $scope.logout();
 
@@ -217,7 +194,7 @@ describe('Controller: UsersCtrl', function () {
 
     it('should set the state to home', function(){
 
-      expect($state.transitionTo).toHaveBeenCalledWith('home');
+      expect($state.go).toHaveBeenCalledWith('home');
     });
 
   });

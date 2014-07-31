@@ -1,7 +1,11 @@
 class SchoolDistrictsController < ApplicationController
   before_action :authenticate_user!
   respond_to :json
-  before_action :set_school_district, only: [:show, :update, :destroy]
+  before_action :set_school_district, only: [:show, :update, :destroy, :schools]
+
+  def index
+    respond_with SchoolDistrict.all
+  end
 
   def create
     @school_district = SchoolDistrict.new(school_district_params)
@@ -26,6 +30,11 @@ class SchoolDistrictsController < ApplicationController
 
   def show
     respond_with @school_district
+  end
+
+  def schools
+    schools = @school_district.schools
+    respond_with schools
   end
 
   private

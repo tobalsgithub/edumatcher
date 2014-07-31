@@ -1,4 +1,4 @@
-<form name="form" id="loginForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="login()">
+<form name="form" id="loginForm" novalidate shake-that submitted="submitted" submit="login()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
@@ -30,6 +30,7 @@
           required>
       </div>
       <button type="submit" class="btn btn-primary btn-block">Login</button>
+      <button ng-click="logout()" class="btn btn-secondary btn-block">Logout</button>
     </div>
   </div>
 </form>

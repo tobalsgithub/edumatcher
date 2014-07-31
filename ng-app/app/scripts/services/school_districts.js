@@ -5,5 +5,12 @@
 angular.module('edumatcherApp').factory('SchoolDistricts', ['$resource', function($resource) {
   return $resource('/school_districts/:id', {
     id: '@id'
+  },
+  {
+    schools: {
+      method: 'GET',
+      url: '/school_districts/:id/schools',
+      isArray: true
+    }
   });
 }]);

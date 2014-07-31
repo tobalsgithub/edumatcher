@@ -1,0 +1,7 @@
+<div class="col-md-2"></div>
+<div class="col-md-8" ng-init=get_classrooms()>
+  <div ng-repeat="classroom in classrooms">
+    <a ng-click="select_classroom({{classroom.id}})"><span>{{classroom.name}}</span></a>
+  </div>
+</div>
+<div class="col-md-2"></div>

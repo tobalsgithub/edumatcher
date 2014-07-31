@@ -21,7 +21,7 @@ angular.module('edumatcherApp')
 
 
     function init(){
-      
+      console.log($scope.session);
     }
 
     init();
