@@ -3,6 +3,9 @@
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">{{session.school.name}}</h3>
+      <a ui-sref="admin_schools_edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
+        Edit
+      </a>
     </div>
     <div class="panel-body">
       <label for="website" class="control-label">Website:</label>

@@ -6,6 +6,9 @@ angular.module('edumatcherApp').factory('Schools', ['$resource', function($resou
   return $resource('/schools/:id', {
     id: '@id'
   },{
+    update: {
+      method: 'PUT'
+    },
     classrooms: {
       method: 'GET',
       url: '/schools/:id/classrooms',

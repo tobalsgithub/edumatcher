@@ -7,6 +7,9 @@ angular.module('edumatcherApp').factory('SchoolDistricts', ['$resource', functio
     id: '@id'
   },
   {
+    update: {
+      method: 'PUT'
+    },
     schools: {
       method: 'GET',
       url: '/school_districts/:id/schools',

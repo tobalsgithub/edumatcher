@@ -3,12 +3,12 @@
 angular.module('MockFactories',[]).
   factory('Classrooms', function(){
     return jasmine.createSpyObj('ClassroomsStub', [
-      'get','save','query','remove','delete','search', 'subjects', 'add_subject', 'remove_subject', 'set_subjects'
+      'get','$save','query','$remove','$delete','search', 'subjects', 'add_subject', 'remove_subject', 'set_subjects'
     ]);
   }).
   factory('Schools', function(){
     return jasmine.createSpyObj('SchoolsStub', [
-      'get', 'save', 'query', 'remove', 'delete'
+      'get', '$save', 'query', '$remove', '$delete'
     ]);
   }).
   factory('SchoolDistricts', function(){

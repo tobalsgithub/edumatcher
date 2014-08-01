@@ -29,10 +29,12 @@ module.exports = function(config) {
       //'bower_components/angular-google-maps/dist/angular-google-maps.js',
       'bower_components/angular-strap/dist/angular-strap.js',
       'bower_components/angular-state-files/state-files.js',
+      'bower_components/angular-webstorage/angular-webstorage.js',
       'app/scripts/**/*.js',
       'app/**/*.html',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      //'test/spec/**/*.js',
+      'test/spec/controllers/admin/admin.js'
     ],
 
     reporters: ['spec'],

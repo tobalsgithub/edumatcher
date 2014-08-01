@@ -78,7 +78,7 @@ angular
         module: 'private'
       })
 
-      .state('admin_school_districts', {
+      .state('admin_school_districts_list', {
         url: '/admin/school_districts',
         templateUrl: 'views/admin/school_districts_list.html',
         controller: 'AdminCtrl',
@@ -107,6 +107,14 @@ angular
         module: 'admin'
       })
 
+      .state('admin_school_districts_edit', {
+        url: '/admi/school_districts/:school_district_id/edit',
+        templateUrl: 'views/admin/school_districts_edit.html',
+        controller: 'AdminCtrl',
+        css: ['styles/shake_that.css'],
+        module: 'admin'
+      })
+
       .state('admin_schools_create', {
         url: '/admin/school_districts/:school_district_id/schools/create',
         templateUrl: 'views/admin/schools_create.html',
@@ -122,16 +130,17 @@ angular
         module: 'admin'
       })
 
-      .state('admin_schools_classrooms_list', {
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms',
-        templateUrl: 'views/admin/classrooms_list.html',
+      .state('admin_schools_edit',{
+        url: '/admin/school_districts/:school_district_id/schools/:school_id/edit',
+        templateUrl: 'views/admin/schools_edit.html',
         controller: 'AdminCtrl',
+        css: ['styles/shake_that.css'],
         module: 'admin'
       })
 
-      .state('admin_classroom_detail', {
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms/:classroom_id',
-        templateUrl: 'views/admin/classrooms_detail.html',
+      .state('admin_schools_classrooms_list', {
+        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms',
+        templateUrl: 'views/admin/classrooms_list.html',
         controller: 'AdminCtrl',
         module: 'admin'
       })
@@ -141,6 +150,13 @@ angular
         templateUrl: 'views/admin/classrooms_create.html',
         controller: 'AdminCtrl',
         css: ['styles/shake_that.css'],
+        module: 'admin'
+      })
+
+      .state('admin_classroom_detail', {
+        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms/:classroom_id',
+        templateUrl: 'views/admin/classrooms_detail.html',
+        controller: 'AdminCtrl',
         module: 'admin'
       })
 

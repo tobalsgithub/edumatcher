@@ -10,12 +10,6 @@
 angular.module('edumatcherApp')
   .controller('AdminCtrl', function ($scope, $stateParams, $state, SchoolDistricts, Schools, Classrooms, Subjects, GradeLevels) {
 
-    $scope.school_district = {
-      name: null,
-      website: null,
-      location: null,
-      notes: null
-    };
     $scope.subjects = [];
     $scope.classrooms = [];
     $scope.subject_list = [];
@@ -32,12 +26,17 @@ angular.module('edumatcherApp')
     //   $state.transitionTo('admin_schools_create');
     // };
 
-    $scope.addClassroomToScope = function(){
-      $scope.classroom = $scope.session.classroom;
+    $scope.createSchoolDistrict = function(){
+      var school_district = new SchoolDistricts($scope.school_district);
+      school_district.$save();
+      $state.go('admin_school_districts_list');
     };
 
-    $scope.addSchoolToScope = function(){
-      $scope.school = $scope.session.school;
+    $scope.updateSchoolDistrict = function(){
+      SchoolDistricts.update({id: $scope.school_district.id},$scope.school_district, function(){
+        $scope.setSchoolDistrict($scope.school_district.id);
+      });
+      $state.go('admin_school_districts_detail', {school_district_id: $scope.school_district_id});
     };
 
     $scope.createSchool = function(){
@@ -51,6 +50,7 @@ angular.module('edumatcherApp')
       Schools.update({id: $scope.school.id},$scope.school, function(){
         $scope.setSchool($scope.school.id);
       });
+      $state.go('admin_school_detail', { school_id: $scope.school.id});
     };
 
     $scope.createClassroom = function(){
@@ -67,6 +67,12 @@ angular.module('edumatcherApp')
       $state.go('admin_classroom_detail',{school_district_id: $scope.session.school_district.id, school_id: $scope.session.school.id,classroom_id: $scope.session.classroom.id});
     };
 
+    $scope.getSchoolDistricts = function(){
+      SchoolDistricts.query(function(school_districts){
+        $scope.school_districts = school_districts;
+      });
+    };
+
     $scope.getSchools = function(){
       SchoolDistricts.schools({id: $scope.session.school_district.id}, function(schools){
         $scope.schools = schools;
@@ -81,7 +87,6 @@ angular.module('edumatcherApp')
     };
 
     function init(){
-      $scope.school_districts = SchoolDistricts.query();
       //console.log($state.current);
     }
 

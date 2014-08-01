@@ -1,9 +1,9 @@
 <div class="col-md-2"></div>
-<form ng-init="newSchool()" class="col-md-8" name="form" id="createSchoolForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="createSchool()">
+<form ng-init="addSchoolToScope()" class="col-md-8" name="form" id="editSchoolForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="updateSchool()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
-        Create a new School
+        Edit {{school.name}}
       </h3>
     </div>
     <div class="panel-body">
@@ -43,7 +43,7 @@
         <label for="notes" class="control-label">Notes</label>
         <textarea class="form-control" id="notes" name="notes" placeholder="Any special notes you may have" ng-model="school.notes" />
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Create</button>
+      <button type="submit" class="btn btn-primary btn-block">Update</button>
     </div>
   </div>
 </form>

@@ -10,6 +10,27 @@
 angular.module('edumatcherApp')
   .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms) {
 
+    var empty_classroom = {
+      name: null,
+      website: null,
+      location: null,
+      notes: null
+    };
+
+    var empty_school = {
+      name: null,
+      website: null,
+      location: null,
+      notes: null
+    };
+
+    var empty_school_district = {
+      name: null,
+      website: null,
+      location: null,
+      notes: null
+    };
+
     $scope.credentials = {email: null, password: null};
     $scope.user = {};
     $scope.attempted_url = '';
@@ -97,6 +118,30 @@ angular.module('edumatcherApp')
 
     $scope.promptLogin = function(){
       $state.go('login');
+    };
+
+    $scope.addClassroomToScope = function(){
+      $scope.classroom = $scope.session.classroom;
+    };
+
+    $scope.addSchoolToScope = function(){
+      $scope.school = $scope.session.school;
+    };
+
+    $scope.addSchoolDistrictToScope = function(){
+      $scope.school_district = $scope.session.school_district;
+    };
+
+    $scope.newClassroom = function(){
+      $scope.classroom = empty_classroom;
+    };
+
+    $scope.newSchool = function(){
+      $scope.school = empty_school;
+    };
+
+    $scope.newSchoolDistrict = function(){
+      $scope.school_district = empty_school_district;
     };
 
     $scope.setSchoolDistrict = function(id){
