@@ -1,21 +1,23 @@
-<div class="col-md-2"></div>
-<form class="col-md-8" name="form" id="createSchoolDistrictForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="createSchoolDistrict()">
+<div class="col-md-2">
+  <div ui-view="session_info"></div>
+</div>
+<form ng-init="addClassroomToScope()" class="col-md-8" name="form" id="editClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="updateClassroom()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
-        Create a new School District
+        Edit Classroom
       </h3>
     </div>
     <div class="panel-body">
       <div class="form-group" ng-class="{'has-error': form.name.$invalid && submitted}">
-        <label for="name" class="control-label">School District Name:</label>
+        <label for="name" class="control-label">Classroom Name:</label>
         <input
           type="text"
           class="form-control"
           id="name"
           name="name"
-          placeholder="School District Name"
-          ng-model="school_district.name"
+          placeholder="Classroom Name"
+          ng-model="classroom.name"
           ng-model-options="{updateOn: 'blur'}"
           required>
       </div>
@@ -26,8 +28,8 @@
           class="form-control"
           id="website"
           name="website"
-          placeholder="http://www.myschooldistrict.com/"
-          ng-model="school_district.website">
+          placeholder="http://www.myschooldistrict.com/school/classroom"
+          ng-model="classroom.website">
       </div>
       <div class="form-group" ng-class="{'has-error': form.location.$invalid && submitted}">
         <label for="location" class="control-label">Location</label>
@@ -37,13 +39,13 @@
           id="location"
           name="location"
           placeholder="Some cool place"
-          ng-model="school_district.location">
+          ng-model="classroom.location">
       </div>
       <div class="form-group" ng-class="{'has-error': form.notes.$invalid && submitted}">
         <label for="notes" class="control-label">Notes</label>
-        <textarea class="form-control" id="notes" name="notes" placeholder="Any special notes you may have" ng-model="school_district.notes" />
+        <textarea class="form-control" id="notes" name="notes" placeholder="Any special notes you may have" ng-model="classroom.notes" />
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Create</button>
+      <button type="submit" class="btn btn-primary btn-block">Update Classroom</button>
     </div>
   </div>
 </form>

@@ -91,49 +91,52 @@ angular.module('edumatcherApp')
 
         webStorage.add('attemptedUrl', $window.location.href);
 
-        $scope.prompt_login();
+        $scope.promptLogin();
       }
     };
 
-    $scope.prompt_login = function(){
+    $scope.promptLogin = function(){
       $state.go('login');
     };
 
-    $scope.set_school_district = function(id){
+    $scope.setSchoolDistrict = function(id){
       var school_district = SchoolDistricts.get({id: id},function(){
         webStorage.add('school_district',school_district);
         $scope.session.school_district = school_district;
       });
     };
 
-    $scope.set_school = function(id){
+    $scope.setSchool = function(id){
       var school = Schools.get({id: id},function(){
         webStorage.add('school',school);
         $scope.session.school = school;
       });
     };
 
-    $scope.set_classroom = function(id){
+    $scope.setClassroom = function(id){
       var classroom = Classrooms.get({id: id},function(){
         webStorage.add('classroom',classroom);
         $scope.session.classroom = classroom;
       });
     };
 
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
+      if(toParams.school_district_id && (!$scope.session.school_district || !$scope.session.school_district.id || $scope.session.school_district.id !== toParams.school_district_id)){
+        $scope.setSchoolDistrict(toParams.school_district_id);
+      }
+      if(toParams.school_id && (!$scope.session.school || !$scope.session.school.id || $scope.session.school.id !== toParams.school_id)){
+        $scope.setSchool(toParams.school_id);
+      }
+      if(toParams.classroom_id && (!$scope.session.classroom || $scope.session.classroom.id || $scope.session.classroom.id !== toParams.classroom_id)){
+        $scope.setClassroom(toParams.classroom_id);
+      }
+    });
+
     function init(){
       $scope.session.school_district = webStorage.get('school_district');
       $scope.session.school = webStorage.get('school');
       $scope.session.classroom = webStorage.get('classroom');
       $scope.session.user = webStorage.get('user');
-      if(typeof $stateParams.school_district_id === 'number' && $scope.session.school_district.id !== $stateParams.school_district_id){
-        $scope.set_school_district($stateParams.school_district_id);
-      }
-      if(typeof $stateParams.school_id === 'number' && $scope.session.school.id !== $stateParams.school_id){
-        $scope.set_school($stateParams.school_id);
-      }
-      if(typeof $stateParams.classroom_id === 'number' && $scope.classroom.id !== $stateParams.classroom_id){
-        $scope.set_classroom($stateParams.classroom_id);
-      }
     }
 
     init();

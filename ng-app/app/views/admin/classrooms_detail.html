@@ -1,0 +1,26 @@
+<div class="col-md-2"></div>
+<div class="col-md-8">
+  <div class="panel panel-default box-shadow">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{session.classroom.name}}</h3>
+      <a ui-sref="admin_classrooms_edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}},classroom_id:{{session.classroom.id}}})">
+        Edit
+      </a>
+    </div>
+    <div class="panel-body">
+      <label for="website" class="control-label">Website:</label>
+        {{session.classroom.website}}
+        <br />
+      <label for="location" class="control-label">Location:</label>
+        {{session.classroom.location}}
+        <br />
+      <label for="notes" class="control-label">Notes:</label>
+        {{session.classroom.notes}}
+        <br />
+      <label for="subjects" class="control-label">Subjects:</label>
+          <div ng-repeat="subject in session.classroom.subjects">
+            {{subject.name}}
+          </div>
+    </div>
+  </div>
+<div class="col-md-2"></div>

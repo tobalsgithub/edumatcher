@@ -15,8 +15,9 @@
         {{session.school.notes}}
         <br />
 
-      <a ui-sref="admin_schools_classrooms_list({school_id: {{session.school.id}}})"><button class="btn btn-primary btn-block">View Classrooms</button></a>
-
+      <a ui-sref="admin_schools_classrooms_list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
+        <button class="btn btn-primary btn-block">View Classrooms</button>
+      </a>
     </div>
   </div>
 <div class="col-md-2"></div>

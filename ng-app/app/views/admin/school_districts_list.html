@@ -1,7 +1,9 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
   <div ng-repeat="school_district in school_districts">
-    <a ng-click="select_school_district({{school_district.id}})">{{school_district.name}}</span></a>
+    <a ui-sref="admin_school_districts({school_district_id:{{school_district_id: school_district.id}}})">
+      {{school_district.name}}
+    </a>
   </div>
 </div>
 <div class="col-md-2"></div>

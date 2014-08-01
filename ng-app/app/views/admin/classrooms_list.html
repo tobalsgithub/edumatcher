@@ -1,7 +1,23 @@
 <div class="col-md-2"></div>
-<div class="col-md-8" ng-init=get_classrooms()>
-  <div ng-repeat="classroom in classrooms">
-    <a ng-click="select_classroom({{classroom.id}})"><span>{{classroom.name}}</span></a>
+<div class="col-md-8" ng-init=getClassrooms()>
+  <div class="panel panel-default box-shadow">
+    <div class="panel-heading">
+      <h3 class="panel-title">Classrooms at
+        <a ui-sref="admin_school_detail({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
+          {{session.school.name}}
+        </a>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="classroom in classrooms">
+        <a ui-sref="admin_classroom_detail({classroom_id: {{classroom.id}}, school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
+          {{classroom.name}}
+        </a>
+      </div>
+      <a ui-sref="admin_classrooms_create({school_district_id: {{session.school_district.id}},school_id:{{session.school.id}}})">
+        <button class="btn btn-primary">Create new classroom</button>
+      </a>
+    </div>
   </div>
 </div>
 <div class="col-md-2"></div>
