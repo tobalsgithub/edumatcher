@@ -41,6 +41,13 @@
           placeholder="Some cool place"
           ng-model="classroom.location">
       </div>
+      <div class="form-group" ng-class="{'has-error': form.location.$invalid && submitted}">
+        <label for="subjects" class="control-label">Subjects</label>
+        <button type="button" class="btn btn-primary" ng-model="subject_list" data-multiple="1"
+          data-placeholder="All subjects" ng-options="subject.id as subject.name for subject in subjects" bs-select>
+          Action <span class="caret"></span>
+        </button>
+      </dvi>
       <div class="form-group" ng-class="{'has-error': form.notes.$invalid && submitted}">
         <label for="notes" class="control-label">Notes</label>
         <textarea class="form-control" id="notes" name="notes" placeholder="Any special notes you may have" ng-model="classroom.notes" />

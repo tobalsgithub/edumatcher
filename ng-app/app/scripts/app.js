@@ -78,106 +78,108 @@ angular
         module: 'private'
       })
 
-      .state('admin_school_districts_list', {
-        url: '/admin/school_districts',
-        templateUrl: 'views/admin/school_districts_list.html',
+      // Admin views
+
+      .state('admin', {
+        url: '/admin',
+        templateUrl: 'views/admin/index.html',
         controller: 'AdminCtrl',
         module: 'admin'
       })
 
-      .state('admin_school_districts_detail', {
-        url: '/admin/school_districts/:school_district_id',
-        templateUrl: 'views/admin/school_districts_detail.html',
-        controller: 'AdminCtrl',
-        module: 'admin'
+      // School Districts
+
+      .state('admin.school_districts', {
+        url: '/school_districts',
+        templateUrl: 'views/admin/school_districts/index.html'
       })
 
-      .state('admin_school_districts_schools_list', {
-        url: '/admin/school_districts/:school_district_id/schools',
-        templateUrl: 'views/admin/schools_list.html',
-        controller: 'AdminCtrl',
-        module: 'admin'
+      .state('admin.school_districts.list', {
+        url: '/list',
+        templateUrl: 'views/admin/school_districts/list.html'
       })
 
-      .state('admin_school_districts_create', {
-        url: '/admin/school_districts/create',
-        templateUrl: 'views/admin/school_districts_create.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      .state('admin.school_districts.create', {
+        url: '/create',
+        templateUrl: 'views/admin/school_districts/create.html'
       })
 
-      .state('admin_school_districts_edit', {
-        url: '/admi/school_districts/:school_district_id/edit',
-        templateUrl: 'views/admin/school_districts_edit.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      .state('admin.school_districts.edit', {
+        url: '/:school_district_id/edit',
+        templateUrl: 'views/admin/school_districts/edit.html'
       })
 
-      .state('admin_schools_create', {
-        url: '/admin/school_districts/:school_district_id/schools/create',
-        templateUrl: 'views/admin/schools_create.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      .state('admin.school_districts.detail', {
+        url: '/:school_district_id',
+        templateUrl: '/views/admin/school_districts/detail.html'
       })
 
-      .state('admin_school_detail', {
-        url: '/admin/school_districts/:school_district_id/schools/:school_id',
-        templateUrl: 'views/admin/schools_detail.html',
-        controller: 'AdminCtrl',
-        module: 'admin'
+      // Schools
+
+      .state('admin.schools', {
+        url: '/school_districts/:school_district_id/schools',
+        templateUrl: 'views/admin/schools/index.html'
       })
 
-      .state('admin_schools_edit',{
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/edit',
-        templateUrl: 'views/admin/schools_edit.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      .state('admin.schools.list', {
+        url: '/list',
+        templateUrl: 'views/admin/schools/list.html'
       })
 
-      .state('admin_schools_classrooms_list', {
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms',
-        templateUrl: 'views/admin/classrooms_list.html',
-        controller: 'AdminCtrl',
-        module: 'admin'
+      .state('admin.schools.create', {
+        url: '/create',
+        templateUrl: 'views/admin/schools/create.html'
       })
 
-      .state('admin_classrooms_create',{
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms/create',
-        templateUrl: 'views/admin/classrooms_create.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      .state('admin.schools.edit', {
+        url: '/:school_id/edit',
+        templateUrl: 'views/admin/schools/edit.html'
       })
 
-      .state('admin_classroom_detail', {
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms/:classroom_id',
-        templateUrl: 'views/admin/classrooms_detail.html',
-        controller: 'AdminCtrl',
-        module: 'admin'
+      .state('admin.schools.detail', {
+        url: '/:school_id',
+        templateUrl: '/views/admin/schools/detail.html'
       })
 
-      .state('admin_classrooms_edit',{
-        url: '/admin/school_districts/:school_district_id/schools/:school_id/classrooms/:classroom_id/edit',
-        templateUrl: 'views/admin/classrooms_edit.html',
-        controller: 'AdminCtrl',
-        css: ['styles/shake_that.css'],
-        module: 'admin'
+      // Classrooms
+
+      .state('admin.classrooms', {
+        url: '/school_districts/:school_district_id/schools/:school_id/classrooms',
+        templateUrl: 'views/admin/classrooms/index.html'
       })
 
-      .state('main', {
-        url: '/main',
-        templateUrl: 'views/main.html'
+      .state('admin.classrooms.list', {
+        url: '/list',
+        templateUrl: 'views/admin/classrooms/list.html'
       })
 
-      // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-      .state('about', {
-        // we'll get to this in a bit
-        url: '/about',
-        templateUrl: 'views/about.html'
+      .state('admin.classrooms.create', {
+        url: '/create',
+        templateUrl: 'views/admin/classrooms/create.html'
+      })
+
+      .state('admin.classrooms.edit', {
+        url: '/:classroom_id/edit',
+        templateUrl: 'views/admin/classrooms/edit.html'
+      })
+
+      .state('admin.classrooms.detail', {
+        url: '/:classroom_id',
+        templateUrl: '/views/admin/classrooms/detail.html'
       });
+
+
+
+      // .state('main', {
+      //   url: '/main',
+      //   templateUrl: 'views/main.html'
+      // })
+      //
+      // // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+      // .state('about', {
+      //   // we'll get to this in a bit
+      //   url: '/about',
+      //   templateUrl: 'views/about.html'
+      // });
 
   }]);

@@ -3,7 +3,7 @@
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">{{session.school.name}}</h3>
-      <a ui-sref="admin_schools_edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
+      <a ui-sref="admin.schools.edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
         Edit
       </a>
     </div>
@@ -18,7 +18,7 @@
         {{session.school.notes}}
         <br />
 
-      <a ui-sref="admin_schools_classrooms_list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
+      <a ui-sref="admin.classrooms.list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
         <button class="btn btn-primary btn-block">View Classrooms</button>
       </a>
     </div>

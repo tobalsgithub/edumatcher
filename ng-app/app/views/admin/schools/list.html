@@ -3,18 +3,18 @@
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">Schools in the
-        <a ui-sref="admin_school_districts_detail({school_district_id: {{session.school_district.id}}})">
+        <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">
           {{session.school_district.name}}
         </a>
       </h3>
     </div>
     <div class="panel-body">
       <div ng-repeat="school in schools">
-        <a ui-sref="admin_school_detail({school_id: {{school.id}},school_district_id: {{session.school_district.id}}})">
+        <a ui-sref="admin.schools.detail({school_id: {{school.id}},school_district_id: {{session.school_district.id}}})">
           {{school.name}}
         </a>
       </div>
-      <a ui-sref="admin_schools_create({school_district_id: {{session.school_district.id}}})">
+      <a ui-sref="admin.schools.create({school_district_id: {{session.school_district.id}}})">
         <button class="btn btn-primary">Create new school</button>
       </a>
     </dvi>
