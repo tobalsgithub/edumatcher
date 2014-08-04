@@ -1,0 +1,52 @@
+html {
+  background: url("/images/sci-class-dark.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  background-color: transparent;
+}
+
+.title-header h1 {
+  font-size: 70px;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+}
+
+.info-box {
+  border: 1px solid #efefef;
+  border-radius: 6px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 44%;
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 20px;
+}
+.info-box h3{
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.1;
+  font-family: Lato,Helvetica,Arial,sans-serif;
+}
+
+.info-box h4{
+  color: #222;
+  font-size: 1.2em;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+
+}
+
+.schools{
+  color: #13bfe1;
+}
+.industry{
+  color: #F99D1E;
+}

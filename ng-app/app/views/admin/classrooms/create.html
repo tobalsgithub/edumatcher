@@ -1,7 +1,4 @@
-<div class="col-md-2">
-  <div ui-view="session_info"></div>
-</div>
-<form ng-init="newClassroom()" class="col-md-8" name="form" id="createClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="createClassroom()">
+<form ng-init="newClassroom()" name="form" id="createClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="createClassroom()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
@@ -41,6 +38,22 @@
           placeholder="Some cool place"
           ng-model="classroom.location">
       </div>
+      <div class="form-group" ng-class="{'has-error': form.location.$invalid && submitted}">
+        <label for="subjects" class="control-label">Subjects</label>
+          <input
+            id="subject-search-box"
+            type="text"
+            class="form-control"
+            placeholder="Add subject"
+            ng-model="subject"
+            typeahead="subject as subject.name for subject in subject_list | filter:{name:$viewValue}"
+            typeahead-on-select="addSubjectToClassroom($item, $model, $label)" />
+        <ul>
+          <li ng-repeat="subject in classroom.subjects track by subject.id">
+            {{subject.name}} <a ng-click="removeSubjectFromClassroom({{subject}})"><span class="glyphicon glyphicon-remove"></span></a>
+          </li>
+        </ul>
+      </dvi>
       <div class="form-group" ng-class="{'has-error': form.notes.$invalid && submitted}">
         <label for="notes" class="control-label">Notes</label>
         <textarea class="form-control" id="notes" name="notes" placeholder="Any special notes you may have" ng-model="classroom.notes" />
@@ -53,4 +66,3 @@
 <div class="alert alert-success message" ng-show="showMessage">Well done!</div>
 
 <div class="alert alert-warning message" ng-show="showErrorMessage">{{$parent.login_error_message}}</div>
-<div class="col-md-2"></div>

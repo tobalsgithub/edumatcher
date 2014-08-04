@@ -1,7 +1,4 @@
-<div class="col-md-2">
-  <div ui-view="session_info"></div>
-</div>
-<form ng-init="addClassroomToScope()" class="col-md-8" name="form" id="editClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="updateClassroom()">
+<form ng-init="addClassroomToScope()" name="form" id="editClassroomForm" autocomplete="off" novalidate shake-that submitted="submitted" submit="updateClassroom()">
   <div class="panel panel-default box-shadow">
     <div class="panel-heading">
       <h3 class="panel-title">
@@ -56,11 +53,6 @@
             {{subject.name}} <a ng-click="removeSubjectFromClassroom({{subject}})"><span class="glyphicon glyphicon-remove"></span></a>
           </li>
         </ul>
-
-        <!-- <button type="button" class="btn btn-primary" ng-model="classroom.subjects" data-multiple="1"
-          data-placeholder="No subjects" ng-options="subject as subject.name for subject in subject_list track by subject.id" bs-select>
-          Action <span class="caret"></span>
-        </button> -->
       </dvi>
       <div class="form-group" ng-class="{'has-error': form.notes.$invalid && submitted}">
         <label for="notes" class="control-label">Notes</label>
@@ -74,4 +66,3 @@
 <div class="alert alert-success message" ng-show="showMessage">Well done!</div>
 
 <div class="alert alert-warning message" ng-show="showErrorMessage">{{$parent.login_error_message}}</div>
-<div class="col-md-2"></div>

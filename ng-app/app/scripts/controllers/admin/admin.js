@@ -29,35 +29,39 @@ angular.module('edumatcherApp')
     $scope.createSchoolDistrict = function(){
       var school_district = new SchoolDistricts($scope.school_district);
       school_district.$save();
-      $state.go('admin_school_districts_list');
+      $state.go('admin_school_districts.list');
     };
 
     $scope.updateSchoolDistrict = function(){
       SchoolDistricts.update({id: $scope.school_district.id},$scope.school_district, function(){
         $scope.setSchoolDistrict($scope.school_district.id);
       });
-      $state.go('admin_school_districts_detail', {school_district_id: $scope.school_district_id});
+      $state.go('admin.school_districts.detail', {school_district_id: $scope.school_district_id});
     };
 
     $scope.createSchool = function(){
       var school = new Schools($scope.school);
       school.school_district_id = $scope.session.school_district.id;
-      school.$save();
-      $state.go('admin_school_districts_schools_list', {school_district_id: $scope.session.school_district.id});
+      school.$save(function(school){
+        $scope.setSchool(school.id);
+        $state.go('admin.schools.detail', {school_district_id: $scope.session.school_district.id, school_id: school.id});
+      });
     };
 
     $scope.updateSchool = function(){
       Schools.update({id: $scope.school.id},$scope.school, function(){
         $scope.setSchool($scope.school.id);
       });
-      $state.go('admin_school_detail', { school_id: $scope.school.id});
+      $state.go('admin.schools.detail', { school_id: $scope.school.id});
     };
 
     $scope.createClassroom = function(){
       var classroom = new Classrooms($scope.classroom);
       classroom.school_id = $scope.session.school.id;
-      classroom.$save();
-      $state.go('admin_schools_classrooms_list',{school_district_id: $scope.session.school_district.id, school_id: $scope.session.school.id});
+      classroom.save(function(classroom){
+        $scope.setClassroom(classroom.id);
+        $state.go('admin.classrooms.detail',{school_district_id: $scope.session.school_district.id, school_id: $scope.session.school.id, classroom_id: classroom.id});
+      });
     };
 
     $scope.updateClassroom = function(){
@@ -105,11 +109,14 @@ angular.module('edumatcherApp')
     // };
 
     $scope.addSubjectToClassroom = function(item){
-      if($.grep($scope.classroom.subjects, function(sub){ return sub.id === item.id }).length > 0){
+      if(!$scope.classroom.subjects){
+        $scope.classroom.subjects = [];
+      }else if($.grep($scope.classroom.subjects, function(sub){ return sub.id === item.id; }).length > 0){
         return;
       }
       $scope.classroom.subjects.push(item);
       $scope.subject = '';
+      console.log($scope.classroom.subjects);
     };
 
     $scope.removeSubjectFromClassroom = function(subject){

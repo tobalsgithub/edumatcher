@@ -1,23 +1,22 @@
-<div class="col-md-2"></div>
-<div class="col-md-8">
-  <div class="panel panel-default box-shadow">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{session.classroom.name}}</h3>
-      <a ui-sref="admin.classrooms.edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}},classroom_id:{{session.classroom.id}}})">
-        Edit
-      </a>
+<div class="panel panel-default box-shadow">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{session.classroom.name}}</h3>
+    <a ui-sref="admin.classrooms.edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}},classroom_id:{{session.classroom.id}}})">
+      Edit
+    </a>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-6">
+      <label for="SchoolDistrict" class="control-label">School District:</label>
+        <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">{{session.school_district.name}}</a>
     </div>
-    <div class="panel-body">
-      <div class="col-md-6">
-        <label for="SchoolDistrict" class="control-label">School District:</label>
-          <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">{{session.school_district.name}}</a>
-      </div>
-      <div class="col-md-6">
-        <label for="School" class="control-label">School:</label>
-          <a ui-sref="admin.schools.detail({school_district_id: {{session.school_district.id}}, school_id: {{session.school.id}}})">{{session.school.name}}</a>
-      </div>
+    <div class="col-md-6">
+      <label for="School" class="control-label">School:</label>
+        <a ui-sref="admin.schools.detail({school_district_id: {{session.school_district.id}}, school_id: {{session.school.id}}})">{{session.school.name}}</a>
+    </div>
+    <div class="col-md-6">
       <label for="website" class="control-label">Website:</label>
-        {{session.classroom.website}}
+        <a href="{{session.classroom.website}}">{{session.classroom.website}}</a>
         <br />
       <label for="location" class="control-label">Location:</label>
         {{session.classroom.location}}
@@ -31,4 +30,4 @@
           </div>
     </div>
   </div>
-<div class="col-md-2"></div>
+</div>

@@ -1,9 +1,7 @@
-<div class="col-md-2"></div>
-<div class="col-md-8" ng-init="getSchoolDistricts()">
+<div ng-init="getSchoolDistricts()">
   <div ng-repeat="school_district in school_districts">
     <a ui-sref="admin.school_districts.detail({school_district_id:{{school_district.id}}})">
       {{school_district.name}}
     </a>
   </div>
 </div>
-<div class="col-md-2"></div>

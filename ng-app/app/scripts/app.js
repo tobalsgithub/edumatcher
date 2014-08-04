@@ -33,10 +33,10 @@ angular
     $stateProvider
 
       // HOME STATES AND NESTED VIEWS ========================================
-      .state('home', {
+      .state('index', {
         url: '/',
         templateUrl: 'views/index.html',
-        css: 'styles/home.css',
+        css: 'styles/index.css',
         module: 'public'
       })
 

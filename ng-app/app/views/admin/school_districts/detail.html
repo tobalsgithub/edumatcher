@@ -1,25 +1,22 @@
-<div class="col-md-2"></div>
-<div class="col-md-8">
-  <div class="panel panel-default box-shadow">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{session.school_district.name}}</h3>
-      <a ui-sref="admin.school_districts.edit({school_district_id: {{session.school_district.id}}})">
-        Edit
-      </a>
-    </div>
-    <div class="panel-body">
-      <label for="website" class="control-label">Website:</label>
-        {{session.school_district.website}}
-        <br />
-      <label for="location" class="control-label">Location:</label>
-        {{session.school_district.location}}
-        <br />
-      <label for="notes" class="control-label">Notes:</label>
-        {{session.school_district.notes}}
-        <br />
-
-      <a ui-sref="admin.schools.list({school_district_id: {{session.school_district.id}}})"><button class="btn btn-primary btn-block">View Schools</button></a>
-
-    </div>
+<div class="panel panel-default box-shadow">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{session.school_district.name}}</h3>
+    <a ui-sref="admin.school_districts.edit({school_district_id: {{session.school_district.id}}})">
+      Edit
+    </a>
   </div>
-<div class="col-md-2"></div>
+  <div class="panel-body">
+    <label for="website" class="control-label">Website:</label>
+      <a href="{{session.school_district.website}}">{{session.school_district.website}}</a>
+      <br />
+    <label for="location" class="control-label">Location:</label>
+      {{session.school_district.location}}
+      <br />
+    <label for="notes" class="control-label">Notes:</label>
+      {{session.school_district.notes}}
+      <br />
+
+    <a ui-sref="admin.schools.list({school_district_id: {{session.school_district.id}}})"><button class="btn btn-primary btn-block">View Schools</button></a>
+
+  </div>
+</div>

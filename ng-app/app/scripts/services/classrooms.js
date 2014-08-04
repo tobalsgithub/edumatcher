@@ -37,13 +37,14 @@ angular.module('edumatcherApp').factory('Classrooms', ['$resource', '$http', fun
 
 	Classrooms.prototype.save = function(cb){
 		var _this = this;
+		var subject_list = _this.subjects;
 		if(_this.id){
 			Classrooms.update({id: _this.id}, _this, function(){
 				_this.set_subjects(cb);
 			});
-			//this.update(this.set_subjects(cb));
 		}else{
 			_this.$save(function(){
+				_this.subjects = subject_list;
 				_this.set_subjects(cb);
 			});
 		}
