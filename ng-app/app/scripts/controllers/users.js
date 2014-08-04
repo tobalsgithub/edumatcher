@@ -77,7 +77,7 @@ angular.module('edumatcherApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $state.transitionTo('home');
+      $state.go('index');
     };
 
     $scope.setLocation = function(url){

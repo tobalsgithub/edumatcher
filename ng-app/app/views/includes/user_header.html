@@ -1,0 +1,73 @@
+<!-- Header Nav Bar -->
+<nav class="navbar navbar-default navbar-fixed-top mm-header-bar" role="navigation" style="border-radius:0px;" ng-controller="UsersCtrl">
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+    <ul class="nav navbar-nav navbar-left">
+      <li><a ui-sref="index" style="font-size:24px;">Education Matchmaker</a></li>
+      <li>
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-default navbar-btn">Classrooms</button>
+          <button type="button" class="btn btn-default navbar-btn dropdown-toggle">
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Browse</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a class="drop" ui-sref="profiles.search.classrooms">Classrooms</a>
+        <ul class="dropdown-list">
+          <li><a ui-sref="profiles.search.classrooms">Search</a></li>
+          <li><a href="#">Browse</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="drop" href="#">Locations</a>
+        <ul class="dropdown-list">
+          <li><a href="#">Location A</a></li>
+          <li><a href="#">Location B</a></li>
+          <li><a href="#">Location C</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="drop" href="#">Staff</a>
+        <ul class="dropdown-list">
+          <li><a href="#">President</a></li>
+          <li><a href="#">VP</a></li>
+          <li><a href="#">Manager</a></li>
+        </ul>
+      </li>
+
+
+      <li>
+        <a href="#" class="no-padding-right">Classrooms</a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown"><span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Search</a></li>
+          <li><a href="#">Browse</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right mm-header-right">
+      <li>
+        <span class="fui-mail"></span>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{session.user.fullname}} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Account Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="#" ng-click="logout()">Logout</a></li>
+        </ul>
+      </li>
+    </ul><!-- /.navbar-right -->
+  </div><!-- /.navbar-collapse -->
+</nav> <!-- /Header Nav Bar -->

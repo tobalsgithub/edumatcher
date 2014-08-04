@@ -85,7 +85,7 @@ angular.module('edumatcherApp')
       if(attemptedUrl){
         $window.location.href = attemptedUrl;
       }else{
-        $state.go('home');
+        $state.go('index');
       }
     });
 
@@ -175,6 +175,25 @@ angular.module('edumatcherApp')
       var classroom = Classrooms.get({id: id},function(){
         webStorage.add('classroom',classroom);
         $scope.session.classroom = classroom;
+      });
+    };
+
+    $scope.getSchoolDistricts = function(){
+      SchoolDistricts.query(function(school_districts){
+        $scope.school_districts = school_districts;
+      });
+    };
+
+    $scope.getSchools = function(){
+      SchoolDistricts.schools({id: $scope.session.school_district.id}, function(schools){
+        $scope.schools = schools;
+        //$state.go('admin_school_districts_schools_list', {school_district_id: $scope.session.school_district.id});
+      });
+    };
+
+    $scope.getClassrooms = function(){
+      Schools.classrooms({id: $scope.session.school.id}, function(classrooms){
+        $scope.classrooms = classrooms;
       });
     };
 

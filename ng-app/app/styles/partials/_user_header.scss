@@ -1,0 +1,42 @@
+/* USER HEADER */
+
+nav {
+  div {
+    ul {
+      li {
+        
+        ul.dropdown-list {
+          position: absolute;
+          left: 0;
+          top: 100%;
+          padding: 0 1000em; /* trick from css-tricks comments */
+          margin: 0 -1000em; /* trick from css-tricks comments */
+          z-index: 101;
+          visibility: hidden;
+          opacity: 0;
+          background: #848484;
+          list-style-type: none;
+
+          li {
+            padding: 3px 0;
+
+            a {
+              color: #f8f8f8;
+            }
+          }
+        }
+      }
+
+      li:hover {
+        ul.dropdown-list {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .drop {
+          color: black;
+        }
+      }
+    }
+  }
+}

@@ -5,24 +5,19 @@
         <th>Name</th>
         <th>Principle</th>
         <th>Website</th>
-        <th>
-          <a ui-sref="admin.schools.create({school_district_id: {{session.school_district.id}}})">
-            <button class="btn btn-default">Create new school</button>
-          </a>
-        </h>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="school in schools">
         <td>
-          <a ui-sref="admin.schools.detail({school_id: {{school.id}},school_district_id: {{session.school_district.id}}})">
+          <a ui-sref="profiles.schools.detail({school_id: {{school.id}},school_district_id: {{session.school_district.id}}})">
             {{school.name}}
           </a>
         </td>
         <td>
           {{school.principle}}
         </td>
-        <td colspan="2">
+        <td>
           <a href="{{school.website}}">{{school.website}}</a>
         </td>
       </tr>

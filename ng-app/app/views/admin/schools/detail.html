@@ -1,33 +1,52 @@
-<div class="panel panel-default box-shadow">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{session.school.name}}</h3>
-    <a ui-sref="admin.schools.edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
-      Edit
-    </a>
-  </div>
-  <div class="panel-body">
-    <div class="col-md-6">
-      <label for="SchoolDistrict" class="control-label">School District:</label>
-        <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">
-          {{session.school_district.name}}
-        </a>
-    </div>
-    <div class="col-md-6"></div>
-    <div class="col-md-12" style="clear:both;">
-      <br />
-      <label for="website" class="control-label">Website:</label>
-        <a href="{{session.school.website}}">{{session.school.website}}</a>
-        <br />
-      <label for="location" class="control-label">Location:</label>
-        {{session.school.location}}
-        <br />
-      <label for="notes" class="control-label">Notes:</label>
-        {{session.school.notes}}
-        <br />
+<div class="col-md-12">
+  <h3>{{session.school.name}}<a ui-sref="admin.schools.edit({school_district_id: {{session.school_district.id}},school_id: {{session.school.id}}})">
+    Edit
+  </a></h3>
+</div>
 
-      <a ui-sref="admin.classrooms.list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
-        <button class="btn btn-primary btn-block">View Classrooms</button>
-      </a>
-    </div>
+<div class="col-md-3">
+  <div class="profile-thumb">
+    <img class="img-rounded profile-thumb-img" src="../images/verona_district_logo.png">
   </div>
+  <div class="profile-contact">
+    <button class="btn btn-hg btn-primary profile-contact-btn">
+      Contact Judy
+    </button>
+  </div>
+</div>
+
+<div class="info-container col-md-9">
+  <div class="col-md-6 col-md-offset-right-6">
+    <p>
+      <label for="SchoolDistrict" class="control-label">School District:</label>
+        <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">{{session.school_district.name}}</a>
+      <br />
+    </p>
+    <p>
+      <label for="website" class="control-label">Website:</label>
+        <a href="{{session.schools.website}}">{{session.schools.website}}</a>
+        <br />
+    </p>
+    <p>
+      <label for="location" class="control-label">Location:</label>
+        {{session.schools.location}}
+        <br />
+    </p>
+    <p>
+      <label for="notes" class="control-label">Notes:</label>
+        {{session.schools.notes}}
+        <br />
+      </p>
+  </div>
+</div><!-- .info-container -->
+
+<div class="col-md-12 tabs">
+  <tabset>
+    <tab heading="Classrooms">
+      <div ng-include="'views/admin/classrooms/list.html'"></div>
+    </tab>
+    <!-- <tab heading="Educators">
+      <div ng-include="'views/educators/list.html'"></div>
+    </tab> -->
+  </tabset>
 </div>

@@ -19,7 +19,7 @@ angular
     'ui.bootstrap',
     'Devise',
     //'google-maps',
-    //'mgcrea.ngStrap',
+    'mgcrea.ngStrap',
     'stateFiles',
     'webStorageModule'
   ])
@@ -64,19 +64,61 @@ angular
         module: 'private'
       })
 
-      .state('classrooms', {
-        url: '/classrooms',
-        views: {
-          '': {
-            templateUrl: 'views/classrooms/classrooms.html',
-            controller: 'ClassroomsCtrl'
-          },
-          'userSnippet@classrooms': {
-            templateUrl: 'views/users/user_snippet.html',
-            controller: 'UsersCtrl'
-          }
-        },
+      .state('profiles', {
+        url: '/profiles',
+        abstract: true,
+        template: '<div ng-include="\'views/includes/user_header.html\'"></div><ui-view/>',
         module: 'private'
+      })
+
+      .state('profiles.search',{
+        url: '/search',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+
+      .state('profiles.search.classrooms', {
+        url: '/classrooms',
+        templateUrl: 'views/classrooms/search.html',
+        controller: 'SearchCtrl'
+      })
+
+      .state('profiles.school_districts', {
+        url: '/school_districts',
+        controller: 'ProfilesCtrl',
+        template: '<ui-view/>'
+      })
+
+      .state('profiles.school_districts.detail',{
+        url: '/:school_district_id',
+        templateUrl: 'views/school_districts/detail.html'
+      })
+
+      .state('profiles.schools', {
+        url: '/school_districts/:school_district_id/schools',
+        controller: 'ProfilesCtrl',
+        template: '<ui-view/>'
+      })
+
+      .state('profiles.schools.list', {
+        url: '/list',
+        templateUrl: 'views/schools/list.html'
+      })
+
+      .state('profiles.schools.detail',{
+        url: '/:school_id',
+        templateUrl: 'views/schools/detail.html'
+      })
+
+      .state('profiles.classrooms', {
+        url: '/school_districts/:school_district_id/schools/:school_id/classrooms',
+        controller: 'ProfilesCtrl',
+        template: '<ui-view/>'
+      })
+
+      .state('profiles.classrooms.detail', {
+        url: '/:classroom_id',
+        templateUrl: 'views/classrooms/detail.html'
       })
 
       // Admin views

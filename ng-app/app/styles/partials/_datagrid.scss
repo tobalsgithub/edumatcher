@@ -1,0 +1,33 @@
+/* Datagrid */
+.datagrid {
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+
+    thead {
+      background-color:#006FA6;
+      color: #ffffff;
+      tr {
+        th {
+          padding: 15px;
+        }
+      }
+    }
+
+    tbody {
+      border-bottom: solid 1px #E1EEf4;
+      tr {
+        border-left: solid 1px #E1EEf4;
+
+        td {
+          width: 33%;
+          border-right: solid 1px #E1EEf4;
+          padding: 15px;
+        }
+      }
+      tr:nth-child(even) {
+        background-color: #E1EEf4;
+      }
+    }
+  }
+}
