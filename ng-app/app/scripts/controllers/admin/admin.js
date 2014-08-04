@@ -61,10 +61,15 @@ angular.module('edumatcherApp')
     };
 
     $scope.updateClassroom = function(){
-      Classrooms.update({id: $scope.classroom.id}, $scope.classroom, function(){
+      var classroom = new Classrooms($scope.classroom);
+      classroom.save(function(classroom){
         $scope.setClassroom($scope.classroom.id);
       });
-      $state.go('admin_classroom_detail',{school_district_id: $scope.session.school_district.id, school_id: $scope.session.school.id,classroom_id: $scope.session.classroom.id});
+      // Classrooms.update({id: $scope.classroom.id}, $scope.classroom, function(classroom){
+      //   $scope.setClassroom($scope.classroom.id);
+      //   console.log(classroom);
+      // });
+      $state.go('admin.classrooms.detail',{school_district_id: $scope.session.school_district.id, school_id: $scope.session.school.id,classroom_id: $scope.session.classroom.id});
     };
 
     $scope.getSchoolDistricts = function(){
@@ -86,7 +91,34 @@ angular.module('edumatcherApp')
       });
     };
 
+    // $scope.searchSubjects = function(searchText) {
+    //   if(!searchText || typeof searchText !== 'string'){ return; }
+    //   var subjects = [];
+    //   var i;
+    //   searchText = searchText.toLowerCase();
+    //   for(i=0;i<$scope.subject_list.length; i++){
+    //     if($scope.subject_list[i].name.toLowerCase().indexOf(searchText) >=0 ) {
+    //       subjects.push($scope.subject_list[i]);
+    //     }
+    //   }
+    //   return subjects;
+    // };
+
+    $scope.addSubjectToClassroom = function(item){
+      if($.grep($scope.classroom.subjects, function(sub){ return sub.id === item.id }).length > 0){
+        return;
+      }
+      $scope.classroom.subjects.push(item);
+      $scope.subject = '';
+    };
+
+    $scope.removeSubjectFromClassroom = function(subject){
+      $scope.classroom.subjects = $.grep($scope.classroom.subjects, function(sub){ return sub.id !== subject.id;});
+
+    };
+
     function init(){
+      $scope.subject_list = Subjects.query();
       //console.log($state.current);
     }
 

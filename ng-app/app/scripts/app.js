@@ -16,9 +16,10 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
+    'ui.bootstrap',
     'Devise',
     //'google-maps',
-    'mgcrea.ngStrap',
+    //'mgcrea.ngStrap',
     'stateFiles',
     'webStorageModule'
   ])

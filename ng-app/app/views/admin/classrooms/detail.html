@@ -8,6 +8,14 @@
       </a>
     </div>
     <div class="panel-body">
+      <div class="col-md-6">
+        <label for="SchoolDistrict" class="control-label">School District:</label>
+          <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">{{session.school_district.name}}</a>
+      </div>
+      <div class="col-md-6">
+        <label for="School" class="control-label">School:</label>
+          <a ui-sref="admin.schools.detail({school_district_id: {{session.school_district.id}}, school_id: {{session.school.id}}})">{{session.school.name}}</a>
+      </div>
       <label for="website" class="control-label">Website:</label>
         {{session.classroom.website}}
         <br />

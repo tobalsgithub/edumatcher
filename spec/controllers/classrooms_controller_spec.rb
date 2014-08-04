@@ -46,6 +46,28 @@ RSpec.describe ClassroomsController, :type => :controller do
       end
 
       it { should respond_with 201 }
+
+      xdescribe 'with subject list' do
+        before(:each) do
+          classroom.subjects.delete_all
+          classroom.subjects << create(:subject)
+          classroom.subjects << create(:subject)
+          # puts classroom_json
+        end
+
+        xit "creates a new Classroom" do
+          expect {
+            post :create, classroom: classroom, format: :json
+          }.to change(Classroom, :count).by(1)
+        end
+
+        it 'returns the new classroom with subjects included' do
+          post :create, classroom: classroom, format: :json
+          expect(json).to have_key('subjects')
+          expect(json['subjects'].size).to be(2)
+        end
+      end
+
     end
 
     describe 'with invalid attributes' do
@@ -221,15 +243,26 @@ RSpec.describe ClassroomsController, :type => :controller do
   describe 'POST set_subjects' do
 
     before(:each) do
+
+    end
+
+    it 'can set the list of subjects for an classroom' do
       sub1 = create(:subject)
       sub2 = create(:subject)
       sub3 = create(:subject)
       array = [sub1.id, sub2.id, sub3.id]
       post :set_subjects, id: classroom.to_param, subject_list: array, format: :json
+      expect(classroom.subjects.size).to be 3
     end
 
-    it 'can set the list of subjects for an classroom' do
-      expect(classroom.subjects.size).to be 3
+    it 'can set the list of subjects for a classroom to empty' do
+      array = nil
+      classroom.subjects << create(:subject)
+      classroom.subjects << create(:subject)
+      classroom.save!
+      expect(classroom.subjects.size).to be 2
+      post :set_subjects, id: classroom.to_param, subject_list: array, format: :json
+      expect(classroom.subjects.size).to be 0
     end
   end
 

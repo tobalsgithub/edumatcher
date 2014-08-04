@@ -7,6 +7,19 @@
  * # AppCtrl
  * Controller of the edumatcherApp
  */
+// angular.module('edumatcherApp').config(['$provide', function ($provide) {
+//   $provide.decorator('$rootScope', function ($delegate) {
+//     var _emit = $delegate.$emit;
+//
+//     $delegate.$emit = function () {
+//       console.log.apply(console, arguments);
+//       _emit.apply(this, arguments);
+//     };
+//
+//     return $delegate;
+//   });
+// }]);
+
 angular.module('edumatcherApp')
   .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms) {
 

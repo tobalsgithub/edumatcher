@@ -29,12 +29,11 @@ class ClassroomsController < ApplicationController
   end
 
   def search
-    limit = params[:limit].to_i || 10
-    page = params[:page].to_i || 1
+    limit = params[:limit] ? params[:limit].to_i : 10
+    page = params[:page] ? params[:page].to_i : 1
     offset = (page - 1) * limit
     subject_list = []
     grade_level_list = []
-
     if params[:grade_level_list] == nil || params[:grade_level_list].size == 0
       grade_level_list = GradeLevel.pluck(:id)
       grade_level_list.push(nil)
@@ -44,7 +43,6 @@ class ClassroomsController < ApplicationController
 
     if params[:subject_list] == nil || params[:subject_list].size == 0
       classrooms = Classroom.where('classrooms.grade_level_id' => grade_level_list).limit(limit).offset(offset)
-
     else
       classrooms = Classroom.joins(:subjects).where('subjects.id' => params[:subject_list], 'classrooms.grade_level_id' => grade_level_list).limit(limit).offset(offset)
     end
@@ -85,23 +83,27 @@ class ClassroomsController < ApplicationController
 
   def set_subjects
     @classroom.subjects.clear
-    params[:subject_list].each do |id|
-      @classroom.subjects << Subject.find(id)
-    end
-    respond_to do |format|
-      if @classroom.save && @classroom.valid?
-        format.json { render :json => @classroom }
-      else
-        format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+    if !params[:subject_list]
+      respond_with @classroom
+    else
+      params[:subject_list].each do |id|
+        @classroom.subjects << Subject.find(id)
       end
-    end
+      respond_to do |format|
+        if @classroom.save && @classroom.valid?
+          format.json { render :json => @classroom }
+        else
+          format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+        end
+      end
+    end    
   end
 
   private
 
   def classroom_params
     json_params = ActionController::Parameters.new( JSON.parse(params.to_json) )
-    json_params[:classroom].permit(:name, :website, :location, :notes, :school_id)
+    json_params[:classroom].permit(:name, :website, :location, :notes, :school_id, :subjects => [])
   end
 
   def set_classroom

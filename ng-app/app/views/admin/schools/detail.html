@@ -8,19 +8,26 @@
       </a>
     </div>
     <div class="panel-body">
-      <label for="website" class="control-label">Website:</label>
-        {{session.school.website}}
+      <label for="SchoolDistrict" class="control-label">School District:</label>
+        <a ui-sref="admin.school_districts.detail({school_district_id: {{session.school_district.id}}})">
+          {{session.school_district.name}}
+        </a>
+      <div class="col-md-12">
         <br />
-      <label for="location" class="control-label">Location:</label>
-        {{session.school.location}}
-        <br />
-      <label for="notes" class="control-label">Notes:</label>
-        {{session.school.notes}}
-        <br />
+        <label for="website" class="control-label">Website:</label>
+          {{session.school.website}}
+          <br />
+        <label for="location" class="control-label">Location:</label>
+          {{session.school.location}}
+          <br />
+        <label for="notes" class="control-label">Notes:</label>
+          {{session.school.notes}}
+          <br />
 
-      <a ui-sref="admin.classrooms.list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
-        <button class="btn btn-primary btn-block">View Classrooms</button>
-      </a>
+        <a ui-sref="admin.classrooms.list({school_id: {{session.school.id}}, school_district_id: {{session.school_district.id}}})">
+          <button class="btn btn-primary btn-block">View Classrooms</button>
+        </a>
+      </div>
     </div>
   </div>
 <div class="col-md-2"></div>

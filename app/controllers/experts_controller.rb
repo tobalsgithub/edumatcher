@@ -24,8 +24,8 @@ class ExpertsController < ApplicationController
   end
 
   def search
-    limit = params[:limit] || 10
-    page = params[:page] || 1
+    limit = params[:limit] ? params[:limit].to_i : 10
+    page = params[:page] ? params[:page].to_i : 1
     offset = (page - 1) * limit
     experts = Expert.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
     respond_to do |format|
