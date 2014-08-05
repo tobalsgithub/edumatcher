@@ -9,6 +9,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-select/bootstrap-select.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -30,9 +31,9 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div id="wrap" class="container">
 
-      <div ui-view=""></div>
+      <div id="main-view" ui-view=""></div>
 
     </div>
 
@@ -74,6 +75,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="bower_components/bootstrap-select/bootstrap-select.js"></script>
     <!-- endbower -->
     <!--<script src="scripts/vendor/flatui-checkbox.js"></script>
     <script src="scripts/vendor/flatui-radio.js"></script>-->
@@ -90,6 +92,7 @@
         <script src="scripts/controllers/admin/school_districts.js"></script>-->
         <script src="scripts/controllers/admin/admin.js"></script>
         <script src="scripts/services/classrooms.js"></script>
+        <script src="scripts/services/experts.js"></script>
         <script src="scripts/services/subjects.js"></script>
         <script src="scripts/services/grade_levels.js"></script>
         <script src="scripts/services/users.js"></script>

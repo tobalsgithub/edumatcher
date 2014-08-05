@@ -9,4 +9,13 @@ RSpec.describe Classroom, :type => :model do
     it { should validate_presence_of(:school) }
     it { should belong_to(:grade_level) }
   end
+
+  xdescribe 'as_json' do
+    it 'should include the school when returned as json' do
+      classroom = create(:classroom)
+      json = classroom.to_json
+      expect(json).to have_key("school")
+    end
+  end
+
 end

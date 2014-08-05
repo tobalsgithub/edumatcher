@@ -3,7 +3,7 @@
     </div> <!-- /.map-section -->
 
 
-    <div class="search-info-section col-md-7" ng-init="update_classrooms()">
+    <div class="search-info-section col-md-7" ng-init="update_experts()">
       <div class="filter-section">
         <div class="filter-item">
           <div class="filter-label">
@@ -78,20 +78,20 @@
         </div> <!-- /.filter-section -->
 
         <div class="list-section">
-          <div class="list-item" ng-repeat="classroom in classrooms">
+          <div class="list-item" ng-repeat="expert in experts">
             <div class="list-thumb">
               <img src="../images/classroom1.png" />
             </div>
             <div class="list-details">
               <div class="list-details-header">
-                <h5><a ui-sref="profiles.classrooms.detail({school_district_id: {{classroom.school.school_district_id}},school_id: {{classroom.school.id}},classroom_id: {{classroom.id}}})">
-                  {{classroom.name}}
+                <h5><a ui-sref="profiles.experts.detail({expert_id: {{expert.id}}})">
+                  {{expert.user.fullname}}
                 </a></h5>
               </div>
               <div class="list-details-info">
                 <small>
                   <span class="list-details-subject">Subjects:
-                    <span ng-repeat="subject in classroom.subjects">{{subject.name}}</span>
+                    <span ng-repeat="subject in expert.subjects">{{subject.name}}</span>
                   </span>
                   <span class="list-details-topics">Topics: ...</span><br />
                   <span class="list-details-availability">Availability: ...</span>

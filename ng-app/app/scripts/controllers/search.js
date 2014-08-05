@@ -8,7 +8,7 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('SearchCtrl', function ($scope, Classrooms, Subjects, GradeLevels) {
+  .controller('SearchCtrl', function ($scope, $rootScope, $state, Classrooms, Experts, Subjects, GradeLevels) {
 
     $scope.subjects = [];
     $scope.classrooms = [];
@@ -69,10 +69,24 @@ angular.module('edumatcherApp')
       name: 'Anywhere'
     }];
 
-    $scope.update_classrooms = function(newValue, oldValue){
-      if(newValue !== oldValue) {
-        $scope.classrooms = Classrooms.search($scope.search_params());
+    $scope.update_search = function(newValue, oldValue){
+      if(newValue === oldValue) {
+        return;
       }
+      if($state.current.data.update_classrooms){
+        $scope.update_classrooms();
+      }
+      if($state.current.data.update_experts){
+        $scope.update_experts();
+      }
+    };
+
+    $scope.update_classrooms = function(){
+      $scope.classrooms = Classrooms.search($scope.search_params());
+    };
+
+    $scope.update_experts = function(){
+      $scope.experts = Experts.search($scope.search_params());
     };
 
     $scope.search_params = function(){
@@ -84,16 +98,13 @@ angular.module('edumatcherApp')
       };
     };
 
-    $scope.$watch('subject_list', $scope.update_classrooms);
+    $scope.$watch('subject_list', $scope.update_search);
 
-    $scope.$watch('grade_level_list', $scope.update_classrooms);
+    $scope.$watch('grade_level_list', $scope.update_search);
 
     function init(){
-      $scope.classrooms = Classrooms.search($scope.search_params());
       $scope.subjects = Subjects.query();
       $scope.grade_levels = GradeLevels.query();
     }
-
     init();
-
   });

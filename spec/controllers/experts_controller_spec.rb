@@ -23,23 +23,38 @@ RSpec.describe ExpertsController, :type => :controller do
   end
 
   describe 'access for experts' do
+    describe 'access allowed' do
 
-    before(:each) do
-      get :index, format: :json
+      before(:each) do
+        get :index, format: :json
+      end
+
+      it { should respond_with 200 }
     end
-
-    it { should respond_with 200 }
 
   end
 
   describe 'access for non experts' do
-    before(:each) do
-      user.expert = nil
-      user.save
-      get :index, format: :json
+    describe 'access allowed' do
+
+      before(:each) do
+        user.expert = nil
+        user.save
+        get :index, format: :json
+      end
+
+      it { should respond_with 200 }
     end
 
-    it { should respond_with 401 }
+    describe 'access denied' do
+      before(:each) do
+        expert.notes = "New notes"
+        user.expert = nil
+        put :update, id: expert.to_param, expert: expert, format: :json
+      end
+
+      it {should respond_with 401 }
+    end
 
   end
 
@@ -182,6 +197,11 @@ RSpec.describe ExpertsController, :type => :controller do
     end
 
     describe 'matching on subject' do
+
+      it 'returns all experts if no subject_list is given' do
+        get :search, format: :json
+        expect(json.size).to be(10)
+      end
 
       it 'finds experts with a matching subject' do
         subject = create(:subject)

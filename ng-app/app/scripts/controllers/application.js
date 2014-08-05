@@ -21,7 +21,7 @@
 // }]);
 
 angular.module('edumatcherApp')
-  .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms) {
+  .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms, Experts) {
 
     var empty_classroom = {
       name: null,
@@ -44,17 +44,19 @@ angular.module('edumatcherApp')
       notes: null
     };
 
-    $scope.credentials = {email: null, password: null};
-    $scope.user = {};
-    $scope.attempted_url = '';
-    $scope.login_failed_message = '';
-    $scope.state = $state;
-    $scope.session = {
+    var empty_session = {
       school_district: null,
       school: null,
       classroom: null,
       user: null
     };
+
+    $scope.credentials = {email: null, password: null};
+    $scope.user = {};
+    $scope.attempted_url = '';
+    $scope.login_failed_message = '';
+    $scope.state = $state;
+    $scope.session = empty_session;
 
     // login form stuff
 
@@ -91,6 +93,7 @@ angular.module('edumatcherApp')
 
     $rootScope.$on('devise:logout', function(event, oldCurrentUser) {
       webStorage.clear();
+      $scope.session = empty_session;
     });
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -101,7 +104,7 @@ angular.module('edumatcherApp')
         $state.go('login');
       }else if(toState.module === 'admin' && !user.admin) {
         event.preventDefault();
-        $state.go('home');
+        $state.go('index');
       }
     });
 
@@ -178,6 +181,13 @@ angular.module('edumatcherApp')
       });
     };
 
+    $scope.setExpert = function(id){
+      var expert = Experts.get({id: id}, function(){
+        webStorage.add('expert', expert);
+        $scope.session.expert = expert;
+      });
+    };
+
     $scope.getSchoolDistricts = function(){
       SchoolDistricts.query(function(school_districts){
         $scope.school_districts = school_districts;
@@ -204,8 +214,11 @@ angular.module('edumatcherApp')
       if(toParams.school_id && (!$scope.session.school || !$scope.session.school.id || $scope.session.school.id !== toParams.school_id)){
         $scope.setSchool(toParams.school_id);
       }
-      if(toParams.classroom_id && (!$scope.session.classroom || $scope.session.classroom.id || $scope.session.classroom.id !== toParams.classroom_id)){
+      if(toParams.classroom_id && (!$scope.session.classroom || !$scope.session.classroom.id || $scope.session.classroom.id !== toParams.classroom_id)){
         $scope.setClassroom(toParams.classroom_id);
+      }
+      if(toParams.expert_id && (!$scope.session.expert || !$scope.session.expert.id || $scope.session.expert.id !== toParams.expert_id )){
+        $scope.setExpert(toParams.expert_id);
       }
     });
 

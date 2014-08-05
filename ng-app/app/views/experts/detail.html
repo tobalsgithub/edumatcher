@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <h3>{{session.expert.user.fullname}}</h3>
+</div>
+
+<div class="col-md-3">
+  <div class="profile-thumb">
+    <img class="img-rounded profile-thumb-img" src="../images/Michael_Jordan.jpg">
+  </div>
+  <div class="profile-contact">
+    <button class="btn btn-hg btn-primary profile-contact-btn">
+      Contact Michael
+    </button>
+  </div>
+</div>
+
+<div class="info-container col-md-9">
+  <div class="col-md-9">
+    <p class="profile-notes">
+      {{session.expert.notes}}
+    </p>
+    <p>
+      <label for="company" class="control-label">Company:</label>
+      {{session.expert.company}}
+    </p>
+    <p>
+      <label for="company" class="control-label">Website:</label>
+      {{session.expert.website}}
+    </p>
+  </div>
+  <div class="col-md-3">
+    <label for="subjects" class="control-label">Subjects:</label>
+      <div ng-repeat="subject in session.expert.subjects">
+        {{subject.name}}
+      </div>
+  </p>
+  </div>
+</div><!-- .info-container -->
+
+<div class="col-md-12 tabs">
+  <tabset>
+    <tab heading="Classrooms">
+      <div ng-include="'views/classrooms/list.html'"></div>
+    </tab>
+    <!-- <tab heading="Educators">
+      <div ng-include="'views/educators/list.html'"></div>
+    </tab> -->
+  </tabset>
+</div>

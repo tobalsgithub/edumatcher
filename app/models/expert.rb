@@ -3,7 +3,7 @@ class Expert < ActiveRecord::Base
   has_and_belongs_to_many :subjects
 
   def as_json(options)
-    super(:include => [:subjects])
+    super(:include => [:subjects, :user])
   end
 
 end

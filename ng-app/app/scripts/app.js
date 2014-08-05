@@ -74,13 +74,35 @@ angular
       .state('profiles.search',{
         url: '/search',
         abstract: true,
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        controller: 'SearchCtrl'
       })
 
       .state('profiles.search.classrooms', {
         url: '/classrooms',
         templateUrl: 'views/classrooms/search.html',
-        controller: 'SearchCtrl'
+        data: {
+          update_classrooms: true
+        }
+      })
+
+      .state('profiles.search.experts', {
+        url: '/experts',
+        templateUrl: 'views/experts/search.html',
+        data: {
+          update_experts: true
+        }
+      })
+
+      .state('profiles.experts', {
+        url: '/experts',
+        controller: 'ProfilesCtrl',
+        template: '<ui-view/>'
+      })
+
+      .state('profiles.experts.detail', {
+        url: '/:expert_id',
+        templateUrl: '/views/experts/detail.html'
       })
 
       .state('profiles.school_districts', {
@@ -134,81 +156,96 @@ angular
 
       .state('admin.school_districts', {
         url: '/school_districts',
-        templateUrl: 'views/admin/school_districts/index.html'
+        templateUrl: 'views/admin/school_districts/index.html',
+        module: 'admin'
       })
 
       .state('admin.school_districts.list', {
         url: '/list',
-        templateUrl: 'views/admin/school_districts/list.html'
+        templateUrl: 'views/admin/school_districts/list.html',
+        module: 'admin'
       })
 
       .state('admin.school_districts.create', {
         url: '/create',
-        templateUrl: 'views/admin/school_districts/create.html'
+        templateUrl: 'views/admin/school_districts/create.html',
+        module: 'admin'
       })
 
       .state('admin.school_districts.edit', {
         url: '/:school_district_id/edit',
-        templateUrl: 'views/admin/school_districts/edit.html'
+        templateUrl: 'views/admin/school_districts/edit.html',
+        module: 'admin'
       })
 
       .state('admin.school_districts.detail', {
         url: '/:school_district_id',
-        templateUrl: '/views/admin/school_districts/detail.html'
+        templateUrl: '/views/admin/school_districts/detail.html',
+        module: 'admin'
       })
 
       // Schools
 
       .state('admin.schools', {
         url: '/school_districts/:school_district_id/schools',
-        templateUrl: 'views/admin/schools/index.html'
+        templateUrl: 'views/admin/schools/index.html',
+        module: 'admin'
       })
 
       .state('admin.schools.list', {
         url: '/list',
-        templateUrl: 'views/admin/schools/list.html'
+        templateUrl: 'views/admin/schools/list.html',
+        module: 'admin'
       })
 
       .state('admin.schools.create', {
         url: '/create',
-        templateUrl: 'views/admin/schools/create.html'
+        templateUrl: 'views/admin/schools/create.html',
+        module: 'admin'
       })
 
       .state('admin.schools.edit', {
         url: '/:school_id/edit',
-        templateUrl: 'views/admin/schools/edit.html'
+        templateUrl: 'views/admin/schools/edit.html',
+        module: 'admin'
       })
 
       .state('admin.schools.detail', {
         url: '/:school_id',
-        templateUrl: '/views/admin/schools/detail.html'
+        templateUrl: '/views/admin/schools/detail.html',
+        module: 'admin'
       })
 
       // Classrooms
 
       .state('admin.classrooms', {
         url: '/school_districts/:school_district_id/schools/:school_id/classrooms',
-        templateUrl: 'views/admin/classrooms/index.html'
+        templateUrl: 'views/admin/classrooms/index.html',
+        module: 'admin'
       })
 
       .state('admin.classrooms.list', {
         url: '/list',
-        templateUrl: 'views/admin/classrooms/list.html'
+        templateUrl: 'views/admin/classrooms/list.html',
+        module: 'admin'
       })
 
       .state('admin.classrooms.create', {
         url: '/create',
-        templateUrl: 'views/admin/classrooms/create.html'
+        templateUrl: 'views/admin/classrooms/create.html',
+        module: 'admin'
       })
 
       .state('admin.classrooms.edit', {
         url: '/:classroom_id/edit',
-        templateUrl: 'views/admin/classrooms/edit.html'
+        templateUrl: 'views/admin/classrooms/edit.html',
+        module: 'admin'
       })
 
       .state('admin.classrooms.detail', {
         url: '/:classroom_id',
-        templateUrl: '/views/admin/classrooms/detail.html'
+        templateUrl: '/views/admin/classrooms/detail.html',
+        module: 'admin'
       });
 
 

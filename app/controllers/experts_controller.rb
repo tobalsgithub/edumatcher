@@ -1,7 +1,7 @@
 class ExpertsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_expert?, :except => [:subjects]
-  before_action :set_expert
+  before_action :is_expert?, :only => [:update]
+  before_action :set_expert, :except => [:show, :search, :subjects]
   respond_to :json
 
   def index
@@ -27,7 +27,11 @@ class ExpertsController < ApplicationController
     limit = params[:limit] ? params[:limit].to_i : 10
     page = params[:page] ? params[:page].to_i : 1
     offset = (page - 1) * limit
-    experts = Expert.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+    if params[:subject_list] == nil || params[:subject_list].size == 0
+      experts = Expert.all.limit(limit).offset(offset)
+    else
+      experts = Expert.joins(:subjects).where('subjects.id' => params[:subject_list]).limit(limit).offset(offset)
+    end
     respond_to do |format|
       format.json { render :json => experts }
     end

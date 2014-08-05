@@ -36,3 +36,6 @@ subject.save!
 
 subject = Subject.where(name: 'Biology').first_or_initialize
 subject.save!
+
+subject = Subject.where(name: 'Basketball').first_or_initialize
+subject.save!

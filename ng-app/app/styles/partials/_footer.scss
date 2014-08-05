@@ -11,6 +11,10 @@
   border-color: #444;
   border-radius: 0;
   margin-bottom: 0;
+  margin-top: -60px; /* negative value of footer height */
+  position: relative;
+	height: 60px;
+	clear:both;
 
   #footerNav {
     margin: 0;

@@ -1,6 +1,11 @@
 @import 'partials/_datagrid';
 @import 'partials/_user_header';
-@import 'partials/_footer.scss';
+@import 'partials/_footer';
+@import 'partials/_profile';
+
+html {
+  height: 100%;
+}
 
 body {
   padding-top: 60px;
@@ -9,11 +14,21 @@ body {
   line-height: 1.1;
   font-size: 18px;
   overflow-x: hidden;  /* trick from css-tricks comments */
+  height: 100%;
 }
 @media (max-width: 979px) {
   body {
     padding-top: 0px;
   }
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#main-view {
+  overflow:auto;
+	padding-bottom: 60px; /* must be the same as the footer */
 }
 
 /* General styling */
@@ -144,59 +159,6 @@ li.dropdown > ul.dropdown-menu {
 }
 .list-item:nth-of-type(odd){
   background-color: #ededed;
-}
-
-/* Profiles */
-.profile-center-col{
-  background-color: #fefefe;
-}
-.profile-contact{
-  width: 100%;
-  margin-top: 10px;
-}
-.profile-contact-btn{
-  width: 100%;
-}
-.profile-info-label{
-  font-weight: 700;
-  display: inline-block;
-  width: 120px;
-}
-.profile-thumb-img{
-  width: 100%;
-  // height: 216px; width: 216px;
-}
-.profile-reviews-container{
-  background-color: #ededed;
-  border-radius: 8px;
-}
-.profile-reviews-header{
-  background-color: #34495e;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  color: #fff;
-  text-align: center;
-  vertical-align: middle;
-  height: 44px;
-  padding-top: 8px;
-}
-.profile-reviews-item {
-  margin-top: 8px;
-}
-.profile-reviews-item-name{
-  display: block;
-  color: #1abc9c;
-  font-size: 14px;
-  margin-left: 4px;
-}
-.profile-reviews-item-details{
-  display: block;
-  font-size: 14px;
-  font-style: italic;
-  margin-left: 4px;
-}
-.profile-reviews-item-stars{
-  margin-left: 4px;
 }
 
 /* General */
