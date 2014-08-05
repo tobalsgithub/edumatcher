@@ -69,14 +69,36 @@ class ExpertsController < ApplicationController
 
   def set_subjects
     @expert.subjects.clear
-    params[:subject_list].each do |id|
-      @expert.subjects << Subject.find(id)
+    if !params[:subject_list]
+      respond_with @expert
+    else
+      params[:subject_list].each do |id|
+        @expert.subjects << Subject.find(id)
+      end
+      respond_to do |format|
+        if @expert.save && @expert.valid?
+          format.json { render :json => @expert }
+        else
+          format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+        end
+      end
     end
-    respond_to do |format|
-      if @expert.save && @expert.valid?
-        format.json { render :json => @expert }
-      else
-        format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+  end
+
+  def set_companies
+    @expert.companies.clear
+    if !params[:company_list]
+      respond_with @expert
+    else
+      params[:company_list].each do |id|
+        @expert.companies << Company.find(id)
+      end
+      respond_to do |format|
+        if @expert.save && @expert.valid?
+          format.json { render :json => @expert }
+        else
+          format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+        end
       end
     end
   end

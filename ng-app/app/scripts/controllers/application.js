@@ -48,7 +48,8 @@ angular.module('edumatcherApp')
       school_district: null,
       school: null,
       classroom: null,
-      user: null
+      user: null,
+      expert: null
     };
 
     $scope.credentials = {email: null, password: null};

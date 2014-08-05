@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729010440) do
+ActiveRecord::Schema.define(version: 20140805202536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20140729010440) do
 
   add_index "classrooms_subjects", ["classroom_id"], name: "index_classrooms_subjects_on_classroom_id", using: :btree
   add_index "classrooms_subjects", ["subject_id"], name: "index_classrooms_subjects_on_subject_id", using: :btree
+
+  create_table "companies", force: true do |t|
+    t.text     "name"
+    t.text     "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies_experts", id: false, force: true do |t|
+    t.integer "expert_id",  null: false
+    t.integer "company_id", null: false
+  end
+
+  add_index "companies_experts", ["company_id", "expert_id"], name: "index_companies_experts_on_company_id_and_expert_id", using: :btree
+  add_index "companies_experts", ["expert_id", "company_id"], name: "index_companies_experts_on_expert_id_and_company_id", using: :btree
 
   create_table "educators", force: true do |t|
     t.text     "notes"

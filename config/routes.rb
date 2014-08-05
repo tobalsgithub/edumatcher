@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   put 'experts/:id/add_subject' => 'experts#add_subject', :defaults => {:format => "json"}
   put 'experts/:id/remove_subject' => 'experts#remove_subject', :defaults => {:format => "json"}
   post 'experts/:id/set_subjects' => 'experts#set_subjects', :defaults => {:format => "json"}
+  post 'experts/:id/set_companies' => 'experts#set_companies', :defaults => {:format => "json"}
+
 
   # routes for educators
   resources :educators, :defaults => {:format => "json"}

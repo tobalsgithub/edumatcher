@@ -161,6 +161,18 @@ li.dropdown > ul.dropdown-menu {
   background-color: #ededed;
 }
 
+/* Inline editing */
+.form-inline {
+  width: 100%;
+  .editable-controls {
+    width: 100%;
+    textarea {
+      width: 80%;
+      height: 200px;
+    }
+  }
+}
+
 /* General */
 .clear{
   clear: both;

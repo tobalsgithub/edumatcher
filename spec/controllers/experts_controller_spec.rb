@@ -166,16 +166,44 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'POST set_subjects' do
 
-    before(:each) do
+    it 'can set the list of subjects for an expert' do
       sub1 = create(:subject)
       sub2 = create(:subject)
       sub3 = create(:subject)
       array = [sub1.id, sub2.id, sub3.id]
       post :set_subjects, id: expert.to_param, subject_list: array, format: :json
+      expect(expert.subjects.size).to be 3
     end
 
-    it 'can set the list of subjects for an expert' do
-      expect(expert.subjects.size).to be 3
+    it 'can set the list of subjects for an expert to empty' do
+      array = nil
+      expert.subjects << create(:subject)
+      expert.subjects << create(:subject)
+      expert.save!
+      expect(expert.subjects.size).to be 2
+      post :set_subjects, id: expert.to_param, subject_list: array, format: :json
+      expect(expert.subjects.size).to be 0
+    end
+  end
+
+  describe 'POST set_companies' do
+    it 'can set the list of companies for an expert' do
+      comp1 = create(:company)
+      comp2 = create(:company)
+      comp3 = create(:company)
+      array = [comp1.id, comp2.id, comp3.id]
+      post :set_companies, id: expert.to_param, company_list: array, format: :json
+      expect(expert.companies.size).to be 3
+    end
+
+    it 'can set the list of companies for an expert to empty' do
+      array = nil
+      expert.companies << create(:company)
+      expert.companies << create(:company)
+      expert.save!
+      expect(expert.companies.size).to be 2
+      post :set_companies, id: expert.to_param, company_list: array, format: :json
+      expect(expert.companies.size).to be 0
     end
   end
 
