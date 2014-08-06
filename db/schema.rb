@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805202536) do
+ActiveRecord::Schema.define(version: 20140806000522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,14 +62,6 @@ ActiveRecord::Schema.define(version: 20140805202536) do
     t.datetime "updated_at"
   end
 
-  create_table "companies_experts", id: false, force: true do |t|
-    t.integer "expert_id",  null: false
-    t.integer "company_id", null: false
-  end
-
-  add_index "companies_experts", ["company_id", "expert_id"], name: "index_companies_experts_on_company_id_and_expert_id", using: :btree
-  add_index "companies_experts", ["expert_id", "company_id"], name: "index_companies_experts_on_expert_id_and_company_id", using: :btree
-
   create_table "educators", force: true do |t|
     t.text     "notes"
     t.datetime "created_at"
@@ -94,6 +86,17 @@ ActiveRecord::Schema.define(version: 20140805202536) do
 
   add_index "educators_schools", ["educator_id"], name: "index_educators_schools_on_educator_id", using: :btree
   add_index "educators_schools", ["school_id"], name: "index_educators_schools_on_school_id", using: :btree
+
+  create_table "employment_links", id: false, force: true do |t|
+    t.integer  "expert_id",  null: false
+    t.integer  "company_id", null: false
+    t.integer  "id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "employment_links", ["company_id", "expert_id"], name: "index_employment_links_on_company_id_and_expert_id", using: :btree
+  add_index "employment_links", ["expert_id", "company_id"], name: "index_employment_links_on_expert_id_and_company_id", using: :btree
 
   create_table "experts", force: true do |t|
     t.text     "notes"

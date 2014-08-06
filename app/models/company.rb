@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
-  has_and_belongs_to_many :experts
+  has_many :employment_links
+  has_many :experts, :through => :employment_links
   validates :name, presence: true
 end

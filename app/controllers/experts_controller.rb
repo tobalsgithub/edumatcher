@@ -14,6 +14,12 @@ class ExpertsController < ApplicationController
   end
 
   def update
+    if params[:expert][:companies]
+      @expert.companies.clear
+      params[:expert][:companies].each do |c|
+        @expert.companies << Company.find(c.id)
+      end
+    end
     respond_to do |format|
       if @expert.update(expert_params)
         format.json { render :json => @expert, :status => 204 }
@@ -85,9 +91,9 @@ class ExpertsController < ApplicationController
     end
   end
 
-  def set_companies
+  def set_companiess
     @expert.companies.clear
-    if !params[:company_list]
+    if !params[:companies]
       respond_with @expert
     else
       params[:company_list].each do |id|
@@ -104,6 +110,13 @@ class ExpertsController < ApplicationController
   end
 
   private
+
+  def set_companies(company_list)
+    @expert.companies.clear
+    company_list.each do |id|
+      @expert.companies << Company.find(id)
+    end
+  end
 
   def is_expert?
     render :json => { "errors" => ["You are not an expert"] }, :status => :unauthorized unless current_user.expert

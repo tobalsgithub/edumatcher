@@ -130,6 +130,39 @@ RSpec.describe ExpertsController, :type => :controller do
     end
 
     it { should respond_with 204 }
+
+    describe 'updating companies' do
+      it 'can set the list of companies for an expert' do
+        comp1 = create(:company)
+        comp2 = create(:company)
+        comp3 = create(:company)
+        array = [comp1.id, comp2.id, comp3.id]
+        exp = {
+          "id" => expert.id,
+          "notes" => expert.notes,
+          "companies" => [comp1, comp2, comp3]
+        }
+        put :update, id: expert.to_param, expert: exp, format: :json
+        expect(expert.companies.size).to be 3
+      end
+
+      it 'can set the list of companies for an expert to empty' do
+        array = nil
+        comp1 = create(:company)
+        comp2 = create(:company)
+        expert.companies << comp1
+        expert.companies << comp2
+        expert.save!
+        exp = {
+          "id" => expert.id,
+          "notes" => expert.notes,
+          "companies" => []
+        }
+        expect(expert.companies.size).to be 2
+        put :update, id: expert.to_param, expert: exp, format: :json
+        expect(expert.companies.size).to be 0
+      end
+    end
   end
 
   describe 'POST add_subject' do
@@ -186,7 +219,7 @@ RSpec.describe ExpertsController, :type => :controller do
     end
   end
 
-  describe 'POST set_companies' do
+  xdescribe 'POST set_companies' do
     it 'can set the list of companies for an expert' do
       comp1 = create(:company)
       comp2 = create(:company)

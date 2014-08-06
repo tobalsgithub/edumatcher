@@ -32,6 +32,10 @@ angular.module('edumatcherApp').factory('Experts', ['$resource','$http', functio
       set_subjects: {
         method: 'POST',
         url: '/experts/:id/set_subjects'
+      },
+      set_companies: {
+        method: 'POST',
+        url: '/experts/:id/set_companies'
       }
     });
 
@@ -55,6 +59,13 @@ angular.module('edumatcherApp').factory('Experts', ['$resource','$http', functio
       return subject.id;
     });
     $http.post('/experts/' + this.id + '/set_subjects', {subject_list: subject_list}).success(cb);
+  };
+
+  Experts.prototype.set_companies = function(cb){
+    var company_list = this.companies.map(function(company){
+      return company.id;
+    });
+    $http.post('/experts/' + this.id + '/set_companies', {company_list: company_list}).success(cb);
   };
 
   return Experts;
