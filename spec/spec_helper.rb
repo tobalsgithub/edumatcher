@@ -16,6 +16,7 @@
 require 'factory_girl'
 require 'support/request_helpers'
 require 'support/auth_helpers'
+require 'database_cleaner'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -24,6 +25,17 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Requests::JsonHelpers, :type => :controller
   config.include AuthHelpers, :type => :controller
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 
 =begin
   # These two settings work together to allow you to limit a spec run

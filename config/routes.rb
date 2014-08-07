@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject', :defaults => {:format => "json"}
   post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects', :defaults => {:format => "json"}
 
+  # routes for companies
+  get 'companies/search' => 'companies#search', :defaults => {:format => "json"}
+  resources :companies, :defaults => {:format => "json"}
+
   # routes for schools
   resources :schools, :defaults => {:format => "json"}
   get 'schools/:id/classrooms' => 'schools#classrooms', :defaults => {:format => "json"}

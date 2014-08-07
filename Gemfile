@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem "devise"
 # Seedbank for organizing seed data
 gem "seedbank"
+# Squeel gem for easier sql expressions in rails
+gem "squeel"
 # CSRF Protection for Rails
 gem "angular_rails_csrf"
 # bundle exec rake doc:rails generates the API under doc/api.
