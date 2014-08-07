@@ -42,6 +42,7 @@ angular.module('edumatcherApp').factory('Experts', ['$resource','$http', functio
   Experts.prototype.save = function(cb){
     var _this = this;
     var subject_list = _this.subjects;
+    _this.companies = [];
     if(_this.id){
       Experts.update({id: _this.id}, _this, function(){
         _this.set_subjects(cb);

@@ -1,6 +1,8 @@
 class SchoolDistrict < ActiveRecord::Base
   self.table_name = "school_districts"
-  has_many :schools
-  has_and_belongs_to_many :educators
   validates :name, presence: true
+
+  has_many :schools
+  has_many :educator_staffings, :as => :staffable, :dependent => :destroy
+  has_many :educators, :through => :educator_staffings
 end

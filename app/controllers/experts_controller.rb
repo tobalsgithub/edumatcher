@@ -15,6 +15,7 @@ class ExpertsController < ApplicationController
 
   def update
     if params[:expert][:companies]
+
       @expert.companies.clear
       params[:expert][:companies].each do |c|
         @expert.companies << Company.find(c.id)

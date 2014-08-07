@@ -1,6 +1,7 @@
 class Expert < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :subjects
+  has_many :knowledge_links, :as => :knowledgeable, :dependent => :destroy
+  has_many :subjects, :through => :knowledge_links
   has_many :employment_links
   has_many :companies, :through => :employment_links
 

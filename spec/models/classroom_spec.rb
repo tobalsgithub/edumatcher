@@ -4,8 +4,10 @@ RSpec.describe Classroom, :type => :model do
   describe 'basic validation checks' do
     it { should belong_to(:school) }
     it { should validate_presence_of(:name) }
-    it { should have_and_belong_to_many(:educators) }
-    it { should have_and_belong_to_many(:subjects) }
+    it { should have_many(:educator_staffings) }
+    it { should have_many(:educators).through(:educator_staffings) }
+    it { should have_many(:subjects).through(:knowledge_links) }
+    it { should have_many(:knowledge_links) }
     it { should validate_presence_of(:school) }
     it { should belong_to(:grade_level) }
   end

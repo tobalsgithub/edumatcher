@@ -1,5 +1,6 @@
 class Subject < ActiveRecord::Base
-  has_and_belongs_to_many :classrooms
-  has_and_belongs_to_many :experts
+  has_many :knowledge_links, :dependent => :destroy
+  has_many :experts, :through => :knowledge_links, :source => :knowledgeable, :source_type => 'Expert'
+  has_many :classrooms, :through => :knowledge_links, :source => :knowledgeable, :source_type => 'Classroom'
   validates :name, presence: true
 end

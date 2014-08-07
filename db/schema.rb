@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806000522) do
+ActiveRecord::Schema.define(version: 20140807030756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,14 +31,6 @@ ActiveRecord::Schema.define(version: 20140806000522) do
   add_index "classrooms", ["grade_level_id"], name: "index_classrooms_on_grade_level_id", using: :btree
   add_index "classrooms", ["school_id"], name: "index_classrooms_on_school_id", using: :btree
 
-  create_table "classrooms_educators", force: true do |t|
-    t.integer "classroom_id"
-    t.integer "educator_id"
-  end
-
-  add_index "classrooms_educators", ["classroom_id"], name: "index_classrooms_educators_on_classroom_id", using: :btree
-  add_index "classrooms_educators", ["educator_id"], name: "index_classrooms_educators_on_educator_id", using: :btree
-
   create_table "classrooms_schools", force: true do |t|
     t.integer "classroom_id"
     t.integer "school_id"
@@ -47,20 +39,23 @@ ActiveRecord::Schema.define(version: 20140806000522) do
   add_index "classrooms_schools", ["classroom_id"], name: "index_classrooms_schools_on_classroom_id", using: :btree
   add_index "classrooms_schools", ["school_id"], name: "index_classrooms_schools_on_school_id", using: :btree
 
-  create_table "classrooms_subjects", force: true do |t|
-    t.integer "classroom_id"
-    t.integer "subject_id"
-  end
-
-  add_index "classrooms_subjects", ["classroom_id"], name: "index_classrooms_subjects_on_classroom_id", using: :btree
-  add_index "classrooms_subjects", ["subject_id"], name: "index_classrooms_subjects_on_subject_id", using: :btree
-
   create_table "companies", force: true do |t|
     t.text     "name"
     t.text     "website"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "educator_staffings", force: true do |t|
+    t.integer  "staffable_id"
+    t.integer  "educator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "staffable_type"
+  end
+
+  add_index "educator_staffings", ["educator_id"], name: "index_educator_staffings_on_educator_id", using: :btree
+  add_index "educator_staffings", ["staffable_id"], name: "index_educator_staffings_on_staffable_id", using: :btree
 
   create_table "educators", force: true do |t|
     t.text     "notes"
@@ -71,26 +66,9 @@ ActiveRecord::Schema.define(version: 20140806000522) do
 
   add_index "educators", ["user_id"], name: "index_educators_on_user_id", using: :btree
 
-  create_table "educators_school_districts", force: true do |t|
-    t.integer "educator_id"
-    t.integer "school_district_id"
-  end
-
-  add_index "educators_school_districts", ["educator_id"], name: "index_educators_school_districts_on_educator_id", using: :btree
-  add_index "educators_school_districts", ["school_district_id"], name: "index_educators_school_districts_on_school_district_id", using: :btree
-
-  create_table "educators_schools", force: true do |t|
-    t.integer "educator_id"
-    t.integer "school_id"
-  end
-
-  add_index "educators_schools", ["educator_id"], name: "index_educators_schools_on_educator_id", using: :btree
-  add_index "educators_schools", ["school_id"], name: "index_educators_schools_on_school_id", using: :btree
-
-  create_table "employment_links", id: false, force: true do |t|
+  create_table "employment_links", force: true do |t|
     t.integer  "expert_id",  null: false
     t.integer  "company_id", null: false
-    t.integer  "id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,19 +85,22 @@ ActiveRecord::Schema.define(version: 20140806000522) do
 
   add_index "experts", ["user_id"], name: "index_experts_on_user_id", using: :btree
 
-  create_table "experts_subjects", force: true do |t|
-    t.integer "expert_id"
-    t.integer "subject_id"
-  end
-
-  add_index "experts_subjects", ["expert_id"], name: "index_experts_subjects_on_expert_id", using: :btree
-  add_index "experts_subjects", ["subject_id"], name: "index_experts_subjects_on_subject_id", using: :btree
-
   create_table "grade_levels", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "knowledge_links", force: true do |t|
+    t.integer  "knowledgeable_id"
+    t.integer  "subject_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "knowledgeable_type"
+  end
+
+  add_index "knowledge_links", ["knowledgeable_id"], name: "index_knowledge_links_on_knowledgeable_id", using: :btree
+  add_index "knowledge_links", ["subject_id"], name: "index_knowledge_links_on_subject_id", using: :btree
 
   create_table "school_districts", force: true do |t|
     t.string   "name"

@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe Expert, :type => :model do
   describe 'basic validation checks' do
     it { should belong_to(:user) }
-    it { should have_and_belong_to_many(:subjects) }
-    it { should have_and_belong_to_many(:companies) }
+    it { should have_many(:knowledge_links) }
+    it { should have_many(:subjects).through(:knowledge_links) }
+    it { should have_many(:employment_links) }
+    it { should have_many(:companies).through(:employment_links) }
   end
 
   describe 'adding and removing subjects' do
