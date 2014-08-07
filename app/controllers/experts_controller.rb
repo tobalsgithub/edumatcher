@@ -14,15 +14,9 @@ class ExpertsController < ApplicationController
   end
 
   def update
-    if params[:expert][:companies]
-
-      @expert.companies.clear
-      params[:expert][:companies].each do |c|
-        @expert.companies << Company.find(c.id)
-      end
-    end
     respond_to do |format|
       if @expert.update(expert_params)
+        @expert.reload
         format.json { render :json => @expert, :status => 204 }
       else
         format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
@@ -92,9 +86,39 @@ class ExpertsController < ApplicationController
     end
   end
 
-  def set_companiess
+  def companies
+    respond_with(Expert.find(params[:id]).companies)
+  end
+
+  def add_company
+    #subject = Company.find(params[:subject_id])
+    @expert.companies << Company.find(params[:company_id])
+    respond_to do |format|
+      if @expert.save && @expert.valid?
+        @expert.reload
+        format.json { render :json => @expert }
+      else
+        format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_company
+    company = Company.find(params[:company_id])
+    @expert.companies.delete(company)
+    respond_to do |format|
+      if @expert.save && @expert.valid?
+        @expert.reload
+        format.json { render :json => @expert }
+      else
+        format.json { render :json => { "errors" => @expert.errors }, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def set_companies
     @expert.companies.clear
-    if !params[:companies]
+    if !params[:company_list]
       respond_with @expert
     else
       params[:company_list].each do |id|
@@ -111,13 +135,6 @@ class ExpertsController < ApplicationController
   end
 
   private
-
-  def set_companies(company_list)
-    @expert.companies.clear
-    company_list.each do |id|
-      @expert.companies << Company.find(id)
-    end
-  end
 
   def is_expert?
     render :json => { "errors" => ["You are not an expert"] }, :status => :unauthorized unless current_user.expert

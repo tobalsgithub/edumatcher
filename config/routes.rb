@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   put 'experts/:id/add_subject' => 'experts#add_subject', :defaults => {:format => "json"}
   put 'experts/:id/remove_subject' => 'experts#remove_subject', :defaults => {:format => "json"}
   post 'experts/:id/set_subjects' => 'experts#set_subjects', :defaults => {:format => "json"}
+  get 'experts/:id/company' => 'experts#company', :defaults => {:format => "json"}
+  put 'experts/:id/add_company' => 'experts#add_company', :defaults => {:format => "json"}
+  put 'experts/:id/remove_company' => 'experts#remove_company', :defaults => {:format => "json"}
   post 'experts/:id/set_companies' => 'experts#set_companies', :defaults => {:format => "json"}
 
 

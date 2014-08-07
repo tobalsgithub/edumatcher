@@ -64,7 +64,7 @@ RSpec.describe ExpertsController, :type => :controller do
     end
 
     it 'should return the expert in json format' do
-      expect(json['subjects'].size).to be(0)
+      expect(json['knowledge_links'].size).to be(0)
     end
 
     it { should respond_with 200 }
@@ -76,7 +76,7 @@ RSpec.describe ExpertsController, :type => :controller do
     end
 
     it 'should return the expert in json format' do
-      expect(json).to have_key('subjects')
+      expect(json).to have_key('knowledge_links')
     end
 
     it { should respond_with 200 }
@@ -131,38 +131,6 @@ RSpec.describe ExpertsController, :type => :controller do
 
     it { should respond_with 204 }
 
-    describe 'updating companies' do
-      it 'can set the list of companies for an expert' do
-        comp1 = create(:company)
-        comp2 = create(:company)
-        comp3 = create(:company)
-        array = [comp1.id, comp2.id, comp3.id]
-        exp = {
-          "id" => expert.id,
-          "notes" => expert.notes,
-          "companies" => [comp1, comp2, comp3]
-        }
-        put :update, id: expert.to_param, expert: exp, format: :json
-        expect(expert.companies.size).to be 3
-      end
-
-      it 'can set the list of companies for an expert to empty' do
-        array = nil
-        comp1 = create(:company)
-        comp2 = create(:company)
-        expert.companies << comp1
-        expert.companies << comp2
-        expert.save!
-        exp = {
-          "id" => expert.id,
-          "notes" => expert.notes,
-          "companies" => []
-        }
-        expect(expert.companies.size).to be 2
-        put :update, id: expert.to_param, expert: exp, format: :json
-        expect(expert.companies.size).to be 0
-      end
-    end
   end
 
   describe 'POST add_subject' do
@@ -178,7 +146,7 @@ RSpec.describe ExpertsController, :type => :controller do
     end
 
     it 'returns the expert as json' do
-      expect(json).to have_key('subjects')
+      expect(json).to have_key('knowledge_links')
     end
   end
 
@@ -219,13 +187,46 @@ RSpec.describe ExpertsController, :type => :controller do
     end
   end
 
-  xdescribe 'POST set_companies' do
+  describe 'POST add_company' do
+    let(:company) { create(:company) }
+
+    before(:each) do
+      post :add_company, id: expert.to_param, company_id: company.to_param, format: :json
+    end
+
+    it 'can add a company to an expert' do
+      expect(expert.companies.size).to be(1)
+      expect(expert.companies.first.name).to eq(company.name)
+    end
+
+    it 'returns the expert as json' do
+      expect(json).to have_key('employment_links')
+    end
+  end
+
+  describe 'POST remove_company' do
+    let(:company) { create(:company) }
+
+    before(:each) do
+      expert.companies << company
+      expert.save
+    end
+
+    it 'can remove an existing company from an expert' do
+      expect(expert.companies.size).to be 1
+      post :remove_company, id: expert.to_param, company_id: company.to_param, format: :json
+      expect(expert.companies.size).to be(0)
+    end
+  end
+
+  describe 'POST set_companies' do
     it 'can set the list of companies for an expert' do
       comp1 = create(:company)
       comp2 = create(:company)
       comp3 = create(:company)
       array = [comp1.id, comp2.id, comp3.id]
       post :set_companies, id: expert.to_param, company_list: array, format: :json
+      expert.reload
       expect(expert.companies.size).to be 3
     end
 

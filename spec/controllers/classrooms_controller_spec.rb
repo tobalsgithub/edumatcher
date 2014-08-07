@@ -174,7 +174,7 @@ RSpec.describe ClassroomsController, :type => :controller do
     end
 
     it 'should return the classroom as json' do
-      expect(json).to have_key('subjects')
+      expect(json).to have_key('knowledge_links')
     end
 
     it 'should return the school_id' do
@@ -221,7 +221,7 @@ RSpec.describe ClassroomsController, :type => :controller do
     end
 
     it 'returns the classroom as json' do
-      expect(json).to have_key('subjects')
+      expect(json).to have_key('knowledge_links')
     end
   end
 
