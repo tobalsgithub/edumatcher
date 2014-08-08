@@ -10,10 +10,24 @@ Rails.application.routes.draw do
 
   get 'welcome/proxy_test' => 'welcome#proxy_test'
 
-  # routes for users
-  post 'users/:id/set_expert' => 'users#set_expert', :defaults => {:format => "json"}
-  post 'users/:id/set_educator' => 'users#set_educator', :defaults => {:format => "json"}
+  # routes for classrooms
+  get 'classrooms/search' => 'classrooms#search', :defaults => {:format => "json"}
+  resources :classrooms, :defaults => {:format => "json"}
+  get 'classrooms/:id/subjects' => 'classrooms#subjects', :defaults => {:format => "json"}
+  put 'classrooms/:id/add_subject' => 'classrooms#add_subject', :defaults => {:format => "json"}
+  put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject', :defaults => {:format => "json"}
+  post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects', :defaults => {:format => "json"}
 
+  # routes for companies
+  get 'companies/search' => 'companies#search', :defaults => {:format => "json"}
+  resources :companies, :defaults => {:format => "json"}
+
+  # routes for educators
+  resources :educators, :defaults => {:format => "json"}
+  get 'educators/:id/subjects' => 'educators#subjects', :defaults => {:format => "json"}
+
+  # routes for employment_links
+  resources :employment_links, :defaults => {:format => "json" }
 
   # routes for experts
   get 'experts/search' => 'experts#search', :defaults => {:format => "json"}
@@ -26,23 +40,6 @@ Rails.application.routes.draw do
   put 'experts/:id/add_company' => 'experts#add_company', :defaults => {:format => "json"}
   put 'experts/:id/remove_company' => 'experts#remove_company', :defaults => {:format => "json"}
   post 'experts/:id/set_companies' => 'experts#set_companies', :defaults => {:format => "json"}
-
-
-  # routes for educators
-  resources :educators, :defaults => {:format => "json"}
-  get 'educators/:id/subjects' => 'educators#subjects', :defaults => {:format => "json"}
-
-  # routes for classrooms
-  get 'classrooms/search' => 'classrooms#search', :defaults => {:format => "json"}
-  resources :classrooms, :defaults => {:format => "json"}
-  get 'classrooms/:id/subjects' => 'classrooms#subjects', :defaults => {:format => "json"}
-  put 'classrooms/:id/add_subject' => 'classrooms#add_subject', :defaults => {:format => "json"}
-  put 'classrooms/:id/remove_subject' => 'classrooms#remove_subject', :defaults => {:format => "json"}
-  post 'classrooms/:id/set_subjects' => 'classrooms#set_subjects', :defaults => {:format => "json"}
-
-  # routes for companies
-  get 'companies/search' => 'companies#search', :defaults => {:format => "json"}
-  resources :companies, :defaults => {:format => "json"}
 
   # routes for schools
   resources :schools, :defaults => {:format => "json"}
@@ -57,6 +54,10 @@ Rails.application.routes.draw do
 
   #routes for grade_levels
   get 'grade_levels' => 'grade_levels#index', :defaults => {:format => "json" }
+
+  # routes for users
+  post 'users/:id/set_expert' => 'users#set_expert', :defaults => {:format => "json"}
+  post 'users/:id/set_educator' => 'users#set_educator', :defaults => {:format => "json"}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
