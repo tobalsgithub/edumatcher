@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   put 'experts/:id/remove_company' => 'experts#remove_company', :defaults => {:format => "json"}
   post 'experts/:id/set_companies' => 'experts#set_companies', :defaults => {:format => "json"}
 
+  # routes for knowledge_links
+  resources :knowledge_links, :defaults => {:format => "json" }
+
   # routes for schools
   resources :schools, :defaults => {:format => "json"}
   get 'schools/:id/classrooms' => 'schools#classrooms', :defaults => {:format => "json"}
