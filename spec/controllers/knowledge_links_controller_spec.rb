@@ -185,4 +185,16 @@ RSpec.describe KnowledgeLinksController, :type => :controller do
 
     it { should respond_with :ok }
   end
+
+  describe 'DELETE destroy' do
+    before(:each) do
+      @knowledge_link = create(:expert_knowledge_link)
+    end
+
+    it 'deletes the knowledge_link' do
+      expect{
+        delete :destroy, id: @knowledge_link.to_param , format: :json
+      }.to change(KnowledgeLink,:count).by(-1)
+    end
+  end
 end
