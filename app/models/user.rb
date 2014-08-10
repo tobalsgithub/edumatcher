@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_one :expert
   has_one :educator
+  has_many :ratings
 end

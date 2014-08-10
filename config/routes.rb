@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   # routes for knowledge_links
   resources :knowledge_links, :defaults => {:format => "json" }
 
+  # routes for ratings
+  resources :ratings, :defaults => {:format => "json" }
+
   # routes for schools
   resources :schools, :defaults => {:format => "json"}
   get 'schools/:id/classrooms' => 'schools#classrooms', :defaults => {:format => "json"}

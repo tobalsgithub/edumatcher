@@ -7,6 +7,7 @@ RSpec.describe Expert, :type => :model do
     it { should have_many(:subjects).through(:knowledge_links) }
     it { should have_many(:employment_links) }
     it { should have_many(:companies).through(:employment_links) }
+    it { should have_many(:ratings) }
   end
 
   describe 'adding and removing subjects' do
