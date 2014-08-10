@@ -2,7 +2,7 @@
 
 // Factory for interacting with the rails experts api
 
-angular.module('edumatcherApp').factory('Experts', ['$resource','$http', function($resource,$http) {
+angular.module('edumatcherApp').factory('Experts', ['$resource','$http', 'KnowledgeLinks','EmploymentLinks', function($resource,$http, KnowledgeLinks, EmploymentLinks) {
   var Experts =
     $resource('/experts/:id', {
       id: '@id'
@@ -38,6 +38,53 @@ angular.module('edumatcherApp').factory('Experts', ['$resource','$http', functio
         url: '/experts/:id/set_companies'
       }
     });
+
+  Experts.prototype.addSubject = function(subject, cb){
+    var _this = this;
+    if (!_this.id){
+      return; // can't add a subject if this isn't saved yet
+    }
+    var knowledge_link = new KnowledgeLinks({
+      subject_id: subject.id,
+      knowledgeable_id: _this.id,
+      knowledgeable_type: 'Expert'
+    });
+    knowledge_link.save(function(kl){
+      _this.knowledge_links.push(kl);
+      if(cb !== undefined) {
+        cb();
+      }
+    });
+  };
+
+  Experts.prototype.addCompany = function(company, cb){
+    var _this = this;
+    if (!_this.id){
+      return; // can't add a subject if this isn't saved yet
+    }
+    var employment_link = new EmploymentLinks({
+      company_id: company.id,
+      expert_id: _this.id,
+    });
+    employment_link.save(function(kl){
+      _this.employment_links.push(kl);
+      if(cb !== undefined) {
+        cb();
+      }
+    });
+  };
+
+  Experts.prototype.removeCompany = function(company, cb){
+    var _this = this;
+    var employment_link = $.grep(_this.employment_links, function(el){ return el.company.id === company.id;})[0];
+    employment_link = new EmploymentLinks(employment_link);
+    employment_link.$delete(function(employment_link){
+      _this.employment_links = $.grep(_this.employment_links, function(el){ return el.id !== employment_link.id;});
+      if(cb !==undefined){
+        cb();
+      }
+    });
+  };
 
   Experts.prototype.save = function(cb){
     var _this = this;

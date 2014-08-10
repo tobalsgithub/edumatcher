@@ -155,4 +155,16 @@ RSpec.describe EmploymentLinksController, :type => :controller do
 
     it { should respond_with :ok }
   end
+
+  describe 'DELETE destroy' do
+    before(:each) do
+      @employment_link = create(:employment_link)
+    end
+
+    it 'deletes the employment_link' do
+      expect{
+        delete :destroy, id: @employment_link.to_param , format: :json
+      }.to change(EmploymentLink,:count).by(-1)
+    end
+  end
 end

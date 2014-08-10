@@ -1,6 +1,6 @@
 class EmploymentLinksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_employment_link, only: [:show, :update]
+  before_action :set_employment_link, only: [:show, :update, :destroy]
   respond_to :json
 
   def create
@@ -26,6 +26,16 @@ class EmploymentLinksController < ApplicationController
 
   def show
     respond_with @employment_link
+  end
+
+  def destroy
+    respond_to do |format|
+      if @employment_link.destroy
+        format.json { render :json => @employment_link }
+      else
+        format.json { render :json => { "errors" => @employment_link.errors }, :status => :unprocessable_entity }
+      end
+    end
   end
 
   private

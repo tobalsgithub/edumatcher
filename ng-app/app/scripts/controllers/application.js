@@ -21,7 +21,7 @@
 // }]);
 
 angular.module('edumatcherApp')
-  .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms, Experts) {
+  .controller('AppCtrl', function ($scope, $stateParams, $rootScope, Auth, $http, $location, $state, $animate, $window, webStorage, SchoolDistricts, Schools, Classrooms, Experts, Companies) {
 
     var empty_classroom = {
       name: null,
@@ -205,6 +205,12 @@ angular.module('edumatcherApp')
     $scope.getClassrooms = function(){
       Schools.classrooms({id: $scope.session.school.id}, function(classrooms){
         $scope.classrooms = classrooms;
+      });
+    };
+
+    $scope.searchCompanies = function(searchText){
+      return Companies.search(searchText, function(companies){
+        return companies;
       });
     };
 
