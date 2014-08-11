@@ -8,7 +8,7 @@
  * Controller of the edumatcherApp
  */
 angular.module('edumatcherApp')
-  .controller('ReviewsCtrl', function ($scope, $state, Reviews) {
+  .controller('ReviewsCtrl', function ($scope, $state, Users, Reviews) {
 
     $scope.reviews = [];
 
@@ -41,7 +41,10 @@ angular.module('edumatcherApp')
     };
 
     function init(){
-      //$scope.reviews = Reviews.query();
+      Users.submitted_reviews({id: $scope.session.user.id}, function(reviews){
+          $scope.reviews = reviews;
+          console.log($scope.reviews);
+      });
     }
 
     init();

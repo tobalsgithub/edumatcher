@@ -13,6 +13,31 @@ RSpec.describe UsersController, :type => :controller do
     sign_in user
   end
 
+  describe 'GET submitted_reviews' do
+    before(:each) do
+      user.reviews.destroy_all
+      user.reviews << create(:review)
+      user.reviews << create(:review)
+      user.reviews << create(:review)
+
+      @user2 = create(:user)
+      @user2.reviews.destroy_all
+      @user2.reviews << create(:review)
+      @user2.reviews << create(:review)
+    end
+
+    it 'should return the submitted reviews by a user' do
+      get :submitted_reviews, id: user.to_param, format: :json
+      expect(json.size).to be 3
+    end
+
+    it 'should return the submitted reviews by any user' do
+      get :submitted_reviews, id: @user2.to_param, format: :json
+      expect(json.size).to be 2
+    end
+
+  end
+
   describe 'setting up a new expert' do
 
     it 'creates a new expert model' do

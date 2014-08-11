@@ -7,6 +7,11 @@ angular.module('edumatcherApp').factory('Users', ['$resource', function($resourc
     id: '@id'
   },
   {
+    submitted_reviews: {
+      method: 'GET',
+      url: '/users/:id/submitted_reviews',
+      isArray: true
+    },
     set_expert: {
       method: 'POST',
       url: '/users/:id/set_expert'

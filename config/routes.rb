@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   # routes for users
   post 'users/:id/set_expert' => 'users#set_expert', :defaults => {:format => "json"}
   post 'users/:id/set_educator' => 'users#set_educator', :defaults => {:format => "json"}
+  get 'users/:id/submitted_reviews' => 'users#submitted_reviews', :defaults => {:format => "json"}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

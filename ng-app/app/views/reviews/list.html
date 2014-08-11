@@ -17,4 +17,11 @@
 
 <div class="row">
   <h3>Previous Reviews</h3>
+  <ul class="reviews-list">
+    <li ng-repeat="review in reviews">
+      {{review.rating}}
+      {{review.title}}
+      {{review.notes}}
+    </li>
+  </ul>
 </div>

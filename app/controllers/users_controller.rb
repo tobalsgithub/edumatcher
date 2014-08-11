@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  respond_to :json
+
+  def submitted_reviews
+    user = User.find(params[:id])
+    respond_with user.reviews
+  end
 
   def set_expert
 
