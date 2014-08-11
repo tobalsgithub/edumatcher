@@ -83,18 +83,24 @@ angular.module('edumatcherApp')
     $rootScope.$on('devise:login', function(event, currentUser) {
       webStorage.add('user', currentUser);
       $scope.session.user = currentUser;
-
       var attemptedUrl = webStorage.get('attemptedUrl');
       if(attemptedUrl){
         $window.location.href = attemptedUrl;
       }else{
-        $state.go('index');
+        if(currentUser.is_expert){
+          $state.go('dashboards.experts.home');
+        }else if(currentUser.is_educator){
+          $state.go('dashboards.educators.home');
+        }else if(currentUser.admin){
+          $state.go('admin');
+        }else {
+          $state.go('index');
+        }
       }
     });
 
     $rootScope.$on('devise:logout', function(event, oldCurrentUser) {
-      webStorage.clear();
-      $scope.session = empty_session;
+      $scope.clearSession();
     });
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -109,8 +115,14 @@ angular.module('edumatcherApp')
       }
     });
 
+    $scope.clearSession = function(){
+      webStorage.clear();
+      $scope.session = empty_session;
+    };
+
     $scope.unauthorized = function(event, xhr){
       var element;
+      $scope.clearSession();
 
       if($state.current.name === 'login'){
 

@@ -2,13 +2,14 @@
 @import 'partials/_user_header';
 @import 'partials/_footer';
 @import 'partials/_profile';
+@import 'partials/_dashboard_sidebar';
 
 html {
   height: 100%;
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 50px;
   font-family: Lato,Helvetica,Arial,sans-serif;
   font-weight: 300;
   line-height: 1.1;

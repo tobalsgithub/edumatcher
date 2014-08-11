@@ -6,5 +6,20 @@ class User < ActiveRecord::Base
 
   has_one :expert
   has_one :educator
-  has_many :ratings
+  has_many :reviews
+
+  def as_json(options)
+    json = super(:include => [:expert, :educator])
+    json["is_expert"] = is_expert?
+    json["is_educator"] = is_educator?
+    json
+  end
+
+  def is_expert?
+    self.expert != nil
+  end
+
+  def is_educator?
+    self.educator != nil
+  end
 end

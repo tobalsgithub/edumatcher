@@ -1,0 +1,27 @@
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a ui-sref="dashboards.experts.home">
+          Dashboard Home
+        </a>
+      </li>
+      <li>
+        <a ui-sref="dashboards.experts.notifications">Notifications</a>
+      </li>
+    </ul>
+  </div><!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div ui-view=""></div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<script>
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>

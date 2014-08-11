@@ -69,6 +69,65 @@ angular
         module: 'private'
       })
 
+      // Dashboards
+
+      .state('dashboards', {
+        url: '/dashboards',
+        abstract: true,
+        template: '<div ng-include="\'views/includes/user_header.html\'"></div><ui-view/>',
+        module: 'private'
+      })
+
+      .state('dashboards.experts', {
+        url: '/expert',
+        templateUrl: 'views/experts/dashboard/layout.html',
+        controller: 'ExpertsCtrl',
+        module: 'private'
+      })
+
+      .state('dashboards.experts.home',{
+        url: '/home',
+        templateUrl: 'views/experts/dashboard/home.html',
+        module: 'private'
+      })
+
+      .state('dashboards.educators', {
+        url: '/educator',
+        templateUrl: 'views/educators/dashboard/layout.html',
+        controller: 'EducatorsCtrl',
+        module: 'private'
+      })
+
+      .state('dashboards.educators.home', {
+        url: '/home',
+        templateUrl: 'views/educators/dashboard/home.html',
+        module: 'private'
+      })
+
+      .state('dashboards.educators.reviews',{
+        url: '/reviews',
+        template: '<ui-view/>',
+        controller: 'ReviewsCtrl',
+        data: {
+          reviewable_type: 'Expert'
+        },
+        module: 'private'
+      })
+
+      .state('dashboards.educators.reviews.list',{
+        url: '/list',
+        templateUrl: 'views/reviews/list.html',
+        module: 'private'
+      })
+
+      .state('dashboards.educators.reviews.create', {
+        url: '/:expert_id/create',
+        templateUrl: 'views/reviews/create.html',
+        module: 'private'
+      })
+
+      // Profiles
+
       .state('profiles', {
         url: '/profiles',
         abstract: true,

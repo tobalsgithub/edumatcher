@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="profile-thumb">
+    <img class="img-rounded profile-thumb-img" src="../images/Michael_Jordan.jpg">
+  </div>
+</div>
+<form name="form" id="createReviewForm" shake-that submitted="submitted" submit="createReview()">
+  <div class="row form-group" ng-class="{'has-error': show_rating_message}">
+    <label class="control-label" for="reviewRating">Rating:</label>
+    <rating ng-model="review.rating"></rating>
+    <span class="alert alert-warning message" ng-if="show_rating_message">Rating is required</span>
+  </div>
+
+  <div class="row">
+    <label for="reviewTitle">Title: </label>
+    <input type="text" ng-model="review.title" class="form-control" />
+  </div>
+
+  <div class="row">
+    <label for="reviewContent">Notes: </label>
+    <textarea class="form-control" ng-model="review.notes"></textarea>
+  </div>
+
+  <div class="row">
+    <button type="submit" class="btn btn-primary btn-block">Submit Review</button>
+  </div>
+</form>
