@@ -1,9 +1,7 @@
 <ul class="reviews-list">
   <li ng-repeat="review in session.expert.reviews">
-    <h4>{{review.reviewable_title}}</h4>
     <rating ng-model="review.rating" readonly="true"></rating>
     <strong>{{review.title}}</strong>
     <p>{{review.notes}}</p>
   </li>
-</ul>
 </ul>
