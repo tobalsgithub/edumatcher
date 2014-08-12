@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
 
   def review_params
     json_params = ActionController::Parameters.new( JSON.parse(params.to_json) )
-    json_params[:review].permit(:title, :notes, :reviewable_id, :reviewable_type)
+    json_params[:review].permit(:title, :notes, :rating, :reviewable_id, :reviewable_type)
   end
 
   def set_review

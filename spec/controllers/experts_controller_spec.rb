@@ -26,7 +26,7 @@ RSpec.describe ExpertsController, :type => :controller do
     describe 'access allowed' do
 
       before(:each) do
-        get :index, format: :json
+        get :index, id: expert.to_param, format: :json
       end
 
       it { should respond_with 200 }
@@ -40,7 +40,7 @@ RSpec.describe ExpertsController, :type => :controller do
       before(:each) do
         user.expert = nil
         user.save
-        get :index, format: :json
+        get :index, id: expert.to_param, format: :json
       end
 
       it { should respond_with 200 }
@@ -60,7 +60,7 @@ RSpec.describe ExpertsController, :type => :controller do
 
   describe 'GET index' do
     before(:each) do
-      get :index, format: :json
+      get :index, id: expert.to_param, format: :json
     end
 
     it 'should return the expert in json format' do
@@ -298,6 +298,33 @@ RSpec.describe ExpertsController, :type => :controller do
 
     xdescribe 'limiting the results by location' do
 
+    end
+  end
+
+  describe 'GET reviews' do
+    before(:each) do
+      expert.reviews.destroy_all
+      expert.reviews << create(:review)
+      expert.reviews << create(:review)
+      expert.reviews << create(:review)
+
+      @expert2 = create(:expert)
+      @expert2.user = create(:user)
+      @expert2.save!
+      @expert2.reviews.destroy_all
+      @expert2.reviews << create(:review)
+      @expert2.reviews << create(:review)
+      @expert2.save!
+    end
+
+    it 'should return the reviews of an expert' do
+      get :reviews, id: expert.to_param, format: :json
+      expect(json.size).to be 3
+    end
+
+    it 'should return the reviews of any expert' do
+      get :reviews, id: @expert2.to_param, format: :json
+      expect(json.size).to be 2
     end
   end
 end

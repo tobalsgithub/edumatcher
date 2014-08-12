@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'experts/search' => 'experts#search', :defaults => {:format => "json"}
   resources :experts, :defaults => {:format => "json"}
   get 'experts/:id/subjects' => 'experts#subjects', :defaults => {:format => "json"}
+  get 'experts/:id/reviews' =>  'experts#reviews', :defaults => {:format => "json" }
   put 'experts/:id/add_subject' => 'experts#add_subject', :defaults => {:format => "json"}
   put 'experts/:id/remove_subject' => 'experts#remove_subject', :defaults => {:format => "json"}
   post 'experts/:id/set_subjects' => 'experts#set_subjects', :defaults => {:format => "json"}

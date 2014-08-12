@@ -35,6 +35,7 @@ RSpec.describe ReviewsController, :type => :controller do
       it "returns the created review" do
         expect(json).to have_key('id')
         expect(json).to have_key('notes')
+        expect(json).to have_key('reviewable')
       end
 
       it { should respond_with 201 }

@@ -19,9 +19,10 @@
   <h3>Previous Reviews</h3>
   <ul class="reviews-list">
     <li ng-repeat="review in reviews">
-      {{review.rating}}
-      {{review.title}}
-      {{review.notes}}
+      <h4>{{review.reviewable_title}}</h4>
+      <rating ng-model="review.rating" readonly="true"></rating>
+      <strong>{{review.title}}</strong>
+      <p>{{review.notes}}</p>
     </li>
   </ul>
 </div>

@@ -36,6 +36,11 @@ angular.module('edumatcherApp').factory('Experts', ['$resource','$http', 'Knowle
       set_companies: {
         method: 'POST',
         url: '/experts/:id/set_companies'
+      },
+      reviews: {
+        method: 'GET',
+        url: '/experts/:id/reviews',
+        isArray: true
       }
     });
 

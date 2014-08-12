@@ -134,6 +134,10 @@ class ExpertsController < ApplicationController
     end
   end
 
+  def reviews
+    respond_with @expert.reviews
+  end
+
   private
 
   def is_expert?
@@ -141,7 +145,8 @@ class ExpertsController < ApplicationController
   end
 
   def set_expert
-    @expert = current_user.expert
+    #@expert = current_user.expert
+    @expert = Expert.find(params[:id])
   end
 
   def expert_params

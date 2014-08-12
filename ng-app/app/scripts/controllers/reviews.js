@@ -43,7 +43,6 @@ angular.module('edumatcherApp')
     function init(){
       Users.submitted_reviews({id: $scope.session.user.id}, function(reviews){
           $scope.reviews = reviews;
-          console.log($scope.reviews);
       });
     }
 

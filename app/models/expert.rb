@@ -4,10 +4,10 @@ class Expert < ActiveRecord::Base
   has_many :subjects, :through => :knowledge_links
   has_many :employment_links, :dependent => :destroy
   has_many :companies, :through => :employment_links
-  has_many :ratings, as: :ratable
+  has_many :reviews, as: :reviewable
 
   def as_json(options)
-    super(:include => [{:knowledge_links => { :include => :subject }}, {:employment_links => { :include => :company }}, :user])
+    super(:include => [{:knowledge_links => { :include => :subject }}, {:employment_links => { :include => :company }}, :user, :reviews])
   end
 
 end
